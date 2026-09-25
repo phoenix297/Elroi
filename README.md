@@ -1,6 +1,7 @@
 # EL-ROI Shipping Services — website
 
 Static website for EL-ROI Shipping Services (Essen, Germany → Lagos, Nigeria & worldwide).
+Design: marine navy, brass gold, steel blue and ivory, set in Fraunces and Inter.
 Plain HTML, CSS and JavaScript. There is no build step, so any static host works (Netlify, GitHub Pages, cPanel…).
 
 ## Pages
@@ -9,12 +10,12 @@ Plain HTML, CSS and JavaScript. There is no build step, so any static host works
 | --- | --- |
 | `index.html` | Home |
 | `services.html` | Services |
-| `routes.html` | Routes (departure board + route map) |
+| `routes.html` | Routes (route table + route map) |
 | `gallery.html` | Photo gallery with filters and lightbox |
 | `about.html` | About |
 | `blog.html` | News |
 | `faq.html` | FAQ |
-| `contact.html` | Contact |
+| `contact.html` | Contact (form, offices, map) |
 | `quote.html` | Quote request form (pre-fills from the calculator) |
 | `book.html` | Booking form |
 | `calculator.html` | Rough cost calculator |
@@ -37,6 +38,11 @@ opens WhatsApp (+49 1521 9521826) with the form details pre-filled, so no enquir
 
 To switch to email delivery, create a form at [formspree.io](https://formspree.io) and replace
 `YOUR_FORM_ID` in the `action` of the forms in `contact.html`, `quote.html` and `book.html`.
+
+## Placeholders to replace
+
+- **Testimonials** on the home page (`index.html`, section 05) use placeholder names. Swap in real client quotes.
+- **Logo**: the gold "ER" monogram in the header, footer and `assets/favicon.svg` is a placeholder until the real logo file is ready.
 
 ## Calculator
 

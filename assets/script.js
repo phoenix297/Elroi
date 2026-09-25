@@ -32,6 +32,15 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 4200);
   }
 
+  // ---------- Preloader ----------
+  var preloader = $('#preloader');
+  if (preloader) {
+    var hidePre = function () { preloader.classList.add('hide'); };
+    if (d.readyState === 'complete') setTimeout(hidePre, 200);
+    else window.addEventListener('load', function () { setTimeout(hidePre, 250); });
+    setTimeout(hidePre, 1600); // never block the page for long
+  }
+
   // ---------- Header ----------
   var header = $('header.site');
   function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 8); }
@@ -59,7 +68,7 @@
   }
 
   // ---------- Scroll reveal ----------
-  $$('[data-reveal], .step').forEach(function (el) {
+  $$('[data-reveal], .process-item').forEach(function (el) {
     onVisible(el, function (t) { t.classList.add('in'); });
   });
   if (!hasIO) d.documentElement.classList.add('no-io');
@@ -88,38 +97,6 @@
       }
       requestAnimationFrame(step);
     });
-  });
-
-  // ---------- Split-flap departure board ----------
-  var FLAP_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~-';
-  $$('.board').forEach(function (board) {
-    var flaps = [];
-    $$('.flaps', board).forEach(function (box) {
-      var len = parseInt(box.getAttribute('data-len'), 10) || box.textContent.length;
-      var text = (box.textContent.trim() + new Array(len + 1).join(' ')).slice(0, len);
-      box.textContent = '';
-      box.setAttribute('aria-hidden', 'true');
-      for (var i = 0; i < len; i++) {
-        var s = d.createElement('span');
-        s.className = 'flap';
-        s.setAttribute('data-ch', text[i] === ' ' ? ' ' : text[i]);
-        s.textContent = reduceMotion ? s.getAttribute('data-ch') : ' ';
-        box.appendChild(s);
-        flaps.push(s);
-      }
-    });
-    if (reduceMotion) return;
-    onVisible(board, function () {
-      flaps.forEach(function (f, i) {
-        var target = f.getAttribute('data-ch');
-        var turns = 6 + Math.floor(Math.random() * 8) + (i % 12);
-        var n = 0;
-        var t = setInterval(function () {
-          if (n++ >= turns) { clearInterval(t); f.textContent = target; return; }
-          f.textContent = FLAP_CHARS.charAt(Math.floor(Math.random() * FLAP_CHARS.length));
-        }, 48);
-      });
-    }, '0px 0px -15% 0px');
   });
 
   // ---------- Horizontal photo strip ----------
@@ -233,6 +210,21 @@
       touchX = null;
     });
   }
+
+  // ---------- Office map tabs ----------
+  var mapFrame = $('.map-frame iframe');
+  $$('.map-tabs button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      $$('.map-tabs button').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      mapFrame.src = btn.getAttribute('data-map');
+      var mapLink = $('#map-link');
+      if (mapLink) mapLink.href = btn.getAttribute('data-link');
+      mapFrame.title = btn.getAttribute('data-title');
+    });
+  });
 
   // ---------- Shipping calculator (rough estimate only) ----------
   var calc = $('#calc-form');
