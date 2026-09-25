@@ -47,6 +47,37 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // ---------- Hero: live background (drifting photo, optional video, scroll depth) ----------
+  var heroMedia = $('.hero-media');
+  if (heroMedia) {
+    var videoSrc = heroMedia.getAttribute('data-video');
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (videoSrc && !reduceMotion && !saveData) {
+      var hv = d.createElement('video');
+      hv.className = 'hero-video';
+      hv.muted = true; hv.loop = true; hv.autoplay = true; hv.playsInline = true;
+      hv.setAttribute('muted', ''); hv.setAttribute('playsinline', '');
+      hv.preload = 'auto';
+      hv.src = videoSrc;
+      hv.addEventListener('playing', function () { hv.classList.add('is-playing'); });
+      heroMedia.appendChild(hv);
+      var pr = hv.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    }
+    if (!reduceMotion) {
+      var heroTicking = false;
+      window.addEventListener('scroll', function () {
+        if (heroTicking) return;
+        heroTicking = true;
+        requestAnimationFrame(function () {
+          var y = Math.min(window.scrollY, window.innerHeight);
+          heroMedia.style.setProperty('--parallax', (y * 0.12).toFixed(1) + 'px');
+          heroTicking = false;
+        });
+      }, { passive: true });
+    }
+  }
+
   // ---------- Mobile menu ----------
   var toggle = $('.nav-toggle');
   var menu = $('#mobile-menu');

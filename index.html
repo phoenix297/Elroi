@@ -67,6 +67,13 @@
 </div>
 <main id="main">
 <section class="hero dark">
+  <!-- Live background: the photo drifts slowly (Ken Burns). To use a real video instead,
+       put an MP4 in assets/video/ and set data-video="assets/video/hero.mp4" below. -->
+  <div class="hero-media" data-video="" aria-hidden="true">
+    <img class="hero-photo" src="assets/img/car-transporter.jpg" alt="" width="1280" height="720" fetchpriority="high">
+  </div>
+  <div class="hero-aurora" aria-hidden="true"></div>
+  <div class="hero-sweep" aria-hidden="true"></div>
   <svg class="hero-network" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path class="hn-line" d="M40 620 C 300 560, 500 480, 780 500 S 1200 420, 1360 340"/>
     <path class="hn-line" d="M100 120 C 320 180, 560 160, 820 220 S 1180 260, 1340 200"/>
@@ -93,26 +100,10 @@
         </div>
         <a class="hero-wa" href="https://wa.me/4915219521826" target="_blank" rel="noopener" style="margin:22px 0 0"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.4-5.64Zm-5.55 12.2h0a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.65 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.83-.3-1.58-.97-.58-.52-.98-1.16-1.09-1.36-.11-.19 0-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.62 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24Z"/></svg> Or chat with us on WhatsApp</a>
       </div>
-      <div class="route-card" data-reveal style="--d:3">
-        <div class="rc-head"><span class="live">Primary route</span><span>Sea freight</span></div>
-        <svg class="rc-svg" viewBox="0 0 420 130" aria-hidden="true">
-          <path class="rc-arc-2" d="M40 112 H380"/>
-          <path id="rc-path" class="rc-arc" d="M40 112 C 130 4, 290 4, 380 112"/>
-          <circle class="rc-glow" cx="40" cy="112" r="7"/>
-          <circle class="rc-node" cx="40" cy="112" r="5"/>
-          <circle class="rc-glow" cx="380" cy="112" r="7" style="animation-delay:-1.2s"/>
-          <circle class="rc-node" cx="380" cy="112" r="5"/>
-          <circle class="rc-ship" r="4"><animateMotion dur="5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 0 .25 1"><mpath href="#rc-path"/></animateMotion></circle>
-        </svg>
-        <div class="rc-points">
-          <div><small>Origin</small><strong>Essen</strong><span>Germany</span></div>
-          <div class="rc-mid">~2 weeks</div>
-          <div><small>Destination</small><strong>Lagos</strong><span>Nigeria</span></div>
-        </div>
-        <ul class="rc-list">
-          <li><span>Belgium &middot; Austria &middot; Holland</span><span>~2 weeks</span></li>
-          <li><span>Rest of the world</span><span>On request</span></li>
-        </ul>
+      <div class="hero-globe-wrap" data-reveal style="--d:2">
+        <div class="hero-globe" data-globe role="img" aria-label="3D globe showing EL-ROI shipping routes from Essen, Germany to Lagos, Europe, the Americas and Asia"></div>
+        <div class="globe-legend" aria-hidden="true"><span><i></i>Essen &rarr; Lagos</span><span><i class="eu"></i>Europe</span><span><i class="ww"></i>Worldwide</span></div>
+        <p class="globe-hint">Drag the globe to spin it</p>
       </div>
     </div>
     <div class="hero-stats" data-reveal style="--d:4">
@@ -176,35 +167,27 @@
 
 <section class="dark">
   <div class="container coverage-grid">
-    <div class="route-visual" data-reveal>
-      <svg class="route-svg" role="img" aria-label="Globe showing routes from Essen to Europe, Lagos, the Americas and Asia" viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="180" cy="160" r="88" stroke="#3E6D9C" stroke-width="1" fill="none" opacity="0.45"/>
-  <ellipse class="globe-meridian gm-1" cx="180" cy="160" rx="88" ry="88" stroke="#C9A227" stroke-width="1" fill="none" opacity="0.55"/>
-  <ellipse class="globe-meridian gm-2" cx="180" cy="160" rx="88" ry="88" stroke="#C9A227" stroke-width="1" fill="none" opacity="0.4"/>
-  <ellipse class="globe-meridian gm-3" cx="180" cy="160" rx="88" ry="88" stroke="#C9A227" stroke-width="1" fill="none" opacity="0.3"/>
-  <ellipse cx="180" cy="160" rx="88" ry="34" stroke="#3E6D9C" stroke-width="0.8" fill="none" opacity="0.35"/>
-  <ellipse cx="180" cy="160" rx="88" ry="60" stroke="#3E6D9C" stroke-width="0.8" fill="none" opacity="0.25"/>
-
-  <circle cx="163" cy="118" r="4.5" fill="#E0C468"/>
-  <text x="130" y="104" class="route-node-label origin">ESSEN, DE</text>
-
-  <path class="globe-route" d="M163 118 C 220 130, 250 160, 296 150" stroke="#E0C468" stroke-width="1.4" fill="none"/>
-  <circle class="globe-marker-anim" cx="296" cy="150" r="3" fill="#E0C468"/>
-  <text x="278" y="138" class="route-node-label">EUROPE</text>
-
-  <path class="globe-route" d="M163 118 C 190 190, 210 230, 250 268" stroke="#E0C468" stroke-width="1.4" fill="none" style="animation-delay:-1s;"/>
-  <circle class="globe-marker-anim" cx="250" cy="268" r="3" fill="#E0C468" style="animation-delay:-0.6s;"/>
-  <text x="196" y="290" class="route-node-label">LAGOS, NG</text>
-
-  <path class="globe-route" d="M163 118 C 110 150, 70 190, 58 244" stroke="#3E6D9C" stroke-width="1.2" fill="none" opacity="0.8" style="animation-delay:-2s;"/>
-  <circle class="globe-marker-anim" cx="58" cy="244" r="3" fill="#3E6D9C" style="animation-delay:-1.2s;"/>
-  <text x="18" y="260" class="route-node-label">AMERICAS</text>
-
-  <path class="globe-route" d="M163 118 C 130 90, 90 78, 50 92" stroke="#3E6D9C" stroke-width="1.2" fill="none" opacity="0.8" style="animation-delay:-1.5s;"/>
-  <circle class="globe-marker-anim" cx="50" cy="92" r="3" fill="#3E6D9C" style="animation-delay:-0.9s;"/>
-  <text x="14" y="80" class="route-node-label">ASIA</text>
-</svg>
-    </div>
+      <div class="route-card" data-reveal>
+        <div class="rc-head"><span class="live">Primary route</span><span>Sea freight</span></div>
+        <svg class="rc-svg" viewBox="0 0 420 130" aria-hidden="true">
+          <path class="rc-arc-2" d="M40 112 H380"/>
+          <path id="rc-path" class="rc-arc" d="M40 112 C 130 4, 290 4, 380 112"/>
+          <circle class="rc-glow" cx="40" cy="112" r="7"/>
+          <circle class="rc-node" cx="40" cy="112" r="5"/>
+          <circle class="rc-glow" cx="380" cy="112" r="7" style="animation-delay:-1.2s"/>
+          <circle class="rc-node" cx="380" cy="112" r="5"/>
+          <circle class="rc-ship" r="4"><animateMotion dur="5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 0 .25 1"><mpath href="#rc-path"/></animateMotion></circle>
+        </svg>
+        <div class="rc-points">
+          <div><small>Origin</small><strong>Essen</strong><span>Germany</span></div>
+          <div class="rc-mid">~2 weeks</div>
+          <div><small>Destination</small><strong>Lagos</strong><span>Nigeria</span></div>
+        </div>
+        <ul class="rc-list">
+          <li><span>Belgium &middot; Austria &middot; Holland</span><span>~2 weeks</span></li>
+          <li><span>Rest of the world</span><span>On request</span></li>
+        </ul>
+      </div>
     <div data-reveal style="--d:1">
       <span class="num-label">(02)</span>
       <span class="eyebrow">Global coverage</span>
@@ -370,6 +353,8 @@
 </footer>
 <a class="wa-float" href="https://wa.me/4915219521826" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.4-5.64Zm-5.55 12.2h0a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.65 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.83-.3-1.58-.97-.58-.52-.98-1.16-1.09-1.36-.11-.19 0-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.62 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24Z"/></svg></a>
 <div class="toast" role="status" aria-live="polite"></div>
+<script src="assets/globe-land.js" defer></script>
+<script src="assets/globe.js" defer></script>
 <script src="assets/script.js" defer></script>
 </body>
 </html>

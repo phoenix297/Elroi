@@ -24,6 +24,15 @@ Plain HTML, CSS and JavaScript. There is no build step, so any static host works
 Shared styles live in `assets/style.css`, interactions in `assets/script.js`, photos in `assets/img/`.
 The header and footer are repeated in every page, so a change to either needs making in each file.
 
+## Home page hero
+
+- **3D globe** (`assets/globe.js` + `assets/globe-land.js`): a dependency-free canvas globe showing
+  the routes from Essen. Visitors can drag it to spin. Routes and colours are at the top of `globe.js`.
+- **Live truck background**: the hero photo drifts slowly and shifts with scroll. To use a real video
+  instead, add a short muted MP4 (for example `assets/video/hero.mp4`, ideally under 8 MB) and set
+  `data-video="assets/video/hero.mp4"` on the `.hero-media` element in `index.html`. The photo stays as
+  the fallback while the video loads, and for visitors with reduced motion or data saver turned on.
+
 ## Adding photos
 
 1. Put the image in `assets/img/` (JPG, ideally no wider than 1600px).
@@ -48,3 +57,9 @@ To switch to email delivery, create a form at [formspree.io](https://formspree.i
 
 Rates live in `assets/script.js` (`baseRates` per kg and `destMultiplier` per route), with a 50 kg minimum.
 Results are rough estimates and the page says so.
+
+## Claude Code skill
+
+`.claude/skills/scroll-world/` is the [scroll-world](https://github.com/oso95/scroll-world) skill (MIT),
+kept here so it loads in Claude Code sessions for this repo. It is not part of the website; leave it
+out when uploading the site to a host.
