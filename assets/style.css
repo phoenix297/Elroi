@@ -1033,3 +1033,23 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .journey-dots { display: none; }
 }
 .also .also-label::before { display: none; }
+
+/* Privacy policy */
+.policy { display: grid; grid-template-columns: 260px 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.policy-toc { position: sticky; top: calc(var(--header-h) + 32px); }
+.policy-toc ol { display: grid; gap: 10px; counter-reset: toc; }
+.policy-toc li { counter-increment: toc; display: flex; gap: 10px; font-size: .92rem; }
+.policy-toc li::before { content: "0" counter(toc); font-family: var(--f-serif); font-style: italic; color: var(--gold-deep); }
+.policy-toc a { color: var(--text-2); transition: color .2s; }
+.policy-toc a:hover { color: var(--navy); }
+.policy-body { max-width: 72ch; }
+.policy-sec { padding: 0 0 36px; margin-bottom: 36px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 24px); }
+.policy-sec h2 { font-size: clamp(1.6rem, 2.4vw, 2rem); color: var(--navy); }
+.policy-sec p, .policy-sec li { color: var(--text-2); }
+.policy-sec a, .form-foot small a, .footer-bottom a { color: var(--gold-deep); border-bottom: 1px solid currentColor; }
+.footer-bottom a { color: var(--on-dark-2); }
+.policy-date { font-size: .85rem; color: var(--text-3); }
+@media (max-width: 860px) { .policy { grid-template-columns: 1fr; } .policy-toc { position: static; } }
+.policy-sec .checklist li { display: block; position: relative; padding-left: 32px; }
+.policy-sec .checklist li::before { position: absolute; left: 0; top: 2px; margin: 0; }
+.policy-sec .checklist { margin-bottom: 16px; }

@@ -19,6 +19,7 @@ Plain HTML, CSS and JavaScript. There is no build step, so any static host works
 | `quote.html` | Quote request form (pre-fills from the calculator) |
 | `book.html` | Booking form |
 | `calculator.html` | Rough cost calculator |
+| `privacy.html` | Privacy policy (GDPR), linked in every footer and under each form |
 | `404.html` | Not-found page |
 
 Shared styles live in `assets/style.css`, interactions in `assets/script.js`, photos in `assets/img/`.
@@ -63,6 +64,12 @@ To switch to email delivery, create a form at [formspree.io](https://formspree.i
 
 - **Testimonials** on the home page (`index.html`, section 05) use placeholder names. Swap in real client quotes.
 - **Logo**: the gold "ER" monogram in the header, footer and `assets/favicon.svg` is a placeholder until the real logo file is ready.
+
+## Photos and privacy
+
+Licence plates, trailer ID numbers and visible faces are blurred in `assets/img/`. Blur them in any new photo before adding it.
+
+The privacy policy is a solid starting point, but have a lawyer or data-protection adviser review it before launch. German sites also normally need an Impressum (legal notice).
 
 ## Calculator
 
