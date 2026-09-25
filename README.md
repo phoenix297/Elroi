@@ -33,6 +33,12 @@ The header and footer are repeated in every page, so a change to either needs ma
   `data-video="assets/video/hero.mp4"` on the `.hero-media` element in `index.html`. The photo stays as
   the fallback while the video loads, and for visitors with reduced motion or data saver turned on.
 
+- **Scroll journey** ("How it works" on the home page): the section pins while you scroll, a truck drives
+  from Essen to the port, becomes a container ship and sails to Lagos, and the four steps light up in turn.
+  The map is inline SVG in `index.html`; the timing lives in `renderJourney()` in `assets/script.js`.
+  On phones the map pans to follow the vehicle. With reduced motion turned on it shows the finished route.
+- **Scroll progress bar**: the thin gold line at the top of every page.
+
 ## Adding photos
 
 1. Put the image in `assets/img/` (JPG, ideally no wider than 1600px).

@@ -78,6 +78,103 @@
     }
   }
 
+  // ---------- Scroll progress bar + pinned journey animation ----------
+  var progressBar = $('.scroll-progress');
+  var journey = $('#journey');
+  var jr = null;
+  if (journey) {
+    jr = {
+      road: $('#jr-road', journey),
+      sea: $('#jr-sea', journey),
+      roadGold: $('#jr-road-gold', journey),
+      seaGold: $('#jr-sea-gold', journey),
+      veh: $('.jr-vehicle', journey),
+      truck: $('.jr-truck', journey),
+      ship: $('.jr-ship', journey),
+      steps: $$('.journey-step', journey),
+      dots: $$('.journey-dots i', journey),
+      status: $('#jr-status', journey),
+      day: $('#jr-day', journey),
+      sticky: $('.journey-sticky', journey),
+      map: $('.journey-map', journey),
+      svg: $('.journey-map svg', journey),
+      last: -1
+    };
+    jr.Lr = jr.road.getTotalLength();
+    jr.Ls = jr.sea.getTotalLength();
+    jr.roadGold.style.strokeDasharray = jr.Lr;
+    jr.seaGold.style.strokeDasharray = jr.Ls;
+  }
+  var STATUS = ['Quote requested', 'Estimate confirmed', 'Loaded and at sea', 'Arrived in Lagos'];
+  var STEP_AT = [0, 0.25, 0.5, 0.8, 1];
+  var phone = window.matchMedia ? window.matchMedia('(max-width: 760px)') : { matches: false };
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function seg(p, a, b) { return clamp01((p - a) / (b - a)); }
+  function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+  function renderJourney(p) {
+    var roadT = ease(seg(p, 0.1, 0.42));
+    var seaT = ease(seg(p, 0.52, 0.93));
+    jr.roadGold.style.strokeDashoffset = (jr.Lr * (1 - roadT)).toFixed(1);
+    jr.seaGold.style.strokeDashoffset = (jr.Ls * (1 - seaT)).toFixed(1);
+    // truck on the road, container ship at sea (swap at the port)
+    var onSea = p >= 0.47;
+    var path = onSea ? jr.sea : jr.road;
+    var L = onSea ? jr.Ls : jr.Lr;
+    var at = (onSea ? seaT : roadT) * L;
+    var pt = path.getPointAtLength(at);
+    var a1 = path.getPointAtLength(Math.max(0, at - 3));
+    var a2 = path.getPointAtLength(Math.min(L, at + 3));
+    var ang = Math.atan2(a2.y - a1.y, a2.x - a1.x) * 180 / Math.PI;
+    ang = Math.max(-26, Math.min(26, ang));
+    jr.veh.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(' + (phone.matches ? 1.25 : 1) + ')');
+    // phones: pan the wide chart so the vehicle stays centred
+    if (phone.matches) {
+      var boxW = jr.map.clientWidth, boxH = jr.map.clientHeight;
+      var k = boxH / 400, svgW = 1200 * k;
+      var pan = Math.min(0, Math.max(boxW - svgW, boxW / 2 - pt.x * k));
+      jr.svg.style.setProperty('--pan', pan.toFixed(1) + 'px');
+    } else {
+      jr.svg.style.removeProperty('--pan');
+    }
+    jr.truck.style.opacity = onSea ? 0 : 1;
+    jr.ship.style.opacity = onSea ? 1 : 0;
+    // steps, status and day counter
+    var step = p < STEP_AT[1] ? 0 : p < STEP_AT[2] ? 1 : p < STEP_AT[3] ? 2 : 3;
+    jr.steps.forEach(function (el, i) {
+      el.classList.toggle('is-active', i === step);
+      el.classList.toggle('is-done', i < step);
+      el.style.setProperty('--fill', i < step ? 1 : i > step ? 0 : seg(p, STEP_AT[i], STEP_AT[i + 1]).toFixed(3));
+    });
+    jr.dots.forEach(function (el, i) { el.classList.toggle('on', i <= step); });
+    var day = Math.round(seaT * 14);
+    if (step !== jr.last) { jr.status.textContent = STATUS[step]; jr.last = step; }
+    jr.day.textContent = day;
+  }
+
+  var scrollTicking = false;
+  function onScrollFrame() {
+    scrollTicking = false;
+    var doc = d.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    if (progressBar) progressBar.style.setProperty('--scroll', max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+    if (jr && !reduceMotion) {
+      var rect = journey.getBoundingClientRect();
+      var headerH = header ? header.offsetHeight : 0;
+      var travel = journey.offsetHeight - jr.sticky.offsetHeight;
+      if (travel > 0) renderJourney(clamp01((headerH - rect.top) / travel));
+    }
+  }
+  function requestScrollFrame() {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }
+  }
+  if (progressBar || jr) {
+    window.addEventListener('scroll', requestScrollFrame, { passive: true });
+    window.addEventListener('resize', requestScrollFrame);
+    if (jr && reduceMotion) renderJourney(1);
+    onScrollFrame();
+  }
+
   // ---------- Mobile menu ----------
   var toggle = $('.nav-toggle');
   var menu = $('#mobile-menu');
