@@ -12,18 +12,21 @@
   var IVORY = '246, 244, 238';
 
   var HUB = { name: 'Essen', lat: 51.4556, lon: 7.0116 };
+  // Major routes (Europe) in gold; worldwide destinations show "any part of the world"
   var ROUTES = [
-    { name: 'Lagos', lat: 6.4474, lon: 3.3903, kind: 'main', label: 'Lagos' },
-    { name: 'Rotterdam', lat: 51.9244, lon: 4.4777, kind: 'eu' },
-    { name: 'Antwerp', lat: 51.2194, lon: 4.4025, kind: 'eu' },
-    { name: 'Vienna', lat: 48.2082, lon: 16.3738, kind: 'eu', label: 'Europe' },
+    { name: 'Antwerp', lat: 51.2194, lon: 4.4025, kind: 'main' },
+    { name: 'Rotterdam', lat: 51.9244, lon: 4.4777, kind: 'main' },
+    { name: 'Vienna', lat: 48.2082, lon: 16.3738, kind: 'main', label: 'Europe' },
+    { name: 'Lagos', lat: 6.4474, lon: 3.3903, kind: 'world', label: 'Lagos' },
     { name: 'New York', lat: 40.7128, lon: -74.006, kind: 'world', label: 'Americas' },
-    { name: 'Mumbai', lat: 19.076, lon: 72.8777, kind: 'world', label: 'Asia' }
+    { name: 'Santos', lat: -23.9608, lon: -46.3336, kind: 'world' },
+    { name: 'Durban', lat: -29.8587, lon: 31.0218, kind: 'world', label: 'Africa' },
+    { name: 'Dubai', lat: 25.0112, lon: 55.0610, kind: 'world', label: 'Middle East' },
+    { name: 'Shanghai', lat: 31.2304, lon: 121.4737, kind: 'world', label: 'Asia' }
   ];
   var STYLE = {
-    main: { rgb: GOLD, width: 2, alpha: 0.95, pulse: 4.2 },
-    eu: { rgb: STEEL, width: 1.4, alpha: 0.8, pulse: 3 },
-    world: { rgb: IVORY, width: 1, alpha: 0.4, pulse: 6.5 }
+    main: { rgb: GOLD, width: 2, alpha: 0.95, pulse: 3.2 },
+    world: { rgb: STEEL, width: 1.3, alpha: 0.75, pulse: 5.5 }
   };
 
   function vec(lat, lon) {
@@ -100,7 +103,8 @@
     var hubV = vec(HUB.lat, HUB.lon);
     var routes = ROUTES.map(function (r, i) {
       var v = vec(r.lat, r.lon);
-      return { r: r, v: v, path: arcPath(hubV, v, r.kind === 'eu' ? 24 : 72), delay: 0.25 + i * 0.18, phase: i * 0.37 };
+      var ang = Math.acos(Math.max(-1, Math.min(1, hubV[0] * v[0] + hubV[1] * v[1] + hubV[2] * v[2])));
+      return { r: r, v: v, path: arcPath(hubV, v, ang < 0.2 ? 24 : 72), delay: 0.25 + i * 0.14, phase: i * 0.29 };
     });
 
     var W = 0, H = 0, R = 0, cx = 0, cy = 0, dpr = 1;
@@ -234,7 +238,6 @@
         var grow = reduce ? 1 : Math.min(1, Math.max(0, (t - rt.delay) / 1.4));
         grow = 1 - Math.pow(1 - grow, 3);
         if (grow <= 0) continue;
-        if (rt.r.kind === 'world') ctx.setLineDash([2, 5]);
         strokePath(rt.path, 0, grow, st.rgb, st.alpha * 0.55, st.width);
         ctx.setLineDash([]);
         if (grow < 1 || reduce) continue;
@@ -308,8 +311,8 @@
       drawRoutes(t);
       for (var i = 0; i < routes.length; i++) {
         var r = routes[i].r;
-        var col = r.kind === 'main' ? GOLD : r.kind === 'eu' ? STEEL : IVORY;
-        marker(routes[i].v, col, r.kind === 'main' ? 4 : 2.6, r.label, t, r.kind === 'main', r.kind === 'world' && r.lon < 0 ? 'left' : 'right');
+        var col = r.kind === 'main' ? GOLD : STEEL;
+        marker(routes[i].v, col, r.kind === 'main' ? 3.2 : 2.8, r.label, t, !!r.label, r.lon < -20 ? 'left' : 'right');
       }
       marker(hubV, GOLD, 5, HUB.name, t + 1.2, true, 'top');
       ctx.globalAlpha = 1;

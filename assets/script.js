@@ -78,68 +78,184 @@
     }
   }
 
-  // ---------- Scroll progress bar + pinned journey animation ----------
+  // ---------- Scroll progress bar + pinned journey (world route chart) ----------
   var progressBar = $('.scroll-progress');
   var journey = $('#journey');
-  var jr = null;
-  if (journey) {
-    jr = {
-      road: $('#jr-road', journey),
-      sea: $('#jr-sea', journey),
-      roadGold: $('#jr-road-gold', journey),
-      seaGold: $('#jr-sea-gold', journey),
-      veh: $('.jr-vehicle', journey),
-      truck: $('.jr-truck', journey),
-      ship: $('.jr-ship', journey),
-      steps: $$('.journey-step', journey),
-      dots: $$('.journey-dots i', journey),
-      status: $('#jr-status', journey),
-      day: $('#jr-day', journey),
-      sticky: $('.journey-sticky', journey),
-      map: $('.journey-map', journey),
-      svg: $('.journey-map svg', journey),
-      last: -1
-    };
-    jr.Lr = jr.road.getTotalLength();
-    jr.Ls = jr.sea.getTotalLength();
-    jr.roadGold.style.strokeDasharray = jr.Lr;
-    jr.seaGold.style.strokeDasharray = jr.Ls;
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs, parent) {
+    var el = d.createElementNS(SVGNS, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(el);
+    return el;
   }
-  var STATUS = ['Quote requested', 'Estimate confirmed', 'Loaded and at sea', 'Arrived in Lagos'];
-  var STEP_AT = [0, 0.25, 0.5, 0.8, 1];
-  var phone = window.matchMedia ? window.matchMedia('(max-width: 760px)') : { matches: false };
+  // chart units: x = (lon + 180) * 10, y = (90 - lat) * 10
+  function toXY(ll) { return [(ll[0] + 180) * 10, (90 - ll[1]) * 10]; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function seg(p, a, b) { return clamp01((p - a) / (b - a)); }
   function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // smooth curve through waypoints (Catmull-Rom), sampled into a polyline
+  function spline(way, per) {
+    var P = way.map(toXY), out = [];
+    for (var i = 0; i < P.length - 1; i++) {
+      var p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || P[i + 1];
+      for (var j = 0; j < per; j++) {
+        var t = j / per, t2 = t * t, t3 = t2 * t;
+        out.push([0, 1].map(function (k) {
+          return 0.5 * (2 * p1[k] + (-p0[k] + p2[k]) * t + (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * t2 + (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * t3);
+        }));
+      }
+    }
+    out.push(P[P.length - 1]);
+    return out;
+  }
+  function curve(a, b, bend, n) {
+    var A = toXY(a), B = toXY(b);
+    var mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2;
+    var nx = -(B[1] - A[1]) * bend, ny = (B[0] - A[0]) * bend;
+    var out = [];
+    for (var i = 0; i <= n; i++) {
+      var t = i / n, u = 1 - t;
+      out.push([u * u * A[0] + 2 * u * t * (mx + nx) + t * t * B[0], u * u * A[1] + 2 * u * t * (my + ny) + t * t * B[1]]);
+    }
+    return out;
+  }
+  function Line(pts, parent, cls) {
+    this.pts = pts;
+    this.cum = [0];
+    for (var i = 1; i < pts.length; i++) {
+      this.cum.push(this.cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    }
+    this.len = this.cum[this.cum.length - 1];
+    var all = pts.map(function (q) { return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+    svgEl('polyline', { points: all, 'class': 'jm-route ' + (cls || ''), 'vector-effect': 'non-scaling-stroke' }, parent);
+    this.gold = svgEl('polyline', { points: '', 'class': 'jm-gold', 'vector-effect': 'non-scaling-stroke' }, parent);
+  }
+  // draw the first `f` of the line; returns the head point and heading (degrees)
+  Line.prototype.draw = function (f) {
+    var target = f * this.len, pts = this.pts, cum = this.cum, out = [], i = 1;
+    out.push(pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1));
+    while (i < pts.length && cum[i] <= target) { out.push(pts[i][0].toFixed(1) + ',' + pts[i][1].toFixed(1)); i++; }
+    var head = pts[Math.min(i, pts.length - 1)], prev = pts[Math.max(0, i - 1)];
+    if (i < pts.length) {
+      var k = (target - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1);
+      head = [lerp(pts[i - 1][0], pts[i][0], k), lerp(pts[i - 1][1], pts[i][1], k)];
+      out.push(head[0].toFixed(1) + ',' + head[1].toFixed(1));
+    } else { prev = pts[pts.length - 2]; }
+    this.gold.setAttribute('points', f > 0 ? out.join(' ') : '');
+    var a = pts[Math.min(i, pts.length - 1)];
+    var dx = a[0] - prev[0], dy = a[1] - prev[1];
+    return { x: head[0], y: head[1], ang: Math.atan2(dy, dx) * 180 / Math.PI };
+  };
+
+  var TRUCK_SVG = '<g transform="translate(0 -9)"><rect x="-24" y="-15" width="28" height="17" rx="2" fill="#0B1F35"/><rect x="-22" y="-13" width="24" height="3" fill="#C9A227"/><path d="M5 -11 H14 L21 -4 V2 H5 Z" fill="#0B1F35"/><path d="M9 -9 H13 L17 -5 H9 Z" fill="#8FB0D1"/><circle cx="-16" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="-7" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="13" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/></g>';
+  var SHIP_SVG = '<g transform="translate(0 -6)"><path d="M-28 0 H26 L19 11 H-21 Z" fill="#0B1F35"/><path d="M-21 11 H19" stroke="#C9A227" stroke-width="1.5"/><rect x="-20" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-11" y="-8" width="8" height="8" fill="#3E6D9C"/><rect x="-2" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-15" y="-16" width="8" height="8" fill="#3E6D9C"/><rect x="-6" y="-16" width="8" height="8" fill="#E0C468"/><rect x="12" y="-15" width="8" height="15" fill="#0B1F35"/><rect x="14" y="-12" width="4" height="3" fill="#8FB0D1"/></g>';
+
+  var jr = null;
+  if (journey && $('#jr-svg')) {
+    var ESSEN = [7.01, 51.46], PORT = [4.40, 51.22];
+    var CHANNEL = [[4.4, 51.22], [3.2, 51.5], [1.6, 51.05], [-1.5, 50.2], [-5.5, 49.3], [-8.5, 47.5]];
+    var ATL = CHANNEL.concat([[-12, 40], [-17, 30], [-19, 20], [-18, 11]]);
+    var MED = CHANNEL.concat([[-10.2, 43], [-10, 38], [-6.5, 36], [-3, 36.1], [5, 37.8], [11, 37.6], [15, 35.8], [22, 34.6], [29, 32.2], [32.3, 31.3], [32.6, 29.8], [34, 27.5], [37, 23], [40, 18], [42.6, 14.2], [43.4, 12.6], [46, 12.2], [51.5, 13.5]]);
+    var LANES = [
+      { label: 'Americas', pos: 'below', way: CHANNEL.concat([[-20, 45.5], [-40, 43.5], [-60, 41], [-74, 40.5]]) },
+      { label: 'South America', pos: 'below', way: ATL.concat([[-27, 5], [-33, -6], [-38, -14], [-41, -23.5], [-46.3, -24]]) },
+      { label: 'Lagos', pos: 'right', way: ATL.concat([[-12, 5], [-4, 4], [3.4, 6.3]]) },
+      { label: 'Southern Africa', pos: 'right', way: ATL.concat([[-10, 0], [0, -15], [10, -28], [18.4, -35.3], [25, -35.5], [31, -30]]) },
+      { label: 'Middle East', pos: 'above', way: MED.concat([[58, 17.5], [60, 22.3], [57.5, 25.5], [56.3, 26.4], [55, 25.1]]) },
+      { label: 'Asia', pos: 'left', way: MED.concat([[62, 11], [73, 8], [80.5, 5.5], [88, 5.8], [94.5, 6.5], [97.5, 5.8], [100, 3.5], [102.5, 1.8], [104, 1.2], [107, 5], [110, 11], [114, 19], [118.5, 23.5], [122, 27.5], [122, 31]]) }
+    ];
+    var EUROPE = [
+      { label: 'Holland', at: [4.48, 51.92], pos: 'above', bend: 0.18 },
+      { label: 'Belgium', at: [4.35, 50.85], pos: 'below', bend: -0.18 },
+      { label: 'Austria', at: [16.37, 48.21], pos: 'below', bend: 0.12 }
+    ];
+
+    var svg = $('#jr-svg'), lines = $('#jr-lines'), marks = $('#jr-marks'), grid = $('#jr-grid');
+    var gd = '';
+    for (var glon = -180; glon <= 180; glon += 15) gd += 'M' + ((glon + 180) * 10) + ' 0V1800';
+    for (var glat = -75; glat <= 75; glat += 15) gd += 'M0 ' + ((90 - glat) * 10) + 'H3600';
+    svgEl('path', { d: gd, 'class': 'jm-grid', 'vector-effect': 'non-scaling-stroke' }, grid);
+
+    var marker = function (ll, cls, label, pos) {
+      var xy = toXY(ll);
+      var g = svgEl('g', { 'class': 'jm-mark ' + cls }, marks);
+      g.innerHTML = (cls.indexOf('hub') > -1 ? '<circle class="jm-ring" r="7"/>' : '') + '<circle class="jm-dot" r="' + (cls.indexOf('hub') > -1 ? 6 : 4.5) + '"/>' +
+        (label ? '<text class="jm-label" ' + ({ above: 'x="0" y="-14" text-anchor="middle"', topfar: 'x="0" y="-32" text-anchor="middle"', below: 'x="0" y="24" text-anchor="middle"', left: 'x="-12" y="5" text-anchor="end"', right: 'x="12" y="5"' }[pos || 'right']) + '>' + label + '</text>' : '');
+      return { g: g, x: xy[0], y: xy[1] };
+    };
+
+    var euroLines = EUROPE.map(function (e) { return new Line(curve(ESSEN, e.at, e.bend, 24), lines, 'jm-road'); });
+    var truckLine = new Line(curve(ESSEN, PORT, -0.25, 24), lines, 'jm-road');
+    var laneLines = LANES.map(function (l) { return new Line(spline(l.way, 6), lines, 'jm-sea'); });
+
+    var euroMarks = EUROPE.map(function (e) { return marker(e.at, 'jm-eu', e.label, e.pos); });
+    var laneMarks = LANES.map(function (l) { return marker(l.way[l.way.length - 1], 'jm-dest', l.label, l.pos); });
+    var portMark = marker(PORT, 'jm-port', null);
+    var hubMark = marker(ESSEN, 'jm-hub', 'Essen', 'topfar');
+    var truck = svgEl('g', { 'class': 'jm-vehicle jm-truck' }, marks);
+    truck.innerHTML = TRUCK_SVG;
+    var ships = LANES.map(function () { var g = svgEl('g', { 'class': 'jm-vehicle jm-ship' }, marks); g.innerHTML = SHIP_SVG; return g; });
+
+    jr = {
+      map: $('#jr-map'), svg: svg, sticky: $('.journey-sticky', journey),
+      steps: $$('.journey-step', journey), dots: $$('.journey-dots i', journey),
+      status: $('#jr-status', journey), sub: $('#jr-sub', journey),
+      euroLines: euroLines, truckLine: truckLine, laneLines: laneLines,
+      euroMarks: euroMarks, laneMarks: laneMarks, fixed: [portMark, hubMark],
+      truck: truck, ships: ships, last: -1
+    };
+  }
+
+  var STATUS = ['Quote requested', 'Estimate confirmed', 'Loaded and shipped', 'Delivered worldwide'];
+  var SUBS = ['Essen, Germany', 'Major routes: Belgium, Holland, Austria', 'Sea freight to any part of the world', 'Europe · Americas · Africa · Middle East · Asia'];
+  var STEP_AT = [0, 0.25, 0.5, 0.8, 1];
+
+  function placeMark(m, k, opacity) {
+    m.g.setAttribute('transform', 'translate(' + m.x.toFixed(1) + ' ' + m.y.toFixed(1) + ') scale(' + k.toFixed(4) + ')');
+    if (opacity !== undefined) m.g.style.opacity = opacity.toFixed(3);
+  }
+  function placeVehicle(g, h, k, scale, opacity) {
+    var a = h.ang, rot;
+    if (Math.cos(a * Math.PI / 180) >= 0) rot = 'rotate(' + Math.max(-35, Math.min(35, a)).toFixed(1) + ')';
+    else {
+      var t = a - 180;
+      while (t < -180) t += 360;
+      while (t > 180) t -= 360;
+      rot = 'rotate(' + Math.max(-35, Math.min(35, t)).toFixed(1) + ') scale(-1 1)';
+    }
+    g.setAttribute('transform', 'translate(' + h.x.toFixed(1) + ' ' + h.y.toFixed(1) + ') scale(' + (k * scale).toFixed(4) + ') ' + rot);
+    g.style.opacity = opacity.toFixed(3);
+  }
 
   function renderJourney(p) {
-    var roadT = ease(seg(p, 0.1, 0.42));
-    var seaT = ease(seg(p, 0.52, 0.93));
-    jr.roadGold.style.strokeDashoffset = (jr.Lr * (1 - roadT)).toFixed(1);
-    jr.seaGold.style.strokeDashoffset = (jr.Ls * (1 - seaT)).toFixed(1);
-    // truck on the road, container ship at sea (swap at the port)
-    var onSea = p >= 0.47;
-    var path = onSea ? jr.sea : jr.road;
-    var L = onSea ? jr.Ls : jr.Lr;
-    var at = (onSea ? seaT : roadT) * L;
-    var pt = path.getPointAtLength(at);
-    var a1 = path.getPointAtLength(Math.max(0, at - 3));
-    var a2 = path.getPointAtLength(Math.min(L, at + 3));
-    var ang = Math.atan2(a2.y - a1.y, a2.x - a1.x) * 180 / Math.PI;
-    ang = Math.max(-26, Math.min(26, ang));
-    jr.veh.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(' + (phone.matches ? 1.25 : 1) + ')');
-    // phones: pan the wide chart so the vehicle stays centred
-    if (phone.matches) {
-      var boxW = jr.map.clientWidth, boxH = jr.map.clientHeight;
-      var k = boxH / 400, svgW = 1200 * k;
-      var pan = Math.min(0, Math.max(boxW - svgW, boxW / 2 - pt.x * k));
-      jr.svg.style.setProperty('--pan', pan.toFixed(1) + 'px');
-    } else {
-      jr.svg.style.removeProperty('--pan');
-    }
-    jr.truck.style.opacity = onSea ? 0 : 1;
-    jr.ship.style.opacity = onSea ? 1 : 0;
-    // steps, status and day counter
+    // camera: close on Europe, then pull back to the whole world
+    var boxW = jr.map.clientWidth || 1, boxH = jr.map.clientHeight || 1, aspect = boxW / boxH;
+    var W0 = Math.max(170, 60 * aspect), W1 = Math.max(aspect < 1.6 ? 2500 : 2950, 960 * aspect);
+    var z = ease(seg(p, 0.5, 0.64));
+    var W = Math.exp(lerp(Math.log(W0), Math.log(W1), z)), H = W / aspect;
+    var cx = lerp(1900, 2020, z), cy = lerp(398, 820, z);
+    jr.svg.setAttribute('viewBox', (cx - W / 2).toFixed(1) + ' ' + (cy - H / 2).toFixed(1) + ' ' + W.toFixed(1) + ' ' + H.toFixed(1));
+    var k = W / boxW; // chart units per screen pixel: keeps markers a constant on-screen size
+    var small = boxW < 600 ? 0.8 : 1;
+
+    var fe = ease(seg(p, 0.2, 0.4));
+    jr.euroLines.forEach(function (l) { l.draw(fe); });
+    var th = jr.truckLine.draw(ease(seg(p, 0.28, 0.47)));
+    placeVehicle(jr.truck, th, k, small, 1 - seg(p, 0.5, 0.55));
+
+    var fs = ease(seg(p, 0.56, 0.9));
+    var shipOn = seg(p, 0.5, 0.56) * (1 - seg(p, 0.9, 0.96)); // ships fade once they arrive
+    jr.laneLines.forEach(function (l, i) { placeVehicle(jr.ships[i], l.draw(fs), k, 0.7 * small, shipOn); });
+
+    var euroOp = 1 - seg(p, 0.52, 0.6);
+    jr.euroMarks.forEach(function (m) { placeMark(m, k, euroOp); });
+    var destOp = seg(p, 0.84, 0.92);
+    jr.laneMarks.forEach(function (m) { placeMark(m, k, destOp); });
+    placeMark(jr.fixed[0], k, 1 - seg(p, 0.55, 0.62));
+    placeMark(jr.fixed[1], k);
+
     var step = p < STEP_AT[1] ? 0 : p < STEP_AT[2] ? 1 : p < STEP_AT[3] ? 2 : 3;
     jr.steps.forEach(function (el, i) {
       el.classList.toggle('is-active', i === step);
@@ -147,22 +263,29 @@
       el.style.setProperty('--fill', i < step ? 1 : i > step ? 0 : seg(p, STEP_AT[i], STEP_AT[i + 1]).toFixed(3));
     });
     jr.dots.forEach(function (el, i) { el.classList.toggle('on', i <= step); });
-    var day = Math.round(seaT * 14);
-    if (step !== jr.last) { jr.status.textContent = STATUS[step]; jr.last = step; }
-    jr.day.textContent = day;
+    if (step !== jr.last) {
+      jr.status.textContent = STATUS[step];
+      jr.sub.textContent = SUBS[step];
+      jr.last = step;
+    }
   }
 
+  var journeyP = 0;
   var scrollTicking = false;
   function onScrollFrame() {
     scrollTicking = false;
     var doc = d.documentElement;
     var max = doc.scrollHeight - window.innerHeight;
     if (progressBar) progressBar.style.setProperty('--scroll', max > 0 ? (window.scrollY / max).toFixed(4) : 0);
-    if (jr && !reduceMotion) {
-      var rect = journey.getBoundingClientRect();
-      var headerH = header ? header.offsetHeight : 0;
-      var travel = journey.offsetHeight - jr.sticky.offsetHeight;
-      if (travel > 0) renderJourney(clamp01((headerH - rect.top) / travel));
+    if (jr) {
+      if (reduceMotion) journeyP = 1;
+      else {
+        var rect = journey.getBoundingClientRect();
+        var headerH = header ? header.offsetHeight : 0;
+        var travel = journey.offsetHeight - jr.sticky.offsetHeight;
+        journeyP = travel > 0 ? clamp01((headerH - rect.top) / travel) : 1;
+      }
+      renderJourney(journeyP);
     }
   }
   function requestScrollFrame() {
@@ -171,7 +294,6 @@
   if (progressBar || jr) {
     window.addEventListener('scroll', requestScrollFrame, { passive: true });
     window.addEventListener('resize', requestScrollFrame);
-    if (jr && reduceMotion) renderJourney(1);
     onScrollFrame();
   }
 
@@ -195,11 +317,51 @@
     });
   }
 
-  // ---------- Scroll reveal ----------
-  $$('[data-reveal], .process-item').forEach(function (el) {
-    onVisible(el, function (t) { t.classList.add('in'); });
-  });
-  if (!hasIO) d.documentElement.classList.add('no-io');
+  // ---------- Scroll reveal: fade in on enter, fade out on leave (both directions) ----------
+  if (hasIO) {
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { entry.target.classList.toggle('in', entry.isIntersecting); });
+    }, { threshold: 0, rootMargin: '-6% 0px -8% 0px' });
+    $$('[data-reveal], .process-item').forEach(function (el) { revealIO.observe(el); });
+  } else {
+    d.documentElement.classList.add('no-io');
+    $$('[data-reveal], .process-item').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // ---------- Headline word reveal (replays when scrolled back to) ----------
+  if (hasIO && !reduceMotion) {
+    var splitWords = function (el) {
+      var walker = d.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+      var n = 0;
+      texts.forEach(function (tn) {
+        var frag = d.createDocumentFragment();
+        tn.nodeValue.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(d.createTextNode(part)); return; }
+          var w = d.createElement('span');
+          w.className = 'w';
+          var wi = d.createElement('span');
+          wi.className = 'wi';
+          wi.textContent = part;
+          wi.style.setProperty('--wi', n++);
+          w.appendChild(wi);
+          frag.appendChild(w);
+        });
+        tn.parentNode.replaceChild(frag, tn);
+      });
+      el.classList.add('wsplit');
+    };
+    var wordIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { entry.target.classList.toggle('words-in', entry.isIntersecting); });
+    }, { threshold: 0.15 });
+    $$('.section-head h2, .why-sticky h2, .cta h2, .journey-head h2, .coverage-grid h2, .split > div > h2, .page-hero h1, .statement blockquote, .values').forEach(function (el) {
+      if (el.closest('.hero')) return;
+      splitWords(el);
+      wordIO.observe(el);
+    });
+  }
 
   // ---------- Year stamps & counters ----------
   var year = new Date().getFullYear();
@@ -445,10 +607,8 @@
     var cargoSel = $('#q-cargo');
     if (params.get('cargo') && cargoSel) cargoSel.value = params.get('cargo');
     if (params.get('destination')) $('#q-destination').value = params.get('destination');
-    if (params.get('weight')) {
-      $('#q-notes').value = 'Approx. weight: ' + params.get('weight') + ' kg' +
-        (params.get('estimate') ? '\nCalculator estimate: ' + params.get('estimate') : '');
-    }
+    if (params.get('weight') && $('#q-weight')) $('#q-weight').value = params.get('weight');
+    if (params.get('estimate')) $('#q-notes').value = 'Calculator estimate: ' + params.get('estimate');
   }
 
   // ---------- Forms: fall back to WhatsApp until Formspree is connected ----------

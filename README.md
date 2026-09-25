@@ -33,10 +33,15 @@ The header and footer are repeated in every page, so a change to either needs ma
   `data-video="assets/video/hero.mp4"` on the `.hero-media` element in `index.html`. The photo stays as
   the fallback while the video loads, and for visitors with reduced motion or data saver turned on.
 
-- **Scroll journey** ("How it works" on the home page): the section pins while you scroll, a truck drives
-  from Essen to the port, becomes a container ship and sails to Lagos, and the four steps light up in turn.
-  The map is inline SVG in `index.html`; the timing lives in `renderJourney()` in `assets/script.js`.
-  On phones the map pans to follow the vehicle. With reduced motion turned on it shows the finished route.
+- **Scroll journey** ("How it works" on the home page): the section pins while you scroll over a real world
+  chart. It starts close on Europe (Essen, and the major routes to Belgium, Holland and Austria), a truck drives to
+  the port, then the camera pulls back and container ships sail real sea lanes to the Americas, South America,
+  Lagos, Southern Africa, the Middle East and Asia. Lanes and labels live at the top of the journey code in
+  `assets/script.js`; the land outline is Natural Earth 1:50m (public domain).
+- **Scroll animations**: sections fade and slide in as they enter and fade out as they leave, photos wipe open,
+  headings reveal word by word (and replay when you scroll back), and the hero drifts away as you scroll.
+  Browsers with CSS scroll-driven animations get scroll-linked motion; others (for example Firefox) get the same
+  effect triggered on entry/exit. Forms and the calculator only fade in. Everything is off with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.
 
 ## Adding photos

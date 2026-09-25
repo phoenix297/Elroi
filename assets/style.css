@@ -520,26 +520,21 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; transition: opaci
   box-shadow: 0 30px 60px -40px rgba(11, 31, 53, .45);
 }
 .journey-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5), inset 0 0 60px rgba(62, 109, 156, .12); }
-.journey-map svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.jm-grid { stroke: rgba(62, 109, 156, .12); stroke-width: 1; }
-.jm-land { fill: #F7F4EC; stroke: rgba(154, 115, 24, .35); stroke-width: 1.2; }
-.jm-region { font-family: var(--f-sans); font-size: 12px; font-weight: 600; letter-spacing: .2em; fill: rgba(11, 31, 53, .38); }
-.jm-waves path { fill: none; stroke: rgba(62, 109, 156, .35); stroke-width: 1.5; stroke-linecap: round; }
-.jm-compass circle { fill: none; stroke: rgba(154, 115, 24, .6); stroke-width: 1; }
-.jm-compass path { fill: var(--gold); }
-.jm-compass text { font-family: var(--f-serif); font-size: 13px; fill: var(--gold-deep); }
-.jm-route { fill: none; stroke: rgba(11, 31, 53, .28); stroke-width: 2; stroke-dasharray: 3 7; stroke-linecap: round; }
-.jm-route-sea { stroke: rgba(62, 109, 156, .45); }
-.jm-gold { fill: none; stroke: var(--gold); stroke-width: 3.5; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(201, 162, 39, .45)); }
-.jm-node circle { fill: var(--white); stroke: var(--navy); stroke-width: 3; }
-.jm-node .jm-ring { fill: none; stroke: var(--gold); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s var(--ease) infinite; }
-.jm-node-end circle:not(.jm-ring) { stroke: var(--gold-deep); }
-.jm-name { font-family: var(--f-serif); font-size: 26px; fill: var(--navy); }
-.jm-name-gold { fill: var(--gold-deep); font-style: italic; }
-.jm-sub { font-family: var(--f-sans); font-size: 11px; font-weight: 600; letter-spacing: .16em; fill: rgba(11, 31, 53, .5); }
-.jr-truck, .jr-ship { transition: opacity .35s var(--ease); }
-.jr-ship { opacity: 0; }
-.jr-vehicle { filter: drop-shadow(0 6px 6px rgba(11, 31, 53, .25)); }
+.journey-map svg { display: block; width: 100%; height: 100%; }
+.jm-grid { fill: none; stroke: rgba(62, 109, 156, .13); stroke-width: 1; }
+.jm-land { fill: #F7F4EC; stroke: rgba(154, 115, 24, .45); stroke-width: .8; vector-effect: non-scaling-stroke; }
+.jm-route { fill: none; stroke: rgba(11, 31, 53, .28); stroke-width: 1.3; stroke-dasharray: 3 5; stroke-linecap: round; }
+.jm-sea { stroke: rgba(62, 109, 156, .5); }
+.jm-gold { fill: none; stroke: var(--gold); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.jm-mark .jm-dot { fill: var(--white); stroke: var(--navy); stroke-width: 2; }
+.jm-hub .jm-dot { fill: var(--gold); stroke: var(--navy); stroke-width: 2.5; }
+.jm-dest .jm-dot { fill: var(--gold-soft); stroke: var(--navy); }
+.jm-eu .jm-dot { stroke: var(--steel); }
+.jm-ring { fill: none; stroke: var(--gold); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s var(--ease) infinite; }
+.jm-label { font-family: var(--f-sans); font-size: 12.5px; font-weight: 600; letter-spacing: .06em; fill: var(--navy); paint-order: stroke; stroke: rgba(247, 244, 236, .9); stroke-width: 4px; stroke-linejoin: round; }
+.jm-hub .jm-label { font-family: var(--f-serif); font-size: 17px; font-weight: 500; letter-spacing: 0; }
+.jm-dest .jm-label { fill: var(--gold-deep); }
+.jm-vehicle { filter: drop-shadow(0 4px 4px rgba(11, 31, 53, .3)); }
 
 .journey-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 .journey-step { position: relative; padding-top: 22px; border-top: 1px solid var(--line); opacity: .42; transition: opacity .5s var(--ease); }
@@ -901,9 +896,50 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 /* 404 */
 .lost { min-height: 64vh; display: flex; align-items: center; }
 
-/* ---------- Scroll reveal ---------- */
-.js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: calc(var(--d, 0) * 100ms); }
+/* ---------- Scroll animations ----------
+   Browsers with scroll-driven animations get scroll-linked fades (in AND out) and image wipes.
+   Others fall back to IntersectionObserver classes toggled in both directions. */
+.js [data-reveal] { opacity: 0; transform: translate3d(0, 48px, 0); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); transition-delay: calc(var(--d, 0) * 110ms); }
 .js [data-reveal].in { opacity: 1; transform: none; }
+@keyframes sd-fade { 0% { opacity: 0; transform: translate3d(0, 80px, 0) scale(.96); } 24% { opacity: 1; transform: none; } 78% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translate3d(0, -60px, 0) scale(.97); } }
+@keyframes sd-fade-in { 0% { opacity: 0; transform: translate3d(0, 80px, 0) scale(.97); } 24%, 100% { opacity: 1; transform: none; } }
+@keyframes sd-wipe { from { clip-path: inset(24% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sd-wipe-x { from { clip-path: inset(0 0 0 35%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sd-zoom { from { scale: 1.28; } to { scale: 1; } }
+@keyframes sd-parallax { from { translate: 0 -10%; } to { translate: 0 10%; } }
+@keyframes hero-out { to { opacity: 0; transform: translate3d(0, -14vh, 0) scale(.96); } }
+@supports (animation-timeline: view()) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: sd-fade linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--d, 0) * 12%) exit 100%;
+  }
+  .js [data-reveal="in"] { animation-name: sd-fade-in; }
+  .cargo-img, .feature-img, .why-photo, .post-img, .photo-trio a {
+    animation: sd-wipe linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 42%;
+  }
+  .cargo-img img, .feature-img img, .why-photo img, .post-img img, .photo-trio img {
+    animation: sd-zoom linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+  }
+  .strip-img { animation: sd-wipe-x linear both; animation-timeline: view(inline); animation-range: entry 0% cover 35%; }
+  .statement .bg { scale: 1.2; animation: sd-parallax linear both; animation-timeline: view(); }
+  .hero > .container { animation: hero-out linear both; animation-timeline: scroll(root block); animation-range: 0 90vh; }
+}
+
+/* Headline word reveal (replays whenever the heading scrolls back into view) */
+.wsplit .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .07em .1em 0; margin: 0 -.07em -.1em 0; }
+.wsplit .wi { display: inline-block; transform: translate3d(0, 108%, 0); opacity: 0; transition: transform 1s var(--ease), opacity .8s var(--ease); transition-delay: calc(var(--wi, 0) * 60ms); }
+.wsplit.words-in .wi { transform: none; opacity: 1; }
+.wsplit em { background: none !important; color: inherit !important; }
+.wsplit em .wi { background-image: var(--grad-gold-deep); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; padding-right: .04em; }
+.dark .wsplit em .wi, .page-hero .wsplit em .wi, .statement .wsplit em .wi { background-image: var(--grad-gold); }
 .js .hero-copy > * { opacity: 0; transform: translateY(18px); animation: rise 1s var(--ease) forwards; }
 .js .hero-copy > :nth-child(2) { animation-delay: .1s; }
 .js .hero-copy > :nth-child(3) { animation-delay: .2s; }
@@ -969,11 +1005,8 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .journey-head .num-label { display: none; }
   .journey-status { text-align: left; min-width: 0; grid-template-columns: auto 1fr; align-items: baseline; column-gap: 12px; }
   .journey-status .js-label { grid-column: 1 / -1; }
-  /* phones: the chart is wider than the screen and pans to follow the truck/ship */
-  .journey-map { height: clamp(200px, 32vh, 280px); }
-  .journey-map svg { width: auto; height: 100%; aspect-ratio: 3 / 1; max-width: none; transform: translate3d(var(--pan, 0px), 0, 0); }
-  .jm-region, .jm-waves, .jm-compass { display: none; }
-  .jm-sub { font-size: 14px; }
+  .journey-map { height: clamp(220px, 36vh, 300px); }
+  .jm-label { font-size: 11px; }
   .journey-steps { grid-template-columns: 1fr; }
   .journey-step { grid-area: 1 / 1; opacity: 0; transform: translateY(10px); transition: opacity .4s var(--ease), transform .4s var(--ease); pointer-events: none; }
   .journey-step.is-done { opacity: 0; }
@@ -990,7 +1023,10 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
-  .js [data-reveal], .js .hero-copy > * { opacity: 1; transform: none; }
+  .js [data-reveal], .js .hero-copy > * { opacity: 1; transform: none; animation: none !important; }
+  .cargo-img, .feature-img, .why-photo, .post-img, .photo-trio a, .strip-img, .hero > .container, .statement .bg,
+  .cargo-img img, .feature-img img, .why-photo img, .post-img img, .photo-trio img { animation: none !important; }
+  .wsplit .wi { transform: none; opacity: 1; }
   .journey { height: auto; padding: clamp(80px, 10vw, 140px) 0; }
   .journey-sticky { position: static; height: auto; }
   .journey-step, .journey-step.is-done { opacity: 1; transform: none; grid-area: auto; }
