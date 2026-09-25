@@ -1,0 +1,353 @@
+/* EL-ROI Shipping Services — site interactions */
+(function () {
+  'use strict';
+
+  var d = document;
+  var WHATSAPP = '4915219521826';
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  function $(sel, ctx) { return (ctx || d).querySelector(sel); }
+  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || d).querySelectorAll(sel)); }
+
+  // Run a callback once, when an element scrolls into view
+  function onVisible(el, cb, margin) {
+    if (!hasIO) { cb(el); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { io.unobserve(entry.target); cb(entry.target); }
+      });
+    }, { threshold: 0, rootMargin: margin || '0px 0px -8% 0px' });
+    io.observe(el);
+  }
+
+  // ---------- Toast ----------
+  var toastEl = $('.toast');
+  var toastTimer;
+  function toast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 4200);
+  }
+
+  // ---------- Header ----------
+  var header = $('header.site');
+  function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 8); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---------- Mobile menu ----------
+  var toggle = $('.nav-toggle');
+  var menu = $('#mobile-menu');
+  function setMenu(open) {
+    d.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.setAttribute('aria-hidden', String(!open));
+  }
+  if (toggle && menu) {
+    toggle.addEventListener('click', function () { setMenu(!d.body.classList.contains('menu-open')); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    d.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && d.body.classList.contains('menu-open')) { setMenu(false); toggle.focus(); }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1140 && d.body.classList.contains('menu-open')) setMenu(false);
+    });
+  }
+
+  // ---------- Scroll reveal ----------
+  $$('[data-reveal], .step').forEach(function (el) {
+    onVisible(el, function (t) { t.classList.add('in'); });
+  });
+  if (!hasIO) d.documentElement.classList.add('no-io');
+
+  // ---------- Year stamps & counters ----------
+  var year = new Date().getFullYear();
+  $$('[data-year]').forEach(function (el) { el.textContent = year; });
+  $$('[data-since]').forEach(function (el) {
+    var n = year - parseInt(el.getAttribute('data-since'), 10);
+    el.setAttribute('data-count', n);
+    el.firstChild.nodeValue = n;
+  });
+  $$('[data-count]').forEach(function (el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var textNode = el.firstChild;
+    if (reduceMotion || !textNode) return;
+    textNode.nodeValue = '0';
+    onVisible(el, function () {
+      var start = null;
+      var dur = 1400;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        textNode.nodeValue = Math.round((1 - Math.pow(1 - p, 3)) * target);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  });
+
+  // ---------- Split-flap departure board ----------
+  var FLAP_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~-';
+  $$('.board').forEach(function (board) {
+    var flaps = [];
+    $$('.flaps', board).forEach(function (box) {
+      var len = parseInt(box.getAttribute('data-len'), 10) || box.textContent.length;
+      var text = (box.textContent.trim() + new Array(len + 1).join(' ')).slice(0, len);
+      box.textContent = '';
+      box.setAttribute('aria-hidden', 'true');
+      for (var i = 0; i < len; i++) {
+        var s = d.createElement('span');
+        s.className = 'flap';
+        s.setAttribute('data-ch', text[i] === ' ' ? ' ' : text[i]);
+        s.textContent = reduceMotion ? s.getAttribute('data-ch') : ' ';
+        box.appendChild(s);
+        flaps.push(s);
+      }
+    });
+    if (reduceMotion) return;
+    onVisible(board, function () {
+      flaps.forEach(function (f, i) {
+        var target = f.getAttribute('data-ch');
+        var turns = 6 + Math.floor(Math.random() * 8) + (i % 12);
+        var n = 0;
+        var t = setInterval(function () {
+          if (n++ >= turns) { clearInterval(t); f.textContent = target; return; }
+          f.textContent = FLAP_CHARS.charAt(Math.floor(Math.random() * FLAP_CHARS.length));
+        }, 48);
+      });
+    }, '0px 0px -15% 0px');
+  });
+
+  // ---------- Horizontal photo strip ----------
+  $$('[data-strip]').forEach(function (wrap) {
+    var strip = d.getElementById(wrap.getAttribute('data-strip'));
+    if (!strip) return;
+    $$('[data-dir]', wrap).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dir = btn.getAttribute('data-dir') === 'next' ? 1 : -1;
+        strip.scrollBy({ left: dir * strip.clientWidth * 0.7, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    });
+  });
+
+  // ---------- FAQ accordion ----------
+  $$('.faq-item').forEach(function (item) {
+    var q = $('.faq-q', item);
+    if (!q) return;
+    q.addEventListener('click', function () {
+      var open = !item.classList.contains('open');
+      $$('.faq-item.open').forEach(function (other) {
+        if (other !== item) {
+          other.classList.remove('open');
+          $('.faq-q', other).setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.toggle('open', open);
+      q.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  // ---------- Gallery filter + lightbox ----------
+  $$('.filters button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      $$('.filters button').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      $$('.masonry figure').forEach(function (fig) {
+        var cats = (fig.getAttribute('data-cat') || '').split(' ');
+        fig.hidden = !(f === 'all' || cats.indexOf(f) > -1);
+      });
+    });
+  });
+
+  var lbLinks = $$('[data-lightbox]');
+  if (lbLinks.length) {
+    var arrow = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
+    var lb = d.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Photo viewer');
+    lb.innerHTML =
+      '<button class="lb-btn lb-close" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+      '<button class="lb-btn lb-prev" aria-label="Previous photo">' + arrow + '</button>' +
+      '<img alt="">' +
+      '<button class="lb-btn lb-next" aria-label="Next photo">' + arrow + '</button>' +
+      '<div class="lb-cap"></div>';
+    d.body.appendChild(lb);
+    var lbImg = $('img', lb);
+    var lbCap = $('.lb-cap', lb);
+    var current = 0;
+    var lastFocus = null;
+
+    function visibleLinks() {
+      return lbLinks.filter(function (a) { var fig = a.closest('figure'); return !fig || !fig.hidden; });
+    }
+    function show(i) {
+      var list = visibleLinks();
+      if (!list.length) return;
+      current = (i + list.length) % list.length;
+      var a = list[current];
+      var img = $('img', a);
+      lbImg.src = a.getAttribute('href');
+      lbImg.alt = img ? img.alt : '';
+      lbCap.textContent = (a.getAttribute('data-caption') || lbImg.alt) + '  —  ' + (current + 1) + ' / ' + list.length;
+    }
+    function open(a) {
+      lastFocus = d.activeElement;
+      show(visibleLinks().indexOf(a));
+      lb.classList.add('open');
+      d.body.style.overflow = 'hidden';
+      $('.lb-close', lb).focus();
+    }
+    function close() {
+      lb.classList.remove('open');
+      d.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    lbLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); open(a); });
+    });
+    $('.lb-close', lb).addEventListener('click', close);
+    $('.lb-prev', lb).addEventListener('click', function () { show(current - 1); });
+    $('.lb-next', lb).addEventListener('click', function () { show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    d.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+    var touchX = null;
+    lb.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+      touchX = null;
+    });
+  }
+
+  // ---------- Shipping calculator (rough estimate only) ----------
+  var calc = $('#calc-form');
+  if (calc) {
+    var baseRates = {
+      'General Cargo': 4.5,
+      'Containers': 3.8,
+      'Vehicles': 6.2,
+      'Fragile Goods': 7.0,
+      'Oversized / Heavy Cargo': 8.5,
+      'Machinery / Equipment': 7.8,
+      'Documents': 2.0
+    };
+    var destMultiplier = {
+      'Europe (Belgium, Austria, Holland)': 1,
+      'Lagos, Nigeria': 1.6,
+      'Rest of World': 2.1
+    };
+    var MIN_KG = 50;
+    var MAX_KG = 30000;
+    var weightIn = $('#calc-weight');
+    var range = $('#calc-range');
+    var amount = $('#calc-amount');
+    var cta = $('#calc-cta');
+    var bRate = $('#b-rate');
+    var bWeight = $('#b-weight');
+    var bRoute = $('#b-route');
+    var eur = function (n, dp) { return '€' + n.toLocaleString('en-GB', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); };
+
+    // Log-scale slider so small and huge loads are both easy to pick
+    function sliderToKg(v) { return Math.round(MIN_KG * Math.pow(MAX_KG / MIN_KG, v / 1000) / 10) * 10; }
+    function kgToSlider(kg) { return Math.round(1000 * Math.log(Math.max(kg, MIN_KG) / MIN_KG) / Math.log(MAX_KG / MIN_KG)); }
+    function paintRange() { range.style.setProperty('--p', (range.value / 10) + '%'); }
+
+    function update() {
+      var cargoEl = $('input[name="cargo"]:checked', calc);
+      var destEl = $('input[name="dest"]:checked', calc);
+      var w = parseFloat(weightIn.value) || 0;
+      var chargeable = Math.max(w, MIN_KG);
+      bWeight.textContent = w > 0 ? chargeable.toLocaleString('en-GB') + ' kg' + (w < MIN_KG ? ' (min.)' : '') : '—';
+      bRate.textContent = cargoEl ? eur(baseRates[cargoEl.value], 2) + ' / kg' : '—';
+      bRoute.textContent = destEl ? '× ' + destMultiplier[destEl.value] : '—';
+
+      if (!cargoEl || !destEl || w <= 0) {
+        amount.textContent = '€ —';
+        cta.classList.add('disabled');
+        cta.setAttribute('aria-disabled', 'true');
+        cta.href = 'quote.html';
+        return;
+      }
+      var estimate = chargeable * baseRates[cargoEl.value] * destMultiplier[destEl.value];
+      var text = eur(Math.round(estimate));
+      if (amount.textContent !== text) {
+        amount.textContent = text;
+        amount.classList.remove('bump');
+        void amount.offsetWidth;
+        amount.classList.add('bump');
+      }
+      cta.classList.remove('disabled');
+      cta.removeAttribute('aria-disabled');
+      cta.href = 'quote.html?' + [
+        'cargo=' + encodeURIComponent(cargoEl.value),
+        'destination=' + encodeURIComponent(destEl.value),
+        'weight=' + encodeURIComponent(w),
+        'estimate=' + encodeURIComponent(text)
+      ].join('&');
+    }
+
+    range.addEventListener('input', function () { weightIn.value = sliderToKg(range.value); paintRange(); update(); });
+    weightIn.addEventListener('input', function () { range.value = kgToSlider(parseFloat(weightIn.value) || MIN_KG); paintRange(); update(); });
+    $$('[data-kg]', calc).forEach(function (b) {
+      b.addEventListener('click', function () {
+        weightIn.value = b.getAttribute('data-kg');
+        range.value = kgToSlider(parseFloat(weightIn.value));
+        paintRange();
+        update();
+      });
+    });
+    calc.addEventListener('change', update);
+    calc.addEventListener('submit', function (e) { e.preventDefault(); update(); });
+    range.value = kgToSlider(parseFloat(weightIn.value) || 1000);
+    paintRange();
+    update();
+  }
+
+  // ---------- Quote form: prefill from the calculator ----------
+  var quoteForm = $('#quote-form');
+  if (quoteForm && window.URLSearchParams && location.search) {
+    var params = new URLSearchParams(location.search);
+    var cargoSel = $('#q-cargo');
+    if (params.get('cargo') && cargoSel) cargoSel.value = params.get('cargo');
+    if (params.get('destination')) $('#q-destination').value = params.get('destination');
+    if (params.get('weight')) {
+      $('#q-notes').value = 'Approx. weight: ' + params.get('weight') + ' kg' +
+        (params.get('estimate') ? '\nCalculator estimate: ' + params.get('estimate') : '');
+    }
+  }
+
+  // ---------- Forms: fall back to WhatsApp until Formspree is connected ----------
+  $$('form[data-wa]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if ((form.getAttribute('action') || '').indexOf('YOUR_FORM_ID') === -1) return; // Formspree is live
+      e.preventDefault();
+      var lines = [form.getAttribute('data-wa'), ''];
+      var hasFiles = false;
+      new FormData(form).forEach(function (value, key) {
+        if (typeof value === 'string') {
+          if (value.trim()) lines.push('*' + key + ':* ' + value.trim());
+        } else if (value && value.name) {
+          hasFiles = true;
+        }
+      });
+      if (hasFiles) lines.push('', '(I have documents to send, attaching them in this chat.)');
+      window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+      toast('Opening WhatsApp with your details. Just hit send.');
+    });
+  });
+})();
