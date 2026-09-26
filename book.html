@@ -8,6 +8,9 @@
 <meta name="theme-color" content="#0B1F35">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://phoenix297.github.io/Elroi/book.html">
+<link rel="alternate" hreflang="en" href="https://phoenix297.github.io/Elroi/book.html">
+<link rel="alternate" hreflang="de" href="https://phoenix297.github.io/Elroi/de/book.html">
+<link rel="alternate" hreflang="x-default" href="https://phoenix297.github.io/Elroi/book.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EL-ROI Shipping Services">
 <meta property="og:title" content="Book a Shipment from Germany | EL-ROI Shipping">
@@ -22,7 +25,7 @@
 <link rel="preload" href="assets/fonts/fraunces-normal-latin-39ce20.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-normal-latin-567244.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css?v=555cd96e43">
-<link rel="stylesheet" href="assets/style.css?v=c3c11eb2d5">
+<link rel="stylesheet" href="assets/style.css?v=8a43a9c01f">
 <script>document.documentElement.className += ' js';</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://phoenix297.github.io/Elroi/"},{"@type":"ListItem","position":2,"name":"Book a Shipment from Germany","item":"https://phoenix297.github.io/Elroi/book.html"}]}</script>
 </head>
@@ -49,6 +52,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-end">
+      <div class="lang-switch" role="group" aria-label="Language"><a class="on" href="book.html" hreflang="en" lang="en" data-lang="en">EN</a><a href="de/book.html" hreflang="de" lang="de" data-lang="de">DE</a></div>
       <a href="quote.html" class="btn btn-primary btn-sm">Get a Quote</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     </div>
@@ -69,6 +73,7 @@
     <a href="quote.html"><span>11</span>Get a Quote</a>
   </nav>
   <div class="mm-foot">
+    <div class="lang-switch" role="group" aria-label="Language"><a class="on" href="book.html" hreflang="en" lang="en" data-lang="en">EN</a><a href="de/book.html" hreflang="de" lang="de" data-lang="de">DE</a></div>
     <a class="btn btn-primary btn-block" href="https://wa.me/4915219521826" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.4-5.64Zm-5.55 12.2h0a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.65 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.83-.3-1.58-.97-.58-.52-.98-1.16-1.09-1.36-.11-.19 0-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.62 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24Z"/></svg> Chat on WhatsApp</a>
     <a class="btn btn-ghost btn-block" href="tel:+4915219521826">Call +49 1521 9521826</a>
     <small>Essen, Germany &middot; Lagos, Nigeria</small>
@@ -108,7 +113,7 @@
         <div class="form-row">
           <div class="field">
             <label for="b-cargo">Cargo type <b>*</b></label>
-            <select id="b-cargo" name="Cargo Type" required><option value="">Select cargo type</option><option>General Cargo</option><option>Containers</option><option>Vehicles</option><option>Fragile Goods</option><option>Oversized / Heavy Cargo</option><option>Machinery / Equipment</option><option>Documents</option></select>
+            <select id="b-cargo" name="Cargo Type" required><option value="">Select cargo type</option><option value="General Cargo">General Cargo</option><option value="Containers">Containers</option><option value="Vehicles">Vehicles</option><option value="Fragile Goods">Fragile Goods</option><option value="Oversized / Heavy Cargo">Oversized / Heavy Cargo</option><option value="Machinery / Equipment">Machinery / Equipment</option><option value="Documents">Documents</option></select>
           </div>
           <div class="field"><label for="b-weight">Cargo weight (kg)</label><input id="b-weight" name="Cargo Weight" type="number" min="0" inputmode="numeric"></div>
         </div>
@@ -116,7 +121,7 @@
           <div class="field"><label for="b-packages">Number of packages</label><input id="b-packages" name="Number of Packages" type="number" min="1" inputmode="numeric"></div>
           <div class="field">
             <label for="b-method">Preferred shipping method</label>
-            <select id="b-method" name="Preferred Method"><option>Sea Freight</option></select>
+            <select id="b-method" name="Preferred Method"><option value="Sea Freight">Sea Freight</option></select>
           </div>
         </div>
         <div class="field">
@@ -202,6 +207,6 @@
 </footer>
 <a class="wa-float" href="https://wa.me/4915219521826" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.4-5.64Zm-5.55 12.2h0a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.65 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.83-.3-1.58-.97-.58-.52-.98-1.16-1.09-1.36-.11-.19 0-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.62 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24Z"/></svg></a>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="assets/script.js?v=7bace87d58" defer></script>
+<script src="assets/script.js?v=c00afef64f" defer></script>
 </body>
 </html>

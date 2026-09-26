@@ -6,6 +6,8 @@
   'use strict';
 
   var DEG = Math.PI / 180;
+  var DE = (document.documentElement.lang || '').slice(0, 2) === 'de';
+  function T(en, de) { return DE ? de : en; }
   var GOLD = '224, 196, 104';
   var GOLD_DEEP = '201, 162, 39';
   var STEEL = '143, 176, 209';
@@ -16,13 +18,13 @@
   var ROUTES = [
     { name: 'Antwerp', lat: 51.2194, lon: 4.4025, kind: 'main' },
     { name: 'Rotterdam', lat: 51.9244, lon: 4.4777, kind: 'main' },
-    { name: 'Vienna', lat: 48.2082, lon: 16.3738, kind: 'main', label: 'Europe' },
+    { name: 'Vienna', lat: 48.2082, lon: 16.3738, kind: 'main', label: T('Europe', 'Europa') },
     { name: 'Lagos', lat: 6.4474, lon: 3.3903, kind: 'world', label: 'Lagos' },
-    { name: 'New York', lat: 40.7128, lon: -74.006, kind: 'world', label: 'Americas' },
+    { name: 'New York', lat: 40.7128, lon: -74.006, kind: 'world', label: T('Americas', 'Amerika') },
     { name: 'Santos', lat: -23.9608, lon: -46.3336, kind: 'world' },
-    { name: 'Durban', lat: -29.8587, lon: 31.0218, kind: 'world', label: 'Africa' },
-    { name: 'Dubai', lat: 25.0112, lon: 55.0610, kind: 'world', label: 'Middle East' },
-    { name: 'Shanghai', lat: 31.2304, lon: 121.4737, kind: 'world', label: 'Asia' }
+    { name: 'Durban', lat: -29.8587, lon: 31.0218, kind: 'world', label: T('Africa', 'Afrika') },
+    { name: 'Dubai', lat: 25.0112, lon: 55.0610, kind: 'world', label: T('Middle East', 'Naher Osten') },
+    { name: 'Shanghai', lat: 31.2304, lon: 121.4737, kind: 'world', label: T('Asia', 'Asien') }
   ];
   var STYLE = {
     main: { rgb: GOLD, width: 2, alpha: 0.95, pulse: 3.2 },
@@ -274,6 +276,10 @@
       if (label) {
         ctx.font = '600 ' + Math.max(10, Math.round(R / 22)) + 'px Inter, system-ui, sans-serif';
         ctx.textBaseline = 'middle';
+        var tw = ctx.measureText(label.toUpperCase()).width;
+        // keep labels inside the canvas: flip sides when a label would be cut off
+        if (align === 'right' && p[0] + size + 8 + tw > W - 4) align = 'left';
+        else if (align === 'left' && p[0] - size - 8 - tw < 4) align = 'right';
         ctx.textAlign = align === 'left' ? 'right' : align === 'top' ? 'center' : 'left';
         var dx = align === 'left' ? -(size + 8) : align === 'top' ? 0 : size + 8;
         var dy = align === 'top' ? -(size + 12) : 0;

@@ -1101,3 +1101,25 @@ a.post:hover h3, .rel-card:hover h3 { color: var(--gold-deep); }
 .rel-card { display: block; }
 .rel-card .post-img { margin-bottom: 18px; }
 .rel-card h3 { color: var(--navy); font-size: 1.3rem; transition: color .2s; }
+
+/* Language switch */
+.lang-switch { display: inline-flex; border: 1px solid var(--line-light); border-radius: var(--r); overflow: hidden; flex: none; }
+.lang-switch a { font-size: .7rem; font-weight: 600; letter-spacing: .12em; padding: 8px 10px; color: var(--on-dark-3); transition: color .2s, background .2s; }
+.lang-switch a:hover { color: var(--on-dark); }
+.lang-switch a.on { background: rgba(224, 196, 104, .16); color: var(--gold-soft); }
+.mm-foot .lang-switch { justify-self: start; margin-bottom: 6px; }
+.mm-foot .lang-switch a { padding: 10px 16px; font-size: .8rem; }
+@media (max-width: 1160px) { .nav-end > .lang-switch { display: none; } }
+
+/* Longer German labels in the header */
+nav.primary a { white-space: nowrap; }
+html[lang="de"] nav.primary a { padding: 10px 8px; }
+html[lang="de"] nav.primary a::after { left: 8px; right: 8px; }
+html[lang="de"] .nav-end .btn { padding: 0 16px; letter-spacing: .1em; }
+@media (max-width: 1320px) {
+  html[lang="de"] nav.primary { display: none; }
+  html[lang="de"] .nav-toggle { display: block; }
+  html[lang="de"] .nav-end > .lang-switch { display: inline-flex; }
+}
+@media (max-width: 1440px) { .nav-end { gap: 10px; } }
+@media (max-width: 760px) { .nav-end > .lang-switch { display: none !important; } }

@@ -6,6 +6,10 @@
   var WHATSAPP = '4915219521826';
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasIO = 'IntersectionObserver' in window;
+  // Language: German pages set <html lang="de">
+  var DE = (d.documentElement.lang || '').slice(0, 2) === 'de';
+  function T(en, de) { return DE ? de : en; }
+  var LOCALE = DE ? 'de-DE' : 'en-GB';
 
   function $(sel, ctx) { return (ctx || d).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || d).querySelectorAll(sel)); }
@@ -159,17 +163,17 @@
     var ATL = CHANNEL.concat([[-12, 40], [-17, 30], [-19, 20], [-18, 11]]);
     var MED = CHANNEL.concat([[-10.2, 43], [-10, 38], [-6.5, 36], [-3, 36.1], [5, 37.8], [11, 37.6], [15, 35.8], [22, 34.6], [29, 32.2], [32.3, 31.3], [32.6, 29.8], [34, 27.5], [37, 23], [40, 18], [42.6, 14.2], [43.4, 12.6], [46, 12.2], [51.5, 13.5]]);
     var LANES = [
-      { label: 'Americas', pos: 'below', way: CHANNEL.concat([[-20, 45.5], [-40, 43.5], [-60, 41], [-74, 40.5]]) },
-      { label: 'South America', pos: 'below', way: ATL.concat([[-27, 5], [-33, -6], [-38, -14], [-41, -23.5], [-46.3, -24]]) },
+      { label: T('Americas', 'Amerika'), pos: 'below', way: CHANNEL.concat([[-20, 45.5], [-40, 43.5], [-60, 41], [-74, 40.5]]) },
+      { label: T('South America', 'Südamerika'), pos: 'below', way: ATL.concat([[-27, 5], [-33, -6], [-38, -14], [-41, -23.5], [-46.3, -24]]) },
       { label: 'Lagos', pos: 'right', way: ATL.concat([[-12, 5], [-4, 4], [3.4, 6.3]]) },
-      { label: 'Southern Africa', pos: 'right', way: ATL.concat([[-10, 0], [0, -15], [10, -28], [18.4, -35.3], [25, -35.5], [31, -30]]) },
-      { label: 'Middle East', pos: 'above', way: MED.concat([[58, 17.5], [60, 22.3], [57.5, 25.5], [56.3, 26.4], [55, 25.1]]) },
-      { label: 'Asia', pos: 'left', way: MED.concat([[62, 11], [73, 8], [80.5, 5.5], [88, 5.8], [94.5, 6.5], [97.5, 5.8], [100, 3.5], [102.5, 1.8], [104, 1.2], [107, 5], [110, 11], [114, 19], [118.5, 23.5], [122, 27.5], [122, 31]]) }
+      { label: T('Southern Africa', 'Südliches Afrika'), pos: 'right', way: ATL.concat([[-10, 0], [0, -15], [10, -28], [18.4, -35.3], [25, -35.5], [31, -30]]) },
+      { label: T('Middle East', 'Naher Osten'), pos: 'above', way: MED.concat([[58, 17.5], [60, 22.3], [57.5, 25.5], [56.3, 26.4], [55, 25.1]]) },
+      { label: T('Asia', 'Asien'), pos: 'left', way: MED.concat([[62, 11], [73, 8], [80.5, 5.5], [88, 5.8], [94.5, 6.5], [97.5, 5.8], [100, 3.5], [102.5, 1.8], [104, 1.2], [107, 5], [110, 11], [114, 19], [118.5, 23.5], [122, 27.5], [122, 31]]) }
     ];
     var EUROPE = [
-      { label: 'Holland', at: [4.48, 51.92], pos: 'above', bend: 0.18 },
-      { label: 'Belgium', at: [4.35, 50.85], pos: 'below', bend: -0.18 },
-      { label: 'Austria', at: [16.37, 48.21], pos: 'below', bend: 0.12 }
+      { label: T('Holland', 'Niederlande'), at: [4.48, 51.92], pos: 'above', bend: 0.18 },
+      { label: T('Belgium', 'Belgien'), at: [4.35, 50.85], pos: 'below', bend: -0.18 },
+      { label: T('Austria', 'Österreich'), at: [16.37, 48.21], pos: 'below', bend: 0.12 }
     ];
 
     var svg = $('#jr-svg'), lines = $('#jr-lines'), marks = $('#jr-marks'), grid = $('#jr-grid');
@@ -208,8 +212,8 @@
     };
   }
 
-  var STATUS = ['Quote requested', 'Estimate confirmed', 'Loaded and shipped', 'Delivered worldwide'];
-  var SUBS = ['Essen, Germany', 'Major routes: Belgium, Holland, Austria', 'Sea freight to any part of the world', 'Europe · Americas · Africa · Middle East · Asia'];
+  var STATUS = DE ? ['Angebot angefragt', 'Kosten bestätigt', 'Verladen und verschifft', 'Weltweit zugestellt'] : ['Quote requested', 'Estimate confirmed', 'Loaded and shipped', 'Delivered worldwide'];
+  var SUBS = DE ? ['Essen, Deutschland', 'Hauptrouten: Belgien, Niederlande, Österreich', 'Seefracht in jeden Teil der Welt', 'Europa · Amerika · Afrika · Naher Osten · Asien'] : ['Essen, Germany', 'Major routes: Belgium, Holland, Austria', 'Sea freight to any part of the world', 'Europe · Americas · Africa · Middle East · Asia'];
   var STEP_AT = [0, 0.25, 0.5, 0.8, 1];
 
   function placeMark(m, k, opacity) {
@@ -303,7 +307,7 @@
   function setMenu(open) {
     d.body.classList.toggle('menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    toggle.setAttribute('aria-label', open ? T('Close menu', 'Menü schließen') : T('Open menu', 'Menü öffnen'));
     menu.setAttribute('aria-hidden', String(!open));
   }
   if (toggle && menu) {
@@ -440,12 +444,12 @@
     lb.className = 'lightbox';
     lb.setAttribute('role', 'dialog');
     lb.setAttribute('aria-modal', 'true');
-    lb.setAttribute('aria-label', 'Photo viewer');
+    lb.setAttribute('aria-label', T('Photo viewer', 'Fotoansicht'));
     lb.innerHTML =
-      '<button class="lb-btn lb-close" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
-      '<button class="lb-btn lb-prev" aria-label="Previous photo">' + arrow + '</button>' +
+      '<button class="lb-btn lb-close" aria-label="' + T('Close', 'Schließen') + '"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+      '<button class="lb-btn lb-prev" aria-label="' + T('Previous photo', 'Vorheriges Foto') + '">' + arrow + '</button>' +
       '<img alt="">' +
-      '<button class="lb-btn lb-next" aria-label="Next photo">' + arrow + '</button>' +
+      '<button class="lb-btn lb-next" aria-label="' + T('Next photo', 'Nächstes Foto') + '">' + arrow + '</button>' +
       '<div class="lb-cap"></div>';
     d.body.appendChild(lb);
     var lbImg = $('img', lb);
@@ -545,7 +549,7 @@
     var bRate = $('#b-rate');
     var bWeight = $('#b-weight');
     var bRoute = $('#b-route');
-    var eur = function (n, dp) { return '€' + n.toLocaleString('en-GB', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); };
+    var eur = function (n, dp) { var t = n.toLocaleString(LOCALE, { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); return DE ? t + ' €' : '€' + t; };
 
     // Log-scale slider so small and huge loads are both easy to pick
     function sliderToKg(v) { return Math.round(MIN_KG * Math.pow(MAX_KG / MIN_KG, v / 1000) / 10) * 10; }
@@ -557,7 +561,7 @@
       var destEl = $('input[name="dest"]:checked', calc);
       var w = parseFloat(weightIn.value) || 0;
       var chargeable = Math.max(w, MIN_KG);
-      bWeight.textContent = w > 0 ? chargeable.toLocaleString('en-GB') + ' kg' + (w < MIN_KG ? ' (min.)' : '') : '—';
+      bWeight.textContent = w > 0 ? chargeable.toLocaleString(LOCALE) + ' kg' + (w < MIN_KG ? ' (min.)' : '') : '—';
       bRate.textContent = cargoEl ? eur(baseRates[cargoEl.value], 2) + ' / kg' : '—';
       bRoute.textContent = destEl ? '× ' + destMultiplier[destEl.value] : '—';
 
@@ -611,7 +615,7 @@
     if (params.get('cargo') && cargoSel) cargoSel.value = params.get('cargo');
     if (params.get('destination')) $('#q-destination').value = params.get('destination');
     if (params.get('weight') && $('#q-weight')) $('#q-weight').value = params.get('weight');
-    if (params.get('estimate')) $('#q-notes').value = 'Calculator estimate: ' + params.get('estimate');
+    if (params.get('estimate')) $('#q-notes').value = T('Calculator estimate: ', 'Schätzung aus dem Rechner: ') + params.get('estimate');
   }
 
   // ---------- Forms: fall back to WhatsApp until Formspree is connected ----------
@@ -628,9 +632,9 @@
           hasFiles = true;
         }
       });
-      if (hasFiles) lines.push('', '(I have documents to send, attaching them in this chat.)');
+      if (hasFiles) lines.push('', T('(I have documents to send, attaching them in this chat.)', '(Ich habe Dokumente, die ich in diesem Chat sende.)'));
       window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
-      toast('Opening WhatsApp with your details. Just hit send.');
+      toast(T('Opening WhatsApp with your details. Just hit send.', 'WhatsApp wird mit Ihren Angaben geöffnet. Einfach absenden.'));
     });
   });
 })();
