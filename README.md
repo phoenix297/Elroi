@@ -102,7 +102,7 @@ To switch to email delivery, create a form at [formspree.io](https://formspree.i
 ## Logo
 
 The client's logo (`_build/logo-source.jpg`) is traced into SVG paths by `_build/logo_trace.py` (saved in `_build/logo_paths.json`),
-so it stays sharp at every size. The header, footer and preloader use the gold "E" mark with the traced "EL-ROI" wordmark.
+so it stays sharp at every size. The header, footer and preloader show it in its original colours (black on a white badge).
 `assets/favicon.svg`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`, `assets/logo.png` (for Google) and
 `assets/og-image.jpg` (link previews) are made from the same paths. If the logo changes, replace the source image and run the trace script again.
 

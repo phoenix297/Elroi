@@ -199,8 +199,8 @@ section { padding: clamp(80px, 10vw, 140px) 0; position: relative; }
   transition: opacity .6s var(--ease), visibility 0s .6s;
 }
 #preloader.hide { opacity: 0; visibility: hidden; }
-.pl-mark { color: var(--gold-soft); display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.pl-mark .logo-mark { height: 78px; }
+.pl-mark { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.pl-mark .logo-mark { height: 78px; color: #000; background: #fff; padding: 12px 14px; border-radius: 6px; box-sizing: content-box; }
 .pl-mark em { color: var(--gold-soft); }
 .pl-bar { width: 120px; height: 1px; background: var(--line-light); overflow: hidden; position: relative; }
 .pl-bar::after { content: ""; position: absolute; inset: 0; background: var(--gold); transform: translateX(-100%); animation: plbar 1s var(--ease) infinite; }
@@ -228,11 +228,12 @@ header.site {
 }
 header.site.scrolled { box-shadow: 0 10px 30px -12px rgba(7, 21, 38, .6); }
 .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); gap: 24px; }
-.logo { display: flex; align-items: center; gap: 10px; flex: none; }
-.logo-mark { height: 50px; width: auto; aspect-ratio: 316 / 354; flex: none; color: var(--gold-soft); }
+/* Client logo in its original colours: black on a white badge */
+.logo { display: flex; width: fit-content; align-items: center; gap: 10px; flex: none; background: #fff; color: #000; padding: 7px 14px 7px 10px; border-radius: 4px; box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .45); }
+.logo-mark { height: 46px; width: auto; aspect-ratio: 316 / 354; flex: none; color: #000; }
 .logo-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
-.logo-word { height: 22px; width: auto; aspect-ratio: 209 / 55; }
-.logo-sub { font-size: .6rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--on-dark-3); margin-top: 7px; white-space: nowrap; }
+.logo-word { height: 21px; width: auto; aspect-ratio: 209 / 55; color: #000; }
+.logo-sub { font-size: .6rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: #000; margin-top: 7px; white-space: nowrap; }
 
 nav.primary { display: flex; align-items: center; gap: 4px; }
 nav.primary a {
@@ -616,7 +617,7 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; transition: opaci
 /* ---------- Footer ---------- */
 footer.site { background: var(--navy-deep); background-image: linear-gradient(180deg, #071526 0%, #040C17 100%); color: var(--on-dark-2); padding: clamp(64px, 8vw, 100px) 0 0; font-size: .92rem; }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 40px; padding-bottom: 56px; border-bottom: 1px solid var(--line-light); }
-.footer-grid .logo { color: var(--on-dark); margin-bottom: 20px; }
+.footer-grid .logo { margin-bottom: 20px; }
 .footer-grid p { max-width: 34ch; color: var(--on-dark-3); }
 footer h5 { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); margin: 0 0 18px; }
 footer ul { display: grid; gap: 10px; }
