@@ -1066,3 +1066,13 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .map-consent p a { color: var(--gold-soft); border-bottom: 1px solid currentColor; }
 .mc-remember { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--on-dark-3); cursor: pointer; }
 .mc-remember input { accent-color: var(--gold); }
+
+/* Truck photos behind navy blocks (tint is baked into each .photo-bg) */
+.has-photo { position: relative; isolation: isolate; overflow: hidden; }
+.has-photo > .photo-bg { position: absolute; inset: -6% 0; z-index: -1; background-size: cover, cover; background-repeat: no-repeat; pointer-events: none; }
+.card.has-photo > .photo-bg, .calc-result.has-photo > .photo-bg { inset: 0; }
+.card-navy.has-photo { border-color: rgba(224, 196, 104, .35); }
+@supports (animation-timeline: view()) {
+  section.has-photo > .photo-bg, footer.has-photo > .photo-bg { animation: sd-parallax linear both; animation-timeline: view(); }
+}
+@media (prefers-reduced-motion: reduce) { .has-photo > .photo-bg { animation: none !important; } }
