@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PHONE = '+49 1521 9521826'
 TEL = '+4915219521826'
 WA = 'https://wa.me/4915219521826'
-EMAIL = 'El_roi4ushippingservices@yahoo.com'
+EMAIL = 'info@elroishipping.de'
 FORMSPREE = 'https://formspree.io/f/YOUR_FORM_ID'
 MAPS_ESSEN = 'https://www.google.com/maps/search/?api=1&amp;query=Ripshorster+Str.+379,+45357+Essen,+Germany'
 MAPS_LAGOS = 'https://www.google.com/maps/search/?api=1&amp;query=Olodi+Apapa,+Lagos,+Nigeria'
@@ -16,23 +16,23 @@ EMBED_ESSEN = 'https://maps.google.com/maps?q=Ripshorster%20Str.%20379%2C%204535
 EMBED_LAGOS = 'https://maps.google.com/maps?q=Olodi%20Apapa%2C%20Lagos%2C%20Nigeria&amp;z=14&amp;output=embed'
 
 IMG = {
-    'transporter': ('assets/img/car-transporter.jpg', 'Car transporter loaded with two trucks for export', 1280, 720),
-    'tractor': ('assets/img/tractor-john-deere.jpg', 'Green John Deere tractor in a yard, being prepared for shipping', 1280, 720),
-    'volvo': ('assets/img/truck-volvo-fh.jpg', 'Rear view of a red Volvo FH tractor unit', 960, 1280),
-    'chassis': ('assets/img/container-chassis-schmitz.jpg', 'Blue Schmitz container chassis trailer', 1280, 960),
-    'loading': ('assets/img/container-loading.jpg', 'Inside a shipping container during loading', 1280, 963),
-    'volvofront': ('assets/img/truck-volvo-front.jpg', 'Front of a red Volvo FH tractor unit', 960, 1280),
-    'chassisrear': ('assets/img/chassis-schmitz-rear.jpg', 'Rear of a Schmitz tri-axle container chassis', 1280, 960),
-    'deere3140': ('assets/img/tractor-john-deere-3140.jpg', 'John Deere 3140 tractor with front loader', 1280, 720),
-    'van': ('assets/img/van-mercedes.jpg', 'Blue Mercedes-Benz van ready for export', 1280, 719),
-    'msc': ('assets/img/container-msc-40ft.jpg', 'Yellow 40ft shipping container on a trailer', 1280, 720),
-    'loaded': ('assets/img/transporter-loaded.jpg', 'Transporter loaded with a van and a truck for export', 1280, 720),
-    'vanload': ('assets/img/container-van-loading.jpg', 'A van loaded inside a shipping container', 1280, 719),
-    'redchassis': ('assets/img/chassis-van-moer.jpg', 'Red tri-axle container chassis in a yard', 1280, 960),
-    'yardload': ('assets/img/container-yard-loading.jpg', 'Loading cargo into an open container', 720, 1280),
-    'engines': ('assets/img/container-engines-night.jpg', 'Loading engines into a container at night', 719, 1280),
-    'carsload': ('assets/img/container-cars-loading.jpg', 'Wrapped cars strapped inside a container during loading', 719, 1280),
-    'enginesclose': ('assets/img/container-engines-closeup.jpg', 'Engines and parts packed tightly into a container', 719, 1280),
+    'transporter': ('assets/img/car-transporter.webp', 'Car transporter loaded with two trucks for export', 1280, 720),
+    'tractor': ('assets/img/tractor-john-deere.webp', 'Green John Deere tractor in a yard, being prepared for shipping', 1280, 720),
+    'volvo': ('assets/img/truck-volvo-fh.webp', 'Rear view of a red Volvo FH tractor unit', 960, 1280),
+    'chassis': ('assets/img/container-chassis-schmitz.webp', 'Blue Schmitz container chassis trailer', 1280, 960),
+    'loading': ('assets/img/container-loading.webp', 'Inside a shipping container during loading', 1280, 963),
+    'volvofront': ('assets/img/truck-volvo-front.webp', 'Front of a red Volvo FH tractor unit', 960, 1280),
+    'chassisrear': ('assets/img/chassis-schmitz-rear.webp', 'Rear of a Schmitz tri-axle container chassis', 1280, 960),
+    'deere3140': ('assets/img/tractor-john-deere-3140.webp', 'John Deere 3140 tractor with front loader', 1280, 720),
+    'van': ('assets/img/van-mercedes.webp', 'Blue Mercedes-Benz van ready for export', 1280, 719),
+    'msc': ('assets/img/container-msc-40ft.webp', 'Yellow 40ft shipping container on a trailer', 1280, 720),
+    'loaded': ('assets/img/transporter-loaded.webp', 'Transporter loaded with a van and a truck for export', 1280, 720),
+    'vanload': ('assets/img/container-van-loading.webp', 'A van loaded inside a shipping container', 1280, 719),
+    'redchassis': ('assets/img/chassis-van-moer.webp', 'Red tri-axle container chassis in a yard', 1280, 960),
+    'yardload': ('assets/img/container-yard-loading.webp', 'Loading cargo into an open container', 720, 1280),
+    'engines': ('assets/img/container-engines-night.webp', 'Loading engines into a container at night', 719, 1280),
+    'carsload': ('assets/img/container-cars-loading.webp', 'Wrapped cars strapped inside a container during loading', 719, 1280),
+    'enginesclose': ('assets/img/container-engines-closeup.webp', 'Engines and parts packed tightly into a container', 719, 1280),
 }
 
 import hashlib
@@ -385,7 +385,7 @@ home = f'''<section class="hero dark">
   <!-- Live background: the photo drifts slowly (Ken Burns). To use a real video instead,
        put an MP4 in assets/video/ and set data-video="assets/video/hero.mp4" below. -->
   <div class="hero-media" data-video="" aria-hidden="true">
-    <img class="hero-photo" src="assets/img/transporter-loaded.jpg" alt="" width="1280" height="720" fetchpriority="high">
+    <img class="hero-photo" src="assets/img/transporter-loaded.webp" alt="" width="1280" height="720" fetchpriority="high">
   </div>
   <div class="hero-aurora" aria-hidden="true"></div>
   <div class="hero-sweep" aria-hidden="true"></div>
@@ -1597,6 +1597,7 @@ ExpiresByType application/javascript "access plus 1 year"
 ExpiresByType text/javascript "access plus 1 year"
 ExpiresByType image/jpeg "access plus 1 year"
 ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
 ExpiresByType image/svg+xml "access plus 1 year"
 ExpiresByType font/woff2 "access plus 1 year"
 ExpiresByType application/xml "access plus 1 day"

@@ -80,8 +80,9 @@ The header and footer are shared by every page through the build script.
 
 ## Adding photos
 
-1. Put the image in `assets/img/` (JPG, ideally no wider than 1600px).
-2. In `gallery.html`, copy one `<figure>` block inside `<div class="masonry">` and change the
+1. Blur plates and faces, convert the photo to WebP (for example with Pillow: `Image.open('x.jpg').save('x.webp', quality=78)`),
+   put it in `assets/img/` (ideally no wider than 1600px) and add it to the `IMG` list in `_build/build.py`.
+2. For the gallery, add a `<figure>` block to the gallery section of `_build/build.py` and set the
    `href`, `src`, `alt`, `width`/`height`, caption text and `data-cat`
    (`vehicles`, `machinery` or `containers`, and the filter buttons pick it up automatically).
 
