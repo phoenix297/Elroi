@@ -46,6 +46,14 @@ The header and footer are repeated in every page, so a change to either needs ma
   effect triggered on entry/exit. Forms and the calculator only fade in. Everything is off with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.
 
+## Fonts and link previews
+
+- Fonts (Fraunces and Inter, SIL Open Font License) are self-hosted in `assets/fonts/` via `assets/fonts.css`.
+  Nothing is loaded from Google Fonts, which matters for GDPR in Germany.
+- `assets/og-image.jpg` (1200x630) is the preview shown when a page link is shared on WhatsApp, Facebook, LinkedIn etc.
+  The `og:` tags use `https://phoenix297.github.io/Elroi/`. When the site moves to its own domain, update the address in
+  every page's `og:url` and `og:image` tags.
+
 ## Adding photos
 
 1. Put the image in `assets/img/` (JPG, ideally no wider than 1600px).
