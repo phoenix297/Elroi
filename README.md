@@ -39,8 +39,8 @@ The header and footer are shared by every page through the build script.
   the fallback while the video loads, and for visitors with reduced motion or data saver turned on.
 
 - **Scroll journey** ("How it works" on the home page): the section pins while you scroll over a real world
-  chart. It starts close on Europe (Essen, and the major routes to Belgium, Holland and Austria), a truck drives to
-  the port, then the camera pulls back and container ships sail real sea lanes to the Americas, South America,
+  chart. It starts close on Europe: trucks leave Essen straight away on the major routes to Belgium, Holland and Austria,
+  and a two-truck convoy heads to the port, then the camera pulls back and container ships sail real sea lanes to the Americas, South America,
   Lagos, Southern Africa, the Middle East and Asia. Lanes and labels live at the top of the journey code in
   `assets/script.js`; the land outline is Natural Earth 1:50m (public domain).
 - **Scroll animations**: sections fade and slide in as they enter and fade out as they leave, photos wipe open,

@@ -136,6 +136,13 @@
     svgEl('polyline', { points: all, 'class': 'jm-route ' + (cls || ''), 'vector-effect': 'non-scaling-stroke' }, parent);
     this.gold = svgEl('polyline', { points: '', 'class': 'jm-gold', 'vector-effect': 'non-scaling-stroke' }, parent);
   }
+  // position and heading at fraction `f`, without touching the drawn line
+  Line.prototype.head = function (f) {
+    var target = f * this.len, pts = this.pts, cum = this.cum, i = 1;
+    while (i < pts.length - 1 && cum[i] < target) i++;
+    var k = clamp01((target - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1));
+    return { x: lerp(pts[i - 1][0], pts[i][0], k), y: lerp(pts[i - 1][1], pts[i][1], k), ang: Math.atan2(pts[i][1] - pts[i - 1][1], pts[i][0] - pts[i - 1][0]) * 180 / Math.PI };
+  };
   // draw the first `f` of the line; returns the head point and heading (degrees)
   Line.prototype.draw = function (f) {
     var target = f * this.len, pts = this.pts, cum = this.cum, out = [], i = 1;
@@ -153,8 +160,8 @@
     return { x: head[0], y: head[1], ang: Math.atan2(dy, dx) * 180 / Math.PI };
   };
 
-  var TRUCK_SVG = '<g transform="translate(0 -9)"><rect x="-24" y="-15" width="28" height="17" rx="2" fill="#0B1F35"/><rect x="-22" y="-13" width="24" height="3" fill="#C9A227"/><path d="M5 -11 H14 L21 -4 V2 H5 Z" fill="#0B1F35"/><path d="M9 -9 H13 L17 -5 H9 Z" fill="#8FB0D1"/><circle cx="-16" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="-7" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="13" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/></g>';
-  var SHIP_SVG = '<g transform="translate(0 -6)"><path d="M-28 0 H26 L19 11 H-21 Z" fill="#0B1F35"/><path d="M-21 11 H19" stroke="#C9A227" stroke-width="1.5"/><rect x="-20" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-11" y="-8" width="8" height="8" fill="#3E6D9C"/><rect x="-2" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-15" y="-16" width="8" height="8" fill="#3E6D9C"/><rect x="-6" y="-16" width="8" height="8" fill="#E0C468"/><rect x="12" y="-15" width="8" height="15" fill="#0B1F35"/><rect x="14" y="-12" width="4" height="3" fill="#8FB0D1"/></g>';
+  function truckSvg(box, stripe) { return '<g class="jm-bob"><g transform="translate(0 -9)"><rect x="-24" y="-15" width="28" height="17" rx="2" fill="' + box + '"/><rect x="-22" y="-13" width="24" height="3" fill="' + stripe + '"/><path d="M5 -11 H14 L21 -4 V2 H5 Z" fill="#0B1F35"/><path d="M9 -9 H13 L17 -5 H9 Z" fill="#8FB0D1"/><circle cx="-16" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="-7" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/><circle cx="13" cy="4" r="3.6" fill="#0B1F35" stroke="#F6F4EE" stroke-width="1.5"/></g></g>'; }
+  var SHIP_SVG = '<g class="jm-bob jm-bob-sea"><g transform="translate(0 -6)"><path d="M-28 0 H26 L19 11 H-21 Z" fill="#0B1F35"/><path d="M-21 11 H19" stroke="#C9A227" stroke-width="1.5"/><rect x="-20" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-11" y="-8" width="8" height="8" fill="#3E6D9C"/><rect x="-2" y="-8" width="8" height="8" fill="#C9A227"/><rect x="-15" y="-16" width="8" height="8" fill="#3E6D9C"/><rect x="-6" y="-16" width="8" height="8" fill="#E0C468"/><rect x="12" y="-15" width="8" height="15" fill="#0B1F35"/><rect x="14" y="-12" width="4" height="3" fill="#8FB0D1"/></g></g>';
 
   var jr = null;
   if (journey && $('#jr-svg')) {
@@ -185,7 +192,7 @@
     var marker = function (ll, cls, label, pos) {
       var xy = toXY(ll);
       var g = svgEl('g', { 'class': 'jm-mark ' + cls }, marks);
-      g.innerHTML = (cls.indexOf('hub') > -1 ? '<circle class="jm-ring" r="7"/>' : '') + '<circle class="jm-dot" r="' + (cls.indexOf('hub') > -1 ? 6 : 4.5) + '"/>' +
+      g.innerHTML = '<circle class="jm-ring" r="7"/>' + '<circle class="jm-dot" r="' + (cls.indexOf('hub') > -1 ? 6 : 4.5) + '"/>' +
         (label ? '<text class="jm-label" ' + ({ above: 'x="0" y="-14" text-anchor="middle"', topfar: 'x="0" y="-32" text-anchor="middle"', below: 'x="0" y="24" text-anchor="middle"', left: 'x="-12" y="5" text-anchor="end"', right: 'x="12" y="5"' }[pos || 'right']) + '>' + label + '</text>' : '');
       return { g: g, x: xy[0], y: xy[1] };
     };
@@ -198,8 +205,11 @@
     var laneMarks = LANES.map(function (l) { return marker(l.way[l.way.length - 1], 'jm-dest', l.label, l.pos); });
     var portMark = marker(PORT, 'jm-port', null);
     var hubMark = marker(ESSEN, 'jm-hub', 'Essen', 'topfar');
-    var truck = svgEl('g', { 'class': 'jm-vehicle jm-truck' }, marks);
-    truck.innerHTML = TRUCK_SVG;
+    var TRUCK_LOOKS = [['#0B1F35', '#C9A227'], ['#3E6D9C', '#E0C468'], ['#0B1F35', '#E0C468'], ['#9A7318', '#F6F4EE']];
+    function makeTruck(i) { var g = svgEl('g', { 'class': 'jm-vehicle jm-truck' }, marks); g.innerHTML = truckSvg(TRUCK_LOOKS[i % 4][0], TRUCK_LOOKS[i % 4][1]); return g; }
+    // [line, start, end] on the scroll timeline: they leave Essen straight away, a few moments apart
+    var TRUCK_RUNS = [[truckLine, 0.01, 0.24], [euroLines[0], 0.05, 0.22], [euroLines[1], 0.1, 0.28], [euroLines[2], 0.03, 0.36], [truckLine, 0.16, 0.4]];
+    var trucks = TRUCK_RUNS.map(function (r, i) { return makeTruck(i); });
     var ships = LANES.map(function () { var g = svgEl('g', { 'class': 'jm-vehicle jm-ship' }, marks); g.innerHTML = SHIP_SVG; return g; });
 
     jr = {
@@ -208,13 +218,13 @@
       status: $('#jr-status', journey), sub: $('#jr-sub', journey),
       euroLines: euroLines, truckLine: truckLine, laneLines: laneLines,
       euroMarks: euroMarks, laneMarks: laneMarks, fixed: [portMark, hubMark],
-      truck: truck, ships: ships, last: -1
+      trucks: trucks, runs: TRUCK_RUNS, ships: ships, last: -1
     };
   }
 
   var STATUS = DE ? ['Angebot angefragt', 'Kosten bestätigt', 'Verladen und verschifft', 'Weltweit zugestellt'] : ['Quote requested', 'Estimate confirmed', 'Loaded and shipped', 'Delivered worldwide'];
   var SUBS = DE ? ['Essen, Deutschland', 'Hauptrouten: Belgien, Niederlande, Österreich', 'Seefracht in jeden Teil der Welt', 'Europa · Amerika · Afrika · Naher Osten · Asien'] : ['Essen, Germany', 'Major routes: Belgium, Holland, Austria', 'Sea freight to any part of the world', 'Europe · Americas · Africa · Middle East · Asia'];
-  var STEP_AT = [0, 0.25, 0.5, 0.8, 1];
+  var STEP_AT = [0, 0.14, 0.44, 0.76, 1];
 
   function placeMark(m, k, opacity) {
     m.g.setAttribute('transform', 'translate(' + m.x.toFixed(1) + ' ' + m.y.toFixed(1) + ') scale(' + k.toFixed(4) + ')');
@@ -237,27 +247,33 @@
     // camera: close on Europe, then pull back to the whole world
     var boxW = jr.map.clientWidth || 1, boxH = jr.map.clientHeight || 1, aspect = boxW / boxH;
     var W0 = Math.max(170, 60 * aspect), W1 = Math.max(aspect < 1.6 ? 2500 : 2950, 960 * aspect);
-    var z = ease(seg(p, 0.5, 0.64));
+    var z = ease(seg(p, 0.44, 0.58));
     var W = Math.exp(lerp(Math.log(W0), Math.log(W1), z)), H = W / aspect;
     var cx = lerp(1900, 2020, z), cy = lerp(398, 820, z);
     jr.svg.setAttribute('viewBox', (cx - W / 2).toFixed(1) + ' ' + (cy - H / 2).toFixed(1) + ' ' + W.toFixed(1) + ' ' + H.toFixed(1));
     var k = W / boxW; // chart units per screen pixel: keeps markers a constant on-screen size
     var small = boxW < 600 ? 0.8 : 1;
 
-    var fe = ease(seg(p, 0.2, 0.4));
-    jr.euroLines.forEach(function (l) { l.draw(fe); });
-    var th = jr.truckLine.draw(ease(seg(p, 0.28, 0.47)));
-    placeVehicle(jr.truck, th, k, small, 1 - seg(p, 0.5, 0.55));
+    // trucks: each draws its own road; the second port truck follows the first
+    var done = [];
+    jr.runs.forEach(function (r, i) {
+      var t = seg(p, r[1], r[2]), f = 1 - (1 - t) * (1 - t) * (1 - t); // pull away quickly, roll gently into the stop
+      var h = r[0] === jr.truckLine && i > 0 ? r[0].head(f) : r[0].draw(f);
+      var on = seg(p, r[1] - 0.015, r[1]) * (1 - seg(p, r[2] + 0.005, r[2] + 0.035));
+      placeVehicle(jr.trucks[i], h, k, small, on);
+      done[i] = f >= 1;
+    });
 
-    var fs = ease(seg(p, 0.56, 0.9));
-    var shipOn = seg(p, 0.5, 0.56) * (1 - seg(p, 0.9, 0.96)); // ships fade once they arrive
+    var fs = ease(seg(p, 0.48, 0.86));
+    var shipOn = seg(p, 0.45, 0.5) * (1 - seg(p, 0.88, 0.94)); // ships fade once they arrive
     jr.laneLines.forEach(function (l, i) { placeVehicle(jr.ships[i], l.draw(fs), k, 0.7 * small, shipOn); });
 
-    var euroOp = 1 - seg(p, 0.52, 0.6);
-    jr.euroMarks.forEach(function (m) { placeMark(m, k, euroOp); });
-    var destOp = seg(p, 0.84, 0.92);
-    jr.laneMarks.forEach(function (m) { placeMark(m, k, destOp); });
-    placeMark(jr.fixed[0], k, 1 - seg(p, 0.55, 0.62));
+    var euroOp = 1 - seg(p, 0.46, 0.54);
+    jr.euroMarks.forEach(function (m, i) { placeMark(m, k, euroOp); m.g.classList.toggle('is-arrived', done[i + 1]); });
+    var destOp = seg(p, 0.8, 0.88);
+    jr.laneMarks.forEach(function (m) { placeMark(m, k, destOp); m.g.classList.toggle('is-arrived', fs >= 1); });
+    placeMark(jr.fixed[0], k, 1 - seg(p, 0.5, 0.58));
+    jr.fixed[0].g.classList.toggle('is-arrived', done[0] && p < 0.5);
     placeMark(jr.fixed[1], k);
 
     var step = p < STEP_AT[1] ? 0 : p < STEP_AT[2] ? 1 : p < STEP_AT[3] ? 2 : 3;
@@ -274,8 +290,14 @@
     }
   }
 
-  var journeyP = 0;
+  var journeyP = 0, journeyShown = -1, glideOn = false;
   var scrollTicking = false;
+  function glide() {
+    var diff = journeyP - journeyShown;
+    journeyShown = Math.abs(diff) < 0.0004 ? journeyP : journeyShown + diff * 0.16;
+    renderJourney(journeyShown);
+    if (journeyShown !== journeyP) requestAnimationFrame(glide); else glideOn = false;
+  }
   function onScrollFrame() {
     scrollTicking = false;
     var doc = d.documentElement;
@@ -289,7 +311,8 @@
         var travel = journey.offsetHeight - jr.sticky.offsetHeight;
         journeyP = travel > 0 ? clamp01((headerH - rect.top) / travel) : 1;
       }
-      renderJourney(journeyP);
+      if (reduceMotion || journeyShown < 0) { journeyShown = journeyP; renderJourney(journeyP); }
+      else if (!glideOn) { glideOn = true; requestAnimationFrame(glide); }
     }
   }
   function requestScrollFrame() {
