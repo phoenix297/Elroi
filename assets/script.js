@@ -504,7 +504,7 @@
   // ---------- Office map: click-to-load (nothing is sent to Google until the visitor agrees) ----------
   var mapFrameBox = $('.map-frame');
   var consent = $('.map-consent');
-  var mapFrame = null;
+  var mapFrame = $('.map-frame iframe');
   var MAP_KEY = 'elroi-maps-ok';
   function loadMap(src, title) {
     if (!mapFrameBox) return;
