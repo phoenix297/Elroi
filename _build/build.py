@@ -196,7 +196,7 @@ BUSINESS_LD = {
     'contactPoint': [{'@type': 'ContactPoint', 'telephone': '+49 1521 9521826', 'contactType': 'customer service', 'availableLanguage': ['English', 'German']}],
 }
 SEO = {
-    'index.html': ('Shipping from Germany to Nigeria & Worldwide | EL-ROI Shipping, Essen',
+    'index.html': ('Shipping from Germany to Worldwide | EL-ROI Shipping, Essen',
                    'Freight forwarder in Essen since 1999. Sea freight for cars, trucks, tractors, containers and machinery from Germany to Europe, Lagos and any part of the world. Honest quotes.'),
     'about.html': ('About Us: Freight Forwarder in Essen since 1999 | EL-ROI Shipping',
                    'EL-ROI Shipping Services: a German freight forwarder in Essen with an office in Lagos. Over 20 years of honest estimates, fair pricing and clear communication.'),
