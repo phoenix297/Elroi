@@ -265,12 +265,22 @@ FOOTER = f'''<footer class="site has-photo">
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-year>2026</span> EL-ROI Shipping Services. All rights reserved.</span>
-      <span><a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp; <em>Your satisfaction, our priority.</em></span>
+      <span><a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp; <button type="button" class="linklike" data-consent-open>Cookie settings</button> &nbsp;&middot;&nbsp; <em>Your satisfaction, our priority.</em></span>
     </div>
   </div>
 </footer>
 <a class="wa-float" href="{WA}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="{WA_PATH}"/></svg></a>
 <div class="toast" role="status" aria-live="polite"></div>
+<div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
+  <div class="consent-body">
+    <strong id="consent-title">Privacy settings</strong>
+    <p id="consent-text">This website sets no cookies of its own. Our office maps come from Google Maps, which can set cookies and receives your IP address. Allow the maps? You can change this any time under &ldquo;Cookie settings&rdquo; at the bottom of the page. <a href="privacy.html#cookies">Privacy Policy</a></p>
+  </div>
+  <div class="consent-actions">
+    <button type="button" class="btn btn-ghost btn-sm" data-consent-decline>Decline</button>
+    <button type="button" class="btn btn-primary btn-sm" data-consent-accept>Accept</button>
+  </div>
+</div>
 <script src="{JS_URL}" defer></script>
 </body>
 </html>
@@ -299,13 +309,21 @@ def map_block(extra=''):
     return f'''<div class="container map-block{extra}" data-map-block data-reveal>
     <div class="head-actions" style="margin-bottom:16px">
       <div class="map-tabs" role="group" aria-label="Choose office map" style="margin:0">
-        <button class="active" aria-pressed="true" data-map="{EMBED_ESSEN}" data-link="{MAPS_ESSEN}" data-title="Map of the EL-ROI office in Essen, Germany">Essen office</button>
-        <button aria-pressed="false" data-map="{EMBED_LAGOS}" data-link="{MAPS_LAGOS}" data-title="Map of the EL-ROI office in Olodi Apapa, Lagos">Lagos office</button>
+        <button class="active" aria-pressed="true" data-map="{EMBED_ESSEN}" data-link="{MAPS_ESSEN}" data-title="Map of the EL-ROI office in Essen, Germany" data-place="Ripshorster Str. 379, 45357 Essen">Essen office</button>
+        <button aria-pressed="false" data-map="{EMBED_LAGOS}" data-link="{MAPS_LAGOS}" data-title="Map of the EL-ROI office in Olodi Apapa, Lagos" data-place="Olodi Apapa, Lagos, Nigeria">Lagos office</button>
       </div>
       <a class="link-arrow map-link" href="{MAPS_ESSEN}" target="_blank" rel="noopener">Open in Google Maps {ARROW}</a>
     </div>
     <div class="map-frame">
-      <iframe src="{EMBED_ESSEN}" title="Map of the EL-ROI office in Essen, Germany" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe data-src="{EMBED_ESSEN}" title="Map of the EL-ROI office in Essen, Germany" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
+      <div class="map-consent">
+        <div class="mc-inner">
+          <svg class="mc-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z" fill="#C9A227"/><circle cx="12" cy="9.5" r="2.6" fill="#0B1F35"/></svg>
+          <strong class="mc-place">Ripshorster Str. 379, 45357 Essen</strong>
+          <p>The map is provided by Google, which can set cookies and receives your IP address. See our <a href="privacy.html#share">Privacy Policy</a>.</p>
+          <button type="button" class="btn btn-primary btn-sm" data-consent-accept>Accept and show map</button>
+        </div>
+      </div>
     </div>
   </div>'''
 
@@ -1441,13 +1459,13 @@ PRIV = [
 <ul class="checklist"><li><strong>Formspree</strong> (USA): receives form submissions and forwards them to our email.</li>
 <li><strong>WhatsApp / Meta</strong>: if you contact us on WhatsApp or a form opens WhatsApp for you.</li>
 <li><strong>GitHub Pages</strong> (hosting): processes technical data such as your IP address to deliver the site.</li>
-<li><strong>Google</strong>: the office maps (Google Maps) load from Google servers, which receive your IP address. Our website fonts are hosted on our own site, so no data goes to Google for them. The maps load when you scroll to them, so visitors can see where our offices are (Art. 6(1)(f): our legitimate interest in showing our location). You can use the &ldquo;Open in Google Maps&rdquo; link instead if you prefer.</li>
+<li><strong>Google</strong>: the office maps (Google Maps) load from Google servers, which receive your IP address. Our website fonts are hosted on our own site, so no data goes to Google for them. The maps only load after you agree in our privacy settings (Art. 6(1)(a) GDPR and &sect; 25(1) TDDDG: consent). If you decline, you can still use the &ldquo;Open in Google Maps&rdquo; link.</li>
 <li><strong>Shipping partners, ports and customs authorities</strong>: the details needed to ship your cargo.</li></ul>
 <p>Some of these providers are outside the EU. Where that is the case, transfers rely on safeguards such as the EU&ndash;US Data Privacy Framework or the European Commission&rsquo;s standard contractual clauses.</p>"""),
  ('keep', 'How long we keep it', """<p>Enquiries that do not lead to a shipment are deleted within 12 months. Records of shipments and invoices are kept for as long as German commercial and tax law requires (usually 6 to 10 years), then deleted.</p>"""),
  ('rights', 'Your rights', f"""<p>You can ask us to show you, correct, delete or restrict the data we hold about you, to object to its use, or to receive it in a portable format. Where we rely on your consent, you can withdraw it at any time. Just email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 <p>You can also complain to a data protection authority, for example the one responsible for us: Landesbeauftragte f&uuml;r Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), D&uuml;sseldorf. Customers in Nigeria can contact the Nigeria Data Protection Commission (NDPC).</p>"""),
- ('cookies', 'Cookies', """<p>This website does not set cookies of its own. Google may set its own cookies through the office maps.</p>"""),
+ ('cookies', 'Cookies', """<p>This website does not set cookies of its own. When you first visit, we ask whether you allow the Google Maps office maps, which can set Google cookies. Your choice is saved in your browser&rsquo;s local storage (never sent to us) so we don&rsquo;t ask again. You can change or withdraw it at any time with &ldquo;Cookie settings&rdquo; at the bottom of every page.</p>"""),
  ('changes', 'Changes', """<p>We may update this policy when our services or the law change. The date below shows the latest version.</p>"""),
 ]
 toc = ''.join(f'<li><a href="#{k}">{t}</a></li>' for k, t, _ in PRIV)

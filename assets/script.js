@@ -505,10 +505,44 @@
     });
   }
 
-  // ---------- Office maps (Essen / Lagos tabs; one or more per page) ----------
-  $$('[data-map-block]').forEach(function (block) {
+  // ---------- Privacy consent (Google Maps only load after the visitor accepts) ----------
+  var CONSENT_KEY = 'elroi-consent-maps';
+  function getConsent() { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function setConsent(v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} }
+  var banner = $('#consent');
+  var mapBlocks = $$('[data-map-block]');
+
+  function applyMaps() {
+    var ok = getConsent() === 'granted';
+    mapBlocks.forEach(function (block) {
+      var frame = $('.map-frame iframe', block);
+      var ph = $('.map-consent', block);
+      if (ok) {
+        if (!frame.getAttribute('src')) frame.src = frame.getAttribute('data-src');
+        frame.hidden = false;
+        if (ph) ph.hidden = true;
+      } else {
+        frame.removeAttribute('src');
+        frame.hidden = true;
+        if (ph) ph.hidden = false;
+      }
+    });
+  }
+  function openBanner() { if (banner) { banner.hidden = false; var b = $('[data-consent-accept]', banner); if (b) b.focus(); } }
+  function closeBanner() { if (banner) banner.hidden = true; }
+  function decide(v) { setConsent(v); closeBanner(); applyMaps(); }
+
+  $$('[data-consent-accept]').forEach(function (b) { b.addEventListener('click', function () { decide('granted'); }); });
+  $$('[data-consent-decline]').forEach(function (b) { b.addEventListener('click', function () { decide('denied'); }); });
+  $$('[data-consent-open]').forEach(function (b) { b.addEventListener('click', openBanner); });
+  if (!getConsent()) openBanner();
+  applyMaps();
+
+  // Office map tabs (Essen / Lagos)
+  mapBlocks.forEach(function (block) {
     var frame = $('.map-frame iframe', block);
     var link = $('.map-link', block);
+    var place = $('.mc-place', block);
     var tabs = $$('.map-tabs button', block);
     tabs.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -516,9 +550,11 @@
           b.classList.toggle('active', b === btn);
           b.setAttribute('aria-pressed', String(b === btn));
         });
-        frame.src = btn.getAttribute('data-map');
+        frame.setAttribute('data-src', btn.getAttribute('data-map'));
         frame.title = btn.getAttribute('data-title');
+        if (getConsent() === 'granted') frame.src = btn.getAttribute('data-map');
         if (link) link.href = btn.getAttribute('data-link');
+        if (place) place.textContent = btn.getAttribute('data-place');
       });
     });
   });
