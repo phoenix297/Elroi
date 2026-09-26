@@ -507,8 +507,15 @@
 
   // ---------- Privacy consent (Google Maps only load after the visitor accepts) ----------
   var CONSENT_KEY = 'elroi-consent-maps';
-  function getConsent() { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function setConsent(v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} }
+  var CONSENT_MAX_AGE = 182 * 864e5; // ask again after about 6 months
+  function getConsent() {
+    try {
+      var at = +localStorage.getItem(CONSENT_KEY + '-at');
+      if (!at || Date.now() - at > CONSENT_MAX_AGE) return null;
+      return localStorage.getItem(CONSENT_KEY);
+    } catch (e) { return null; }
+  }
+  function setConsent(v) { try { localStorage.setItem(CONSENT_KEY, v); localStorage.setItem(CONSENT_KEY + '-at', String(Date.now())); } catch (e) {} }
   var banner = $('#consent');
   var mapBlocks = $$('[data-map-block]');
 

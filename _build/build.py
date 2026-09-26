@@ -60,11 +60,12 @@ ARROW = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 WA_ICON = f'<svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="{WA_PATH}"/></svg>'
 PHONE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'
 MAIL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>'
-LOGO_MARK = ('<svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true">'
-             '<circle cx="22" cy="22" r="21" fill="none" stroke="#C9A227" stroke-width="1"/>'
-             '<circle cx="22" cy="22" r="17.5" fill="none" stroke="#C9A227" stroke-width=".5" opacity=".55"/>'
-             '<text x="22" y="27.2" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="15" font-style="italic" fill="#E0C468">ER</text></svg>')
-LOGO = f'{LOGO_MARK}<span class="logo-text"><span class="logo-name">EL-ROI <em>Shipping</em></span><span class="logo-sub">Freight &amp; Logistics &middot; Est. 1999</span></span>'
+# Client logo, traced from _build/logo-source.jpg by _build/logo_trace.py
+import json as _json
+_LP = _json.load(open(os.path.join(HERE, 'logo_paths.json')))
+LOGO_MARK = f'<svg class="logo-mark" viewBox="140 127 316 354" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="{_LP["E"]}"/></svg>'
+LOGO_WORD = f'<svg class="logo-word" viewBox="304 260 209 55" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="{_LP["elroi"]}"/></svg>'
+LOGO = f'{LOGO_MARK}<span class="logo-text">{LOGO_WORD}<span class="logo-sub">Shipping Service</span></span>'
 
 ICONS = {
     'box': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>',
@@ -110,6 +111,8 @@ def head(title, desc, page='', ld='', noindex=False):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:url" content="{SITE_URL}{page}">
 <meta property="og:image" content="{SITE_URL}assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -179,7 +182,7 @@ BUSINESS_LD = {
     'description': 'Freight forwarder in Essen, Germany since 1999. Sea freight for vehicles, trucks, tractors, 20ft and 40ft containers, machinery and general cargo from Germany to any part of the world, with major routes to Belgium, Austria and Holland and an office in Lagos, Nigeria.',
     'url': SITE_URL,
     'image': SITE_URL + 'assets/og-image.jpg',
-    'logo': SITE_URL + 'assets/favicon.svg',
+    'logo': SITE_URL + 'assets/logo.png',
     'telephone': '+49 1521 9521826',
     'email': EMAIL,
     'foundingDate': '1999',
@@ -355,7 +358,7 @@ ROUTES_TABLE = '''<table class="route-table">
 
 
 def write(name, title, desc, active, body, preloader=False, scripts='', extra_ld=None, crumbs=None):
-    pre = '<div id="preloader" aria-hidden="true"><div class="pl-mark"><span>EL-ROI <em>Shipping</em></span><span class="pl-bar"></span></div></div>\n' if preloader else ''
+    pre = '<div id="preloader" aria-hidden="true"><div class="pl-mark">' + LOGO_MARK + '<span class="pl-bar"></span></div></div>\n' if preloader else ''
     if name in ('quote.html', 'book.html', 'contact.html', 'calculator.html', 'faq.html'):
         # forms and tools only fade in, so nothing fades while someone is typing
         body = body.replace(' data-reveal>', ' data-reveal="in">').replace(' data-reveal style', ' data-reveal="in" style')
@@ -1068,7 +1071,7 @@ def guide_page(g):
     ld = [{'@context': 'https://schema.org', '@type': 'Article', 'headline': g['title'], 'description': g['desc'],
            'image': SITE_URL + IMG[g['img']][0], 'datePublished': '2026-09-26', 'dateModified': '2026-09-26',
            'author': {'@type': 'Organization', 'name': 'EL-ROI Shipping Services', 'url': SITE_URL},
-           'publisher': {'@type': 'Organization', 'name': 'EL-ROI Shipping Services', 'logo': {'@type': 'ImageObject', 'url': SITE_URL + 'assets/favicon.svg'}},
+           'publisher': {'@type': 'Organization', 'name': 'EL-ROI Shipping Services', 'logo': {'@type': 'ImageObject', 'url': SITE_URL + 'assets/logo.png'}},
            'mainEntityOfPage': SITE_URL + g['slug']}]
     if g['faq']:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
@@ -1465,7 +1468,7 @@ PRIV = [
  ('keep', 'How long we keep it', """<p>Enquiries that do not lead to a shipment are deleted within 12 months. Records of shipments and invoices are kept for as long as German commercial and tax law requires (usually 6 to 10 years), then deleted.</p>"""),
  ('rights', 'Your rights', f"""<p>You can ask us to show you, correct, delete or restrict the data we hold about you, to object to its use, or to receive it in a portable format. Where we rely on your consent, you can withdraw it at any time. Just email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 <p>You can also complain to a data protection authority, for example the one responsible for us: Landesbeauftragte f&uuml;r Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), D&uuml;sseldorf. Customers in Nigeria can contact the Nigeria Data Protection Commission (NDPC).</p>"""),
- ('cookies', 'Cookies', """<p>This website does not set cookies of its own. When you first visit, we ask whether you allow the Google Maps office maps, which can set Google cookies. Your choice is saved in your browser&rsquo;s local storage (never sent to us) so we don&rsquo;t ask again. You can change or withdraw it at any time with &ldquo;Cookie settings&rdquo; at the bottom of every page.</p>"""),
+ ('cookies', 'Cookies', """<p>This website does not set cookies of its own. When you first visit, we ask whether you allow the Google Maps office maps, which can set Google cookies. Your choice is saved in your browser&rsquo;s local storage (never sent to us) and we ask again after about six months. You can change or withdraw it at any time with &ldquo;Cookie settings&rdquo; at the bottom of every page.</p>"""),
  ('changes', 'Changes', """<p>We may update this policy when our services or the law change. The date below shows the latest version.</p>"""),
 ]
 toc = ''.join(f'<li><a href="#{k}">{t}</a></li>' for k, t, _ in PRIV)

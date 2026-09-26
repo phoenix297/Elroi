@@ -199,7 +199,8 @@ section { padding: clamp(80px, 10vw, 140px) 0; position: relative; }
   transition: opacity .6s var(--ease), visibility 0s .6s;
 }
 #preloader.hide { opacity: 0; visibility: hidden; }
-.pl-mark { font-family: var(--f-serif); font-size: 1.6rem; color: var(--on-dark); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.pl-mark { color: var(--gold-soft); display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.pl-mark .logo-mark { height: 78px; }
 .pl-mark em { color: var(--gold-soft); }
 .pl-bar { width: 120px; height: 1px; background: var(--line-light); overflow: hidden; position: relative; }
 .pl-bar::after { content: ""; position: absolute; inset: 0; background: var(--gold); transform: translateX(-100%); animation: plbar 1s var(--ease) infinite; }
@@ -227,12 +228,11 @@ header.site {
 }
 header.site.scrolled { box-shadow: 0 10px 30px -12px rgba(7, 21, 38, .6); }
 .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); gap: 24px; }
-.logo { display: flex; align-items: center; gap: 12px; flex: none; }
-.logo-mark { width: 42px; height: 42px; flex: none; }
-.logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-name { font-family: var(--f-serif); font-size: 1.5rem; font-weight: 500; letter-spacing: .01em; }
-.logo-name em { font-style: italic; font-weight: 400; color: var(--gold-soft); }
-.logo-sub { font-size: .56rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--on-dark-3); margin-top: 6px; }
+.logo { display: flex; align-items: center; gap: 10px; flex: none; }
+.logo-mark { height: 50px; width: auto; aspect-ratio: 316 / 354; flex: none; color: var(--gold-soft); }
+.logo-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+.logo-word { height: 22px; width: auto; aspect-ratio: 209 / 55; }
+.logo-sub { font-size: .6rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--on-dark-3); margin-top: 7px; white-space: nowrap; }
 
 nav.primary { display: flex; align-items: center; gap: 4px; }
 nav.primary a {
@@ -930,6 +930,11 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .strip-img { animation: sd-wipe-x linear both; animation-timeline: view(inline); animation-range: entry 0% cover 35%; }
   .statement .bg { scale: 1.2; animation: sd-parallax linear both; animation-timeline: view(); }
   .hero > .container { animation: hero-out linear both; animation-timeline: scroll(root block); animation-range: 0 90vh; }
+  /* Stacked hero (tablet/phone): the globe sits below the copy, so only the copy drifts away */
+  @media (max-width: 1024px) {
+    .hero > .container { animation: none; }
+    .hero-copy { animation: hero-out linear both; animation-timeline: scroll(root block); animation-range: 0 80vh; }
+  }
 }
 
 /* Headline word reveal (replays whenever the heading scrolls back into view) */
