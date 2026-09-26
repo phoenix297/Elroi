@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /.claude/
 
-Sitemap: https://phoenix297.github.io/Elroi/sitemap.xml
+Sitemap: https://elroishipping.de/sitemap.xml

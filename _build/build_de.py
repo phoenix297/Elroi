@@ -9,7 +9,7 @@ from de_dict import DE, SAME
 from extract import units, ATTRS, SKIP
 
 OUT = os.path.dirname(HERE)  # the site root (parent of _build/)
-SITE_URL = 'https://phoenix297.github.io/Elroi/'
+SITE_URL = 'https://elroishipping.de/'
 SVG_RE = re.compile(r'<svg.*?</svg>', re.S)
 
 
@@ -97,6 +97,8 @@ def build_page(path):
             m['content'] = SITE_URL + 'de/' + page
     og = soup.new_tag('meta'); og['property'] = 'og:locale'; og['content'] = 'de_DE'
     soup.head.append(og)
+    for b in soup.find_all('base'):
+        b['href'] = '/de/'
     for l in soup.find_all('link', rel='canonical'):
         l['href'] = SITE_URL + 'de/' + page
 

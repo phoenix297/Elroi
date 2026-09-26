@@ -60,18 +60,23 @@ The header and footer are shared by every page through the build script.
 - Every page has a keyword title and description, a canonical link, Open Graph tags and structured data
   (LocalBusiness on Home/About/Contact, BreadcrumbList on inner pages, FAQPage on the FAQ and guides, Article on guides).
 - `sitemap.xml` and `robots.txt` are generated at the site root.
-- **Moving to the custom domain:** all absolute URLs come from one address (`https://phoenix297.github.io/Elroi/`).
-  When the domain is live, replace that address everywhere (canonical, `og:url`, `og:image`, structured data,
-  `sitemap.xml`, `robots.txt`), add a `CNAME` file containing the domain, then submit `sitemap.xml` in Google Search Console.
+- **Domain:** the site lives at `https://elroishipping.de/` (hosted on Hostinger). All absolute URLs (canonical, `og:url`,
+  `og:image`, structured data, `sitemap.xml`, `robots.txt`) come from `SITE_URL` in `_build/build.py` and `_build/build_de.py`.
+  Submit `https://elroishipping.de/sitemap.xml` in Google Search Console.
 - After launch: create a Google Business Profile for the Essen address, and ask happy customers for Google reviews.
+
+## Hosting (Hostinger)
+
+- The build also writes `.htaccess`: it sends every visitor to `https://elroishipping.de` (https, no www), serves `404.html`
+  for missing pages, hides `_build/`, `.claude/` and this README, adds security headers, and caches the hashed assets for a year.
+- The site deploys from GitHub with Hostinger's Git tool (Websites → Advanced → Git). Every push to the deploy branch updates the live site.
 
 ## Fonts and link previews
 
 - Fonts (Fraunces and Inter, SIL Open Font License) are self-hosted in `assets/fonts/` via `assets/fonts.css`.
   Nothing is loaded from Google Fonts, which matters for GDPR in Germany.
 - `assets/og-image.jpg` (1200x630) is the preview shown when a page link is shared on WhatsApp, Facebook, LinkedIn etc.
-  The `og:` tags use `https://phoenix297.github.io/Elroi/`. When the site moves to its own domain, update the address in
-  every page's `og:url` and `og:image` tags.
+  The `og:` tags use `https://elroishipping.de/`.
 
 ## Adding photos
 
