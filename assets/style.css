@@ -1053,3 +1053,13 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .policy-sec .checklist li { display: block; position: relative; padding-left: 32px; }
 .policy-sec .checklist li::before { position: absolute; left: 0; top: 2px; margin: 0; }
 .policy-sec .checklist { margin-bottom: 16px; }
+/* Map click-to-load placeholder */
+.map-consent { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--on-dark);
+  background: radial-gradient(60% 70% at 50% 45%, rgba(62, 109, 156, .35), transparent 70%), linear-gradient(rgba(143, 176, 209, .08) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, rgba(143, 176, 209, .08) 1px, transparent 1px) 0 0 / 40px 40px, var(--grad-navy); }
+.mc-inner { max-width: 460px; display: grid; justify-items: center; gap: 12px; }
+.mc-pin { width: 40px; height: 40px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4)); }
+.mc-place { font-family: var(--f-serif); font-weight: 400; font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+.map-consent p { margin: 0; font-size: .86rem; color: var(--on-dark-2); }
+.map-consent p a { color: var(--gold-soft); border-bottom: 1px solid currentColor; }
+.mc-remember { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--on-dark-3); cursor: pointer; }
+.mc-remember input { accent-color: var(--gold); }
