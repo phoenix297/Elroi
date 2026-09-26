@@ -13,7 +13,8 @@ Plain HTML, CSS and JavaScript. There is no build step, so any static host works
 | `routes.html` | Routes (route table + route map) |
 | `gallery.html` | Photo gallery with filters and lightbox |
 | `about.html` | About |
-| `blog.html` | News |
+| `blog.html` | Shipping guides & news |
+| `guide-*.html` | SEO guides: car to Nigeria, Form M, 20ft vs 40ft containers, what to prepare |
 | `faq.html` | FAQ |
 | `contact.html` | Contact (form, offices, map) |
 | `quote.html` | Quote request form (pre-fills from the calculator) |
@@ -45,6 +46,16 @@ The header and footer are repeated in every page, so a change to either needs ma
   Browsers with CSS scroll-driven animations get scroll-linked motion; others (for example Firefox) get the same
   effect triggered on entry/exit. Forms and the calculator only fade in. Everything is off with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.
+
+## SEO
+
+- Every page has a keyword title and description, a canonical link, Open Graph tags and structured data
+  (LocalBusiness on Home/About/Contact, BreadcrumbList on inner pages, FAQPage on the FAQ and guides, Article on guides).
+- `sitemap.xml` and `robots.txt` are generated at the site root.
+- **Moving to the custom domain:** all absolute URLs come from one address (`https://phoenix297.github.io/Elroi/`).
+  When the domain is live, replace that address everywhere (canonical, `og:url`, `og:image`, structured data,
+  `sitemap.xml`, `robots.txt`), add a `CNAME` file containing the domain, then submit `sitemap.xml` in Google Search Console.
+- After launch: create a Google Business Profile for the Essen address, and ask happy customers for Google reviews.
 
 ## Fonts and link previews
 
