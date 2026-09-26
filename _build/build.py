@@ -384,26 +384,11 @@ def write(name, title, desc, active, body, preloader=False, scripts='', extra_ld
 # HOME
 # =====================================================================
 
-# Hero slideshow: wide yard photos only, and none showing other hauliers' branding
-HERO_SLIDES = [
-    ('transporter-loaded', '40% 60%', 'in-l'),
-    ('container-van-loading', '55% 55%', 'in-r'),
-    ('container-msc-40ft', '60% 55%', 'pan'),
-    ('tractor-john-deere', '45% 55%', 'out'),
-    ('van-mercedes', '50% 55%', 'in-l'),
-    ('container-chassis-schmitz', '50% 60%', 'in-r'),
-]
-HERO_SLIDES_HTML = '\n    '.join(
-    f'<img class="hero-photo hero-slide{" is-on is-live" if i == 0 else ""}" '
-    + (f'src="assets/img/{f}.webp" fetchpriority="high"' if i == 0 else f'data-src="assets/img/{f}.webp"')
-    + f' alt="" width="1280" height="720" data-kb="{kb}" style="object-position:{pos}">'
-    for i, (f, pos, kb) in enumerate(HERO_SLIDES))
-
 home = f'''<section class="hero dark">
-  <!-- Live background: a slideshow of yard photos, each with its own slow camera move (HERO_SLIDES).
-       To use a real video instead, put an MP4 in assets/video/ and set data-video="assets/video/hero.mp4" below. -->
+  <!-- Live background: the photo drifts slowly (Ken Burns). To use a real video instead,
+       put an MP4 in assets/video/ and set data-video="assets/video/hero.mp4" below. -->
   <div class="hero-media" data-video="" aria-hidden="true">
-    {HERO_SLIDES_HTML}
+    <img class="hero-photo" src="assets/img/transporter-loaded.webp" alt="" width="1280" height="720" fetchpriority="high">
   </div>
   <div class="hero-aurora" aria-hidden="true"></div>
   <div class="hero-sweep" aria-hidden="true"></div>

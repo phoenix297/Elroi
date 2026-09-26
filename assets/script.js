@@ -68,47 +68,6 @@
       var pr = hv.play();
       if (pr && pr.catch) pr.catch(function () {});
     }
-    // Slideshow: crossfade the yard photos, one camera move each; paused while the hero is off screen
-    var slides = $$('.hero-slide', heroMedia);
-    if (slides.length > 1 && !reduceMotion && !saveData) {
-      var cur = 0, slideTimer = null, heroOnScreen = true, SLIDE_MS = 6500;
-      var heroSec = heroMedia.closest('.hero');
-      var dotsWrap = d.createElement('div');
-      dotsWrap.className = 'hero-dots';
-      dotsWrap.setAttribute('aria-hidden', 'true');
-      slides.forEach(function () { dotsWrap.appendChild(d.createElement('i')); });
-      heroSec.appendChild(dotsWrap);
-      var dots = $$('i', dotsWrap);
-      var markDot = function () {
-        dots.forEach(function (el, i) { el.classList.remove('on'); if (i === cur) { void el.offsetWidth; el.classList.add('on'); } });
-      };
-      var loadSlides = function () {
-        slides.forEach(function (im) { var src = im.getAttribute('data-src'); if (src) { im.src = src; im.removeAttribute('data-src'); } });
-      };
-      var nextSlide = function () {
-        var n = (cur + 1) % slides.length, nx = slides[n];
-        if (!nx.complete || !nx.naturalWidth) { schedule(800); return; } // wait for the photo instead of fading to blank
-        var prev = slides[cur];
-        prev.classList.remove('is-on');
-        setTimeout(function () { if (!prev.classList.contains('is-on')) prev.classList.remove('is-live'); }, 2000);
-        nx.classList.remove('is-live'); void nx.offsetWidth; // restart its camera move
-        nx.classList.add('is-live', 'is-on');
-        cur = n;
-        markDot();
-        schedule(SLIDE_MS);
-      };
-      var schedule = function (ms) {
-        clearTimeout(slideTimer);
-        if (heroOnScreen && !d.hidden) slideTimer = setTimeout(nextSlide, ms);
-      };
-      if (d.readyState === 'complete') loadSlides(); else window.addEventListener('load', loadSlides);
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es) { heroOnScreen = es[0].isIntersecting; schedule(SLIDE_MS); }).observe(heroSec);
-      }
-      d.addEventListener('visibilitychange', function () { schedule(SLIDE_MS); });
-      markDot();
-      schedule(SLIDE_MS);
-    }
     if (!reduceMotion) {
       var heroTicking = false;
       window.addEventListener('scroll', function () {
@@ -386,6 +345,13 @@
   }
 
   // ---------- Scroll reveal: fade in on enter, fade out on leave (both directions) ----------
+  // Cards and list items get the effect too, one after another along each row
+  $$('.card, .feature, .post, .faq-item, .lane, .glance-row, .cargo-grid > *, .posts > *, .stat, .value, .gallery-grid figure, .masonry figure').forEach(function (el) {
+    if (el.hasAttribute('data-reveal') || (el.parentElement && el.parentElement.closest('[data-reveal]'))) return;
+    var i = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.setAttribute('data-reveal', '');
+    el.style.setProperty('--d', String(Math.min(i % 4, 3)));
+  });
   if (hasIO) {
     var revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) { entry.target.classList.toggle('in', entry.isIntersecting); });
@@ -465,8 +431,44 @@
       btn.addEventListener('click', function () {
         var dir = btn.getAttribute('data-dir') === 'next' ? 1 : -1;
         strip.scrollBy({ left: dir * strip.clientWidth * 0.7, behavior: reduceMotion ? 'auto' : 'smooth' });
+        hold(9000);
       });
     });
+
+    // Auto-slide one photo at a time, looping back to the start. Pauses while the visitor
+    // hovers, touches or tabs into it, and while the strip is off screen or the tab is hidden.
+    var AUTO_MS = 3200, autoTimer = null, heldUntil = 0, onScreen = false;
+    function step() {
+      var card = strip.firstElementChild;
+      var gap = parseFloat(getComputedStyle(strip).columnGap) || 20;
+      var w = card ? card.getBoundingClientRect().width + gap : strip.clientWidth * 0.7;
+      var atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 8;
+      if (atEnd) strip.scrollTo({ left: 0, behavior: 'smooth' });
+      else strip.scrollBy({ left: w, behavior: 'smooth' });
+    }
+    function tick() {
+      clearTimeout(autoTimer);
+      if (!onScreen || d.hidden) return;
+      var wait = heldUntil - Date.now();
+      if (wait > 0) { autoTimer = setTimeout(tick, wait); return; }
+      step();
+      autoTimer = setTimeout(tick, AUTO_MS);
+    }
+    function hold(ms) { heldUntil = Date.now() + ms; tick(); }
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        onScreen = es[0].isIntersecting;
+        if (onScreen) { clearTimeout(autoTimer); autoTimer = setTimeout(tick, AUTO_MS); } else clearTimeout(autoTimer);
+      }, { threshold: 0.4 }).observe(strip);
+      strip.addEventListener('pointerenter', function () { heldUntil = Infinity; });
+      strip.addEventListener('pointerleave', function () { hold(1500); });
+      strip.addEventListener('pointerdown', function () { hold(8000); });
+      strip.addEventListener('touchstart', function () { hold(8000); }, { passive: true });
+      strip.addEventListener('wheel', function () { hold(8000); }, { passive: true });
+      strip.addEventListener('focusin', function () { heldUntil = Infinity; });
+      strip.addEventListener('focusout', function () { hold(3000); });
+      d.addEventListener('visibilitychange', tick);
+    }
   });
 
   // ---------- FAQ accordion ----------
