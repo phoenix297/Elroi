@@ -110,11 +110,11 @@ def head(title, desc, page='', ld='', noindex=False):
 <meta property="og:site_name" content="EL-ROI Shipping Services">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/favicon.svg?v={ver('assets/favicon.svg')}" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png?v={ver('assets/favicon-32.png')}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v={ver('assets/apple-touch-icon.png')}">
 <meta property="og:url" content="{SITE_URL}{page}">
-<meta property="og:image" content="{SITE_URL}assets/og-image.jpg">
+<meta property="og:image" content="{SITE_URL}assets/og-image.jpg?v={ver('assets/og-image.jpg')}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="EL-ROI Shipping: Germany to any part of the world">
