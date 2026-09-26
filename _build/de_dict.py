@@ -332,7 +332,7 @@ DE = {
 "Send a photo of your cargo and its destination on WhatsApp, and we'll tell you what it takes to ship it.": "Schicken Sie uns per WhatsApp ein Foto Ihrer Fracht und das Ziel, und wir sagen Ihnen, was für den Versand nötig ist.",
 "§ Send on WhatsApp": "§ Per WhatsApp senden",
 # ---- home ----
-"Shipping from Germany to Worldwide | EL-ROI Shipping, Essen": "Spedition Essen: Seefracht nach Nigeria & weltweit | EL-ROI Shipping",
+"Shipping from Germany to Worldwide | EL-ROI Shipping, Essen": "Spedition Essen: Seefracht weltweit | EL-ROI Shipping",
 "Freight forwarder in Essen since 1999. Sea freight for cars, trucks, tractors, containers and machinery from Germany to Europe, Lagos and any part of the world. Honest quotes.": "Spedition in Essen seit 1999. Seefracht für Autos, Lkw, Traktoren, Container und Maschinen von Deutschland nach Europa, Lagos und in jeden Teil der Welt. Ehrliche Angebote.",
 "Germany → Worldwide freight forwarding": "Spedition · Deutschland → Weltweit",
 "Your cargo,": "Ihre Fracht,",
