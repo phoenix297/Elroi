@@ -1053,7 +1053,10 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .policy-sec .checklist li { display: block; position: relative; padding-left: 32px; }
 .policy-sec .checklist li::before { position: absolute; left: 0; top: 2px; margin: 0; }
 .policy-sec .checklist { margin-bottom: 16px; }
-/* Map click-to-load placeholder */
+/* Map under the CTA */
+.cta-map { margin-top: clamp(48px, 6vw, 72px); text-align: left; }
+.cta-map .map-frame { width: 100%; height: clamp(280px, 34vw, 420px); aspect-ratio: auto; min-height: 0; }
+/* (unused) click-to-load placeholder */
 .map-consent { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--on-dark);
   background: radial-gradient(60% 70% at 50% 45%, rgba(62, 109, 156, .35), transparent 70%), linear-gradient(rgba(143, 176, 209, .08) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, rgba(143, 176, 209, .08) 1px, transparent 1px) 0 0 / 40px 40px, var(--grad-navy); }
 .mc-inner { max-width: 460px; display: grid; justify-items: center; gap: 12px; }

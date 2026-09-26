@@ -501,46 +501,21 @@
     });
   }
 
-  // ---------- Office map: click-to-load (nothing is sent to Google until the visitor agrees) ----------
-  var mapFrameBox = $('.map-frame');
-  var consent = $('.map-consent');
-  var mapFrame = $('.map-frame iframe');
-  var MAP_KEY = 'elroi-maps-ok';
-  function loadMap(src, title) {
-    if (!mapFrameBox) return;
-    if (!mapFrame) {
-      mapFrame = d.createElement('iframe');
-      mapFrame.setAttribute('loading', 'lazy');
-      mapFrame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-      mapFrameBox.appendChild(mapFrame);
-      if (consent) consent.remove();
-    }
-    mapFrame.src = src;
-    mapFrame.title = title;
-  }
-  if (consent) {
-    var remembered = false;
-    try { remembered = localStorage.getItem(MAP_KEY) === '1'; } catch (e) {}
-    $('#mc-load').addEventListener('click', function () {
-      if ($('#mc-remember').checked) { try { localStorage.setItem(MAP_KEY, '1'); } catch (e) {} }
-      loadMap(consent.getAttribute('data-src'), consent.getAttribute('data-title'));
-    });
-    if (remembered) loadMap(consent.getAttribute('data-src'), consent.getAttribute('data-title'));
-  }
-  $$('.map-tabs button').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      $$('.map-tabs button').forEach(function (b) {
-        b.classList.toggle('active', b === btn);
-        b.setAttribute('aria-pressed', String(b === btn));
+  // ---------- Office maps (Essen / Lagos tabs; one or more per page) ----------
+  $$('[data-map-block]').forEach(function (block) {
+    var frame = $('.map-frame iframe', block);
+    var link = $('.map-link', block);
+    var tabs = $$('.map-tabs button', block);
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tabs.forEach(function (b) {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
+        frame.src = btn.getAttribute('data-map');
+        frame.title = btn.getAttribute('data-title');
+        if (link) link.href = btn.getAttribute('data-link');
       });
-      var mapLink = $('#map-link');
-      if (mapLink) mapLink.href = btn.getAttribute('data-link');
-      if (mapFrame) loadMap(btn.getAttribute('data-map'), btn.getAttribute('data-title'));
-      else if (consent) {
-        consent.setAttribute('data-src', btn.getAttribute('data-map'));
-        consent.setAttribute('data-title', btn.getAttribute('data-title'));
-        $('#mc-place').textContent = btn.getAttribute('data-place');
-      }
     });
   });
 
