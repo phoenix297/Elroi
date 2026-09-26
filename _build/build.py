@@ -418,13 +418,13 @@ home = f'''<section class="hero dark">
         </div>
         <a class="hero-wa" href="{WA}" target="_blank" rel="noopener" style="margin:22px 0 0">{WA_ICON} Or chat with us on WhatsApp</a>
       </div>
-      <div class="hero-globe-wrap" data-reveal style="--d:2">
+      <div class="hero-globe-wrap">
         <div class="hero-globe" data-globe role="img" aria-label="3D globe showing EL-ROI shipping routes from Essen, Germany to Europe and to destinations worldwide: the Americas, Africa, the Middle East and Asia"></div>
         <div class="globe-legend" aria-hidden="true"><span><i></i>Major routes: Europe</span><span><i class="eu"></i>Worldwide destinations</span></div>
         <p class="globe-hint">Drag the globe to spin it</p>
       </div>
     </div>
-    <div class="hero-stats" data-reveal style="--d:4">
+    <div class="hero-stats">
       <div><div class="stat-num"><span data-count="20">20</span><span class="plus">+</span></div><div class="stat-label">Years in operation</div></div>
       <div><div class="stat-num">1999</div><div class="stat-label">Established</div></div>
       <div><div class="stat-num" data-count="2">2</div><div class="stat-label">Offices: Essen &amp; Lagos</div></div>
