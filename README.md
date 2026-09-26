@@ -20,6 +20,7 @@ Plain HTML, CSS and JavaScript. There is no build step, so any static host works
 | `book.html` | Booking form |
 | `calculator.html` | Rough cost calculator |
 | `privacy.html` | Privacy policy (GDPR), linked in every footer and under each form |
+| `terms.html` | Terms & conditions, linked in every footer and under the quote and booking forms |
 | `404.html` | Not-found page |
 
 Shared styles live in `assets/style.css`, interactions in `assets/script.js`, photos in `assets/img/`.
@@ -69,7 +70,7 @@ To switch to email delivery, create a form at [formspree.io](https://formspree.i
 
 Licence plates, trailer ID numbers and visible faces are blurred in `assets/img/`. Blur them in any new photo before adding it.
 
-The privacy policy is a solid starting point, but have a lawyer or data-protection adviser review it before launch. German sites also normally need an Impressum (legal notice).
+The privacy policy and terms & conditions are solid starting points, but have a lawyer review both before launch (in particular whether to use the ADSp 2017, the liability limits, quote validity and cancellation charges). German sites also normally need an Impressum (legal notice).
 
 ## Calculator
 
