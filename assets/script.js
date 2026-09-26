@@ -68,6 +68,47 @@
       var pr = hv.play();
       if (pr && pr.catch) pr.catch(function () {});
     }
+    // Slideshow: crossfade the yard photos, one camera move each; paused while the hero is off screen
+    var slides = $$('.hero-slide', heroMedia);
+    if (slides.length > 1 && !reduceMotion && !saveData) {
+      var cur = 0, slideTimer = null, heroOnScreen = true, SLIDE_MS = 6500;
+      var heroSec = heroMedia.closest('.hero');
+      var dotsWrap = d.createElement('div');
+      dotsWrap.className = 'hero-dots';
+      dotsWrap.setAttribute('aria-hidden', 'true');
+      slides.forEach(function () { dotsWrap.appendChild(d.createElement('i')); });
+      heroSec.appendChild(dotsWrap);
+      var dots = $$('i', dotsWrap);
+      var markDot = function () {
+        dots.forEach(function (el, i) { el.classList.remove('on'); if (i === cur) { void el.offsetWidth; el.classList.add('on'); } });
+      };
+      var loadSlides = function () {
+        slides.forEach(function (im) { var src = im.getAttribute('data-src'); if (src) { im.src = src; im.removeAttribute('data-src'); } });
+      };
+      var nextSlide = function () {
+        var n = (cur + 1) % slides.length, nx = slides[n];
+        if (!nx.complete || !nx.naturalWidth) { schedule(800); return; } // wait for the photo instead of fading to blank
+        var prev = slides[cur];
+        prev.classList.remove('is-on');
+        setTimeout(function () { if (!prev.classList.contains('is-on')) prev.classList.remove('is-live'); }, 2000);
+        nx.classList.remove('is-live'); void nx.offsetWidth; // restart its camera move
+        nx.classList.add('is-live', 'is-on');
+        cur = n;
+        markDot();
+        schedule(SLIDE_MS);
+      };
+      var schedule = function (ms) {
+        clearTimeout(slideTimer);
+        if (heroOnScreen && !d.hidden) slideTimer = setTimeout(nextSlide, ms);
+      };
+      if (d.readyState === 'complete') loadSlides(); else window.addEventListener('load', loadSlides);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { heroOnScreen = es[0].isIntersecting; schedule(SLIDE_MS); }).observe(heroSec);
+      }
+      d.addEventListener('visibilitychange', function () { schedule(SLIDE_MS); });
+      markDot();
+      schedule(SLIDE_MS);
+    }
     if (!reduceMotion) {
       var heroTicking = false;
       window.addEventListener('scroll', function () {

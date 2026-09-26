@@ -33,7 +33,9 @@ The header and footer are shared by every page through the build script.
 
 - **3D globe** (`assets/globe.js` + `assets/globe-land.js`): a dependency-free canvas globe showing
   the routes from Essen. Visitors can drag it to spin. Routes and colours are at the top of `globe.js`.
-- **Live truck background**: the hero photo drifts slowly and shifts with scroll. To use a real video
+- **Live background slideshow**: six yard photos crossfade every 6.5 seconds, each with its own slow camera move, and
+  shift with scroll (list in `HERO_SLIDES` in `_build/build.py`; photos with other hauliers' branding are left out).
+  It pauses when the hero is off screen, and shows one still photo with reduced motion or data saver on. To use a real video
   instead, add a short muted MP4 (for example `assets/video/hero.mp4`, ideally under 8 MB) and set
   `data-video="assets/video/hero.mp4"` on the `.hero-media` element in `index.html`. The photo stays as
   the fallback while the video loads, and for visitors with reduced motion or data saver turned on.

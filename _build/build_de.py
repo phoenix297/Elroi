@@ -127,7 +127,7 @@ def build_page(path):
 
     # links and asset paths
     for el in soup.find_all(True):
-        for a in ('href', 'src'):
+        for a in ('href', 'src', 'data-src'):
             if el.get(a):
                 el[a] = localize_href(el[a])
         if el.get('style') and "url('assets/" in el['style']:
