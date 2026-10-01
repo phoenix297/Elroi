@@ -1207,12 +1207,7 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 @media (max-width: 1024px) { .box-grid { grid-template-columns: 1fr; } .box-stage { --u: 34px; } }
 @media (max-width: 560px) { .box-stage { --u: 25px; height: 300px; } .box-specs dd { font-size: 1.1rem; } }
 
-/* ---------- 3D tilt on cards (mouse only): leans toward the pointer with a soft light reflection ---------- */
-.tilt { rotate: var(--tilt-x, 0) var(--tilt-y, 0) 0 var(--tilt-a, 0deg); transition: rotate .5s var(--ease); }
-.tilt.is-tilting { transition: rotate .08s linear; }
-.tilt-glare { position: absolute; inset: 0; pointer-events: none; z-index: 3; opacity: 0; transition: opacity .4s; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .22), transparent 55%); mix-blend-mode: soft-light; }
-.tilt.is-tilting .tilt-glare { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .tilt { rotate: none !important; } .box3d { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .box3d { transition: none; } }
 
 /* Container colour variants */
 .box3d.c-steel { --s1: #5a8bbb; --s2: #3e6d9c; --s3: #325b84; --d1: #4a79a8; --d2: #2f5a85; --t1: #79a3cc; --t2: #5c88b5; --bar: #0b1f35; }

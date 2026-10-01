@@ -533,34 +533,6 @@
     }
   });
 
-  // ---------- 3D tilt on cards (mouse and trackpad only) ----------
-  if (!reduceMotion && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    $$('.cargo-card, .card, .post, .testimonial, .route-card').forEach(function (el) {
-      if (el.parentElement) el.parentElement.style.perspective = '1200px';
-      el.classList.add('tilt');
-      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
-      var glare = d.createElement('span');
-      glare.className = 'tilt-glare';
-      glare.setAttribute('aria-hidden', 'true');
-      el.appendChild(glare);
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
-        var mag = Math.min(1, Math.hypot(px, py) * 2);
-        el.classList.add('is-tilting');
-        el.style.setProperty('--tilt-x', (-py).toFixed(3));
-        el.style.setProperty('--tilt-y', px.toFixed(3));
-        el.style.setProperty('--tilt-a', (mag * 7).toFixed(2) + 'deg');
-        el.style.setProperty('--gx', ((px + 0.5) * 100).toFixed(1) + '%');
-        el.style.setProperty('--gy', ((py + 0.5) * 100).toFixed(1) + '%');
-      });
-      el.addEventListener('pointerleave', function () {
-        el.classList.remove('is-tilting');
-        el.style.setProperty('--tilt-a', '0deg');
-      });
-    });
-  }
-
   // ---------- Track a shipment: opens WhatsApp with the reference filled in ----------
   $$('[data-track]').forEach(function (f) {
     var input = f.querySelector('input');

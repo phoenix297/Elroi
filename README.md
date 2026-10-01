@@ -56,8 +56,6 @@ The header and footer are shared by every page through the build script.
   `box3d()` helper as the home container, turning slowly. Hidden below 1100px wide; still with reduced motion.
 - **3D coverflow** on the "From the yard" strip: the photo at the start faces you and the next ones turn away in depth
   as the strip slides.
-- **3D card tilt**: on computers with a mouse, cargo cards, posts, testimonials and info cards lean toward the pointer
-  with a soft light reflection. Off on touch screens and with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.
 
 ## German version
