@@ -435,6 +435,29 @@
       });
     });
 
+    // 3D coverflow: the photo at the start of the strip faces you, the next ones turn away in depth
+    if (!reduceMotion) {
+      strip.classList.add('coverflow');
+      var cards = Array.prototype.slice.call(strip.children), cfTick = false;
+      var coverflow = function () {
+        cfTick = false;
+        var sr = strip.getBoundingClientRect();
+        var pad = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+        cards.forEach(function (c) {
+          var r = c.getBoundingClientRect();
+          var off = (r.left - (sr.left + pad)) / (r.width || 1); // 0 = in focus, 1 = next card
+          var o = Math.max(-1.2, Math.min(2.5, off));
+          var ang = o * -11, z = -Math.abs(o) * 60, lift = Math.abs(o) < 0.5 ? (0.5 - Math.abs(o)) * -14 : 0;
+          c.style.transform = 'perspective(1100px) translate3d(0,' + lift.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ang.toFixed(2) + 'deg)';
+          c.style.opacity = o < -0.6 ? Math.max(0.25, 1 + (o + 0.6) * 1.2).toFixed(2) : '1';
+        });
+      };
+      var reqCf = function () { if (!cfTick) { cfTick = true; requestAnimationFrame(coverflow); } };
+      strip.addEventListener('scroll', reqCf, { passive: true });
+      window.addEventListener('resize', reqCf);
+      coverflow();
+    }
+
     // Auto-slide one photo at a time, looping back to the start. Pauses while the visitor
     // hovers, touches or tabs into it, and while the strip is off screen or the tab is hidden.
     var AUTO_MS = 3200, autoTimer = null, heldUntil = 0, onScreen = false;

@@ -52,6 +52,10 @@ The header and footer are shared by every page through the build script.
 - **3D container** (home page, after the cargo types): a CSS 3D shipping container in her colours with the logo on
   the sides. Visitors drag it to turn it and switch 20ft / 40ft to see the length change, with the inside sizes,
   volume and max. weight beside it (same figures as the 20ft vs 40ft guide). It spins slowly when idle.
+- **3D container stack** (Services header, desktop): five containers in navy, steel and gold, built with the same
+  `box3d()` helper as the home container, turning slowly. Hidden below 1100px wide; still with reduced motion.
+- **3D coverflow** on the "From the yard" strip: the photo at the start faces you and the next ones turn away in depth
+  as the strip slides.
 - **3D card tilt**: on computers with a mouse, cargo cards, posts, testimonials and info cards lean toward the pointer
   with a soft light reflection. Off on touch screens and with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.

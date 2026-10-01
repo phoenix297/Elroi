@@ -1192,13 +1192,13 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 .box-stage::after { content: ""; position: absolute; left: 14%; right: 14%; bottom: 20%; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(11, 31, 53, .35), transparent); filter: blur(4px); pointer-events: none; }
 .box3d { --L: calc(var(--m) * var(--u)); --W: calc(var(--w) * var(--u)); --H: calc(var(--h) * var(--u)); position: relative; width: var(--L); height: var(--H); transform-style: preserve-3d; transform: rotateX(var(--rx, -16deg)) rotateY(var(--ry, -32deg)); transition: --m 1s var(--ease); z-index: 1; }
 .bf { position: absolute; left: 0; top: 0; backface-visibility: hidden; box-shadow: inset 0 0 0 2px #0a1d33; }
-.bf-side { width: var(--L); height: var(--H); background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .09) 0 3px, rgba(0, 0, 0, .12) 3px 6px, transparent 6px 14px), linear-gradient(180deg, #2a5482, #17365a 70%, #122c4a); display: grid; place-items: center; overflow: hidden; }
+.bf-side { width: var(--L); height: var(--H); background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .09) 0 3px, rgba(0, 0, 0, .12) 3px 6px, transparent 6px 14px), linear-gradient(180deg, var(--s1, #2a5482), var(--s2, #17365a) 70%, var(--s3, #122c4a)); display: grid; place-items: center; overflow: hidden; }
 .bf-a { transform: translateZ(calc(var(--W) / 2)); }
 .bf-b { transform: rotateY(180deg) translateZ(calc(var(--W) / 2)); filter: brightness(.82); }
 .bf-end { width: var(--W); height: var(--H); left: calc((var(--L) - var(--W)) / 2); }
-.bf-doors { transform: rotateY(90deg) translateZ(calc(var(--L) / 2)); background: linear-gradient(90deg, transparent 49.2%, #0a1d33 49.2% 50.8%, transparent 50.8%), repeating-linear-gradient(90deg, transparent 0 14%, #c9a227 14% 15.5%, transparent 15.5% 25%), linear-gradient(180deg, #24496f, #142f4f); filter: brightness(.92); }
-.bf-front { transform: rotateY(-90deg) translateZ(calc(var(--L) / 2)); background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .07) 0 3px, transparent 3px 11px), linear-gradient(180deg, #1f4269, #11294a); filter: brightness(.7); }
-.bf-top { width: var(--L); height: var(--W); top: calc((var(--H) - var(--W)) / 2); transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .1) 0 2px, transparent 2px 12px), linear-gradient(90deg, #3a6896, #2b5784); }
+.bf-doors { transform: rotateY(90deg) translateZ(calc(var(--L) / 2)); background: linear-gradient(90deg, transparent 49.2%, #0a1d33 49.2% 50.8%, transparent 50.8%), repeating-linear-gradient(90deg, transparent 0 14%, var(--bar, #c9a227) 14% 15.5%, transparent 15.5% 25%), linear-gradient(180deg, var(--d1, #24496f), var(--d2, #142f4f)); filter: brightness(.92); }
+.bf-front { transform: rotateY(-90deg) translateZ(calc(var(--L) / 2)); background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .07) 0 3px, transparent 3px 11px), linear-gradient(180deg, var(--d1, #1f4269), var(--d2, #11294a)); filter: brightness(.7); }
+.bf-top { width: var(--L); height: var(--W); top: calc((var(--H) - var(--W)) / 2); transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .1) 0 2px, transparent 2px 12px), linear-gradient(90deg, var(--t1, #3a6896), var(--t2, #2b5784)); }
 .bf-bottom { width: var(--L); height: var(--W); top: calc((var(--H) - var(--W)) / 2); transform: rotateX(-90deg) translateZ(calc(var(--H) / 2)); background: #0a1d33; }
 .bf-brand { display: flex; align-items: center; gap: 8px; color: rgba(255, 255, 255, .9); }
 .bf-brand .logo-mark { height: calc(var(--H) * .36); color: #fff; }
@@ -1213,3 +1213,21 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 .tilt-glare { position: absolute; inset: 0; pointer-events: none; z-index: 3; opacity: 0; transition: opacity .4s; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .22), transparent 55%); mix-blend-mode: soft-light; }
 .tilt.is-tilting .tilt-glare { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .tilt { rotate: none !important; } .box3d { transition: none; } }
+
+/* Container colour variants */
+.box3d.c-steel { --s1: #5a8bbb; --s2: #3e6d9c; --s3: #325b84; --d1: #4a79a8; --d2: #2f5a85; --t1: #79a3cc; --t2: #5c88b5; --bar: #0b1f35; }
+.box3d.c-gold { --s1: #e0c468; --s2: #c9a227; --s3: #a8861c; --d1: #d4b44a; --d2: #a8861c; --t1: #ecd58a; --t2: #d8bb55; --bar: #0b1f35; }
+
+/* ---------- Floating 3D container stack (Services header) ---------- */
+.stack3d { position: absolute; right: clamp(24px, 7vw, 120px); top: 50%; width: 400px; height: 380px; margin-top: -170px; perspective: 1300px; perspective-origin: 50% 30%; pointer-events: none; z-index: 0; }
+.stack-scene { position: absolute; inset: 0; transform-style: preserve-3d; animation: stack-spin 30s linear infinite; }
+.stack-item { position: absolute; left: 50%; top: 62%; transform-style: preserve-3d; transform: translate3d(calc(var(--x, 0) * 1px), calc(var(--y, 0) * 1px), calc(var(--z, 0) * 1px)); }
+.stack-item .box3d { --u: 26px; --m: 6.06; --w: 2.44; --h: 2.59; --rx: 0deg; --ry: 0deg; transition: none; margin: calc(var(--H) / -2) 0 0 calc(var(--L) / -2); }
+.stack-item .bf-brand .logo-mark { height: calc(var(--H) * .4); }
+@keyframes stack-spin { from { transform: rotateX(-20deg) rotateY(0deg) translateY(0); } 50% { transform: rotateX(-20deg) rotateY(-180deg) translateY(-10px); } to { transform: rotateX(-20deg) rotateY(-360deg) translateY(0); } }
+.page-hero > .container { position: relative; z-index: 1; }
+@media (max-width: 1100px) { .stack3d { display: none; } }
+@media (prefers-reduced-motion: reduce) { .stack-scene { animation: none; transform: rotateX(-20deg) rotateY(-35deg); } }
+
+/* ---------- 3D coverflow on the "From the yard" strip ---------- */
+.strip.coverflow a { transform-origin: 50% 50%; will-change: transform; transition: opacity .3s; }

@@ -296,10 +296,28 @@ CHART_LAND = open(os.path.join(HERE, 'chart_land.txt')).read()
 ROUTE_LINE = '<svg class="route-line" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M-10 72 C 260 72, 420 18, 720 30 S 1160 76, 1450 22"/></svg>'
 
 
-def page_hero(crumb, eyebrow, h1, lede, bg, pos='center'):
+def box3d(color='', brand=True):
+    """One CSS 3D container. color: '' (navy), 'c-steel' or 'c-gold'."""
+    side = f'<span class="bf-brand">{LOGO_MARK}{LOGO_WORD}</span>' if brand else ''
+    return (f'<div class="box3d {color}"><div class="bf bf-side bf-a">{side}</div><div class="bf bf-side bf-b"></div>'
+            '<div class="bf bf-end bf-doors"></div><div class="bf bf-end bf-front"></div><div class="bf bf-top"></div><div class="bf bf-bottom"></div></div>')
+
+
+# Floating stack of containers for the Services header (decorative)
+STACK3D = ('<div class="stack3d" aria-hidden="true"><div class="stack-scene">'
+           + f'<div class="stack-item" style="--y:0;--z:-33">{box3d("", True)}</div>'
+           + f'<div class="stack-item" style="--y:0;--z:33">{box3d("c-gold", False)}</div>'
+           + f'<div class="stack-item" style="--y:-68;--z:-33;--x:-16">{box3d("c-steel", False)}</div>'
+           + f'<div class="stack-item" style="--y:-68;--z:33;--x:24">{box3d("", True)}</div>'
+           + f'<div class="stack-item" style="--y:-136;--z:0;--x:5">{box3d("c-gold", False)}</div>'
+           + '</div></div>')
+
+
+def page_hero(crumb, eyebrow, h1, lede, bg, pos='center', art=''):
     return f'''<section class="page-hero">
   <div class="bg" style="background-image:url('{IMG[bg][0]}');background-position:{pos}"></div>
   {ROUTE_LINE}
+  {art}
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">{crumb}</span></nav>
     <span class="eyebrow">{eyebrow}</span>
@@ -759,7 +777,7 @@ def feature(anchor, num, key, title, text, bullets):
 
 services = page_hero('Services', 'What we offer', 'Freight services <em>built around your cargo</em>',
                      'Sea freight from Germany for everything from documents to heavy machinery, with the paperwork handled and the price agreed up front.',
-                     'loaded', 'center 55%') + f'''
+                     'loaded', 'center 55%', art=STACK3D) + f'''
 <section>
   <div class="container">
     <div class="section-head" data-reveal>
