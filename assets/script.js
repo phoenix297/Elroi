@@ -471,6 +471,20 @@
     }
   });
 
+  // ---------- Track a shipment: opens WhatsApp with the reference filled in ----------
+  $$('[data-track]').forEach(function (f) {
+    var input = f.querySelector('input');
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ref = input.value.trim();
+      if (!ref) { input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
+      input.removeAttribute('aria-invalid');
+      var msg = T('Hello EL-ROI, could you tell me the latest status of my shipment? Reference: ', 'Hallo EL-ROI, können Sie mir den aktuellen Stand meiner Sendung mitteilen? Referenz: ') + ref;
+      window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+    input.addEventListener('input', function () { input.removeAttribute('aria-invalid'); });
+  });
+
   // ---------- FAQ accordion ----------
   $$('.faq-item').forEach(function (item) {
     var q = $('.faq-q', item);

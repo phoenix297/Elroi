@@ -619,6 +619,16 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; transition: opaci
 .cta-phone { display: inline-block; margin-top: 30px; font-family: var(--f-serif); font-size: 1.2rem; color: var(--navy); border-bottom: 1px solid var(--gold); }
 .cta-phone:hover { color: var(--gold-deep); }
 .cta.dark p { color: var(--on-dark-2); }
+.track { max-width: 560px; margin: 34px auto 0; padding-top: 28px; border-top: 1px solid var(--line); text-align: left; }
+.track-label { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 10px; }
+.track-row { display: flex; gap: 10px; }
+.track-row input { flex: 1; min-width: 0; height: 52px; padding: 0 16px; border: 1px solid var(--line); background: #fff; font: inherit; color: var(--navy); }
+.track-row input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, .18); }
+.track-row input[aria-invalid="true"] { border-color: #B4442C; }
+.track-row .btn { flex: none; height: 52px; white-space: nowrap; }
+.track-row .btn .wa-ico { width: 18px; height: 18px; }
+.track-note { display: block; margin-top: 10px; color: var(--text-2); font-size: .82rem; }
+@media (max-width: 560px) { .track-row { flex-direction: column; } .track-row input { flex: none; width: 100%; } .track-row .btn { width: 100%; justify-content: center; } }
 .cta.dark .cta-phone { color: var(--on-dark); }
 
 /* ---------- Footer ---------- */
@@ -919,6 +929,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .js [data-reveal] {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
     animation: sd-fade linear both;
     animation-timeline: view();
@@ -1039,7 +1050,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
-  .js [data-reveal], .js .hero-copy > *, .js .hero-globe-wrap, .js .hero-stats { opacity: 1; transform: none; animation: none !important; }
+  .js [data-reveal], .js .hero-copy > *, .js .hero-globe-wrap, .js .hero-stats { opacity: 1; transform: none; filter: none; animation: none !important; }
   .cargo-img, .feature-img, .why-photo, .post-img, .photo-trio a, .strip-img, .hero > .container, .hero-copy, .statement .bg,
   .cargo-img img, .feature-img img, .why-photo img, .post-img img, .photo-trio img { animation: none !important; }
   .wsplit .wi { transform: none; opacity: 1; }

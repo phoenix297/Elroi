@@ -82,11 +82,16 @@ The header and footer are shared by every page through the build script.
 
 ## Adding photos
 
-1. Blur plates and faces, convert the photo to WebP (for example with Pillow: `Image.open('x.jpg').save('x.webp', quality=78)`),
+1. Blur plates and faces, convert the photo to WebP, also save a half-size copy named `name-sm.webp` (used on phones), (for example with Pillow: `Image.open('x.jpg').save('x.webp', quality=78)`),
    put it in `assets/img/` (ideally no wider than 1600px) and add it to the `IMG` list in `_build/build.py`.
 2. For the gallery, add a `<figure>` block to the gallery section of `_build/build.py` and set the
    `href`, `src`, `alt`, `width`/`height`, caption text and `data-cat`
    (`vehicles`, `machinery` or `containers`, and the filter buttons pick it up automatically).
+
+## Track a shipment
+
+Every page with the "Ready to move your cargo?" block has a **Track a shipment** box. The customer types a container,
+booking or B/L number and it opens WhatsApp to the office with the reference filled in (German message on `/de/`).
 
 ## Forms
 

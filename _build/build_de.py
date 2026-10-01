@@ -130,6 +130,8 @@ def build_page(path):
         for a in ('href', 'src', 'data-src'):
             if el.get(a):
                 el[a] = localize_href(el[a])
+        if el.get('srcset'):
+            el['srcset'] = re.sub(r'(^|,\s*)assets/', r'\1../assets/', el['srcset'])
         if el.get('style') and "url('assets/" in el['style']:
             el['style'] = el['style'].replace("url('assets/", "url('../assets/")
     # language switch

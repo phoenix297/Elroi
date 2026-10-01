@@ -88,9 +88,11 @@ NAV = [
 MOBILE_NAV = NAV[:5] + [('calculator.html', 'Calculator'), ('book.html', 'Book a Shipment')] + NAV[5:] + [('quote.html', 'Get a Quote')]
 
 
-def img(key, eager=False):
+def img(key, eager=False, sizes='(max-width: 760px) 92vw, 42vw'):
     src, alt, w, h = IMG[key]
-    return f'<img src="{src}" alt="{alt}" width="{w}" height="{h}" loading="{"eager" if eager else "lazy"}" decoding="async">'
+    small = src.replace('.webp', '-sm.webp')  # half-size copy for phones and small slots
+    return (f'<img src="{src}" srcset="{small} {w // 2}w, {src} {w}w" sizes="{sizes}" alt="{alt}" width="{w}" height="{h}" '
+            f'loading="{"eager" if eager else "lazy"}" decoding="async">')
 
 
 def head(title, desc, page='', ld='', noindex=False):
@@ -341,6 +343,14 @@ CTA = f'''<section class="section-alt cta">
       <a href="{WA}" class="btn btn-outline" target="_blank" rel="noopener">{WA_ICON} Chat on WhatsApp</a>
     </div>
     <a class="cta-phone" href="tel:{TEL}">{PHONE}</a>
+    <form class="track" data-track novalidate>
+      <label class="track-label" for="track-ref">Track a shipment</label>
+      <div class="track-row">
+        <input id="track-ref" name="ref" type="text" autocomplete="off" maxlength="40" placeholder="Container, booking or B/L number" required>
+        <button class="btn btn-dark" type="submit">{WA_ICON} Check status</button>
+      </div>
+      <small class="track-note">We reply on WhatsApp with the latest status of your shipment.</small>
+    </form>
   </div>
   {map_block(' cta-map')}
 </section>

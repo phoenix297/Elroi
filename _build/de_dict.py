@@ -632,3 +632,10 @@ DE.update({
 
 # Strings that stay the same in German (names, numbers, addresses)
 SAME = """Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
+
+DE.update({
+"Track a shipment": "Sendung verfolgen",
+"Container, booking or B/L number": "Container-, Buchungs- oder B/L-Nummer",
+"§ Check status": "§ Status abfragen",
+"We reply on WhatsApp with the latest status of your shipment.": "Wir antworten per WhatsApp mit dem aktuellen Stand Ihrer Sendung.",
+})
