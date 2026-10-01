@@ -1478,7 +1478,7 @@ calculator = page_hero('Calculator', 'Estimate', 'Shipping cost <em>calculator</
         <div class="label"><i>02</i> <label for="calc-weight">Estimated weight</label></div>
         <div class="weight-row">
           <input type="range" id="calc-range" min="0" max="1000" step="1" value="500" aria-label="Weight slider">
-          <div class="weight-input"><input type="number" id="calc-weight" min="1" max="100000" value="1500" inputmode="numeric"><span>KG</span></div>
+          <div class="weight-input"><input type="number" id="calc-weight" min="1" max="300000" value="1500" inputmode="numeric"><span>KG</span></div>
         </div>
         <div class="presets">
           <button type="button" data-kg="500">Pallet ~500 kg</button>
@@ -1499,9 +1499,10 @@ calculator = page_hero('Calculator', 'Estimate', 'Shipping cost <em>calculator</
         <div class="calc-amount" id="calc-amount">&euro; &mdash;</div>
       </div>
       <div class="calc-box" aria-hidden="true">
-        <div class="box3d calc-glass"><div class="fill3d"><div class="ff ff-a"></div><div class="ff ff-b"></div><div class="ff ff-top"></div><div class="ff ff-end ff-end-r"></div><div class="ff ff-end ff-end-l"></div></div><div class="bf bf-side bf-a"></div><div class="bf bf-side bf-b"></div><div class="bf bf-end bf-doors"></div><div class="bf bf-end bf-front"></div><div class="bf bf-top"></div><div class="bf bf-bottom"></div></div>
+        <div class="calc-boxes" data-count="1"><div class="calc-unit"><div class="box3d calc-glass"><div class="fill3d"><div class="ff ff-a"></div><div class="ff ff-b"></div><div class="ff ff-top"></div><div class="ff ff-end ff-end-r"></div><div class="ff ff-end ff-end-l"></div></div><div class="bf bf-side bf-a"></div><div class="bf bf-side bf-b"></div><div class="bf bf-end bf-doors"></div><div class="bf bf-end bf-front"></div><div class="bf bf-top"></div><div class="bf bf-bottom"></div></div></div></div>
+        <span class="calc-more"></span>
       </div>
-      <p class="calc-fill" id="calc-fill">Enter a weight to see how much of a 20ft container it uses.</p>
+      <p class="calc-fill" id="calc-fill">Enter a weight to see how many 20ft containers it needs.</p>
       <div class="calc-breakdown">
         <div><span>Base rate</span><strong id="b-rate">&mdash;</strong></div>
         <div><span>Chargeable weight</span><strong id="b-weight">&mdash;</strong></div>

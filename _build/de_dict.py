@@ -674,3 +674,5 @@ DE.update({
 "Globe showing our offices in Essen, Germany and Lagos, Nigeria": "Globus mit unseren Büros in Essen, Deutschland und Lagos, Nigeria",
 "Essen · Lagos · Worldwide": "Essen · Lagos · Weltweit",
 })
+
+DE["Enter a weight to see how many 20ft containers it needs."] = "Geben Sie ein Gewicht ein, um zu sehen, wie viele 20-Fuß-Container es braucht."

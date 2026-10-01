@@ -741,7 +741,7 @@
       'Rest of World': 2.1
     };
     var MIN_KG = 50;
-    var MAX_KG = 30000;
+    var MAX_KG = 170000; // slider reaches about six containers; the number box takes more
     var weightIn = $('#calc-weight');
     var range = $('#calc-range');
     var amount = $('#calc-amount');
@@ -749,7 +749,8 @@
     var bRate = $('#b-rate');
     var bWeight = $('#b-weight');
     var bRoute = $('#b-route');
-    var fillBox = $('.calc-glass'), fillTxt = $('#calc-fill');
+    var fillWrap = $('.calc-boxes'), fillTxt = $('#calc-fill'), fillMore = $('.calc-more');
+    var fillTpl = fillWrap ? fillWrap.firstElementChild.cloneNode(true) : null;
     var eur = function (n, dp) { var t = n.toLocaleString(LOCALE, { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); return DE ? t + ' €' : '€' + t; };
 
     // Log-scale slider so small and huge loads are both easy to pick
@@ -765,13 +766,23 @@
       bWeight.textContent = w > 0 ? chargeable.toLocaleString(LOCALE) + ' kg' + (w < MIN_KG ? ' (min.)' : '') : '—';
       bRate.textContent = cargoEl ? eur(baseRates[cargoEl.value], 2) + ' / kg' : '—';
       bRoute.textContent = destEl ? '× ' + destMultiplier[destEl.value] : '—';
-      // 3D container fill: share of a 20ft container's max. load (~28,000 kg)
-      if (fillBox) {
-        var share = w / 28000;
-        fillBox.style.setProperty('--f', Math.min(1, Math.max(0, share)).toFixed(3));
-        if (w <= 0) fillTxt.textContent = T('Enter a weight to see how much of a 20ft container it uses.', 'Geben Sie ein Gewicht ein, um zu sehen, wie viel eines 20-Fuß-Containers es nutzt.');
-        else if (share > 1) fillTxt.innerHTML = T('<strong>More than one 20ft container</strong> by weight (max. ~28,000 kg each).', '<strong>Mehr als ein 20-Fuß-Container</strong> nach Gewicht (max. ~28.000 kg je Container).');
-        else fillTxt.innerHTML = T('About <strong>' + Math.max(1, Math.round(share * 100)) + '%</strong> of a 20ft container\'s max. load (~28,000 kg).', 'Etwa <strong>' + Math.max(1, Math.round(share * 100)) + ' %</strong> der max. Zuladung eines 20-Fuß-Containers (~28.000 kg).');
+      // 3D containers: how many 20ft containers the weight needs (max. ~28,000 kg each), each one filled
+      if (fillWrap) {
+        var CAP = 28000, MAX_SHOWN = 6;
+        var n = w > 0 ? Math.max(1, Math.ceil(w / CAP)) : 1;
+        var shown = Math.min(n, MAX_SHOWN);
+        while (fillWrap.children.length < shown) fillWrap.appendChild(fillTpl.cloneNode(true));
+        while (fillWrap.children.length > shown) fillWrap.removeChild(fillWrap.lastChild);
+        fillWrap.setAttribute('data-count', String(shown));
+        Array.prototype.forEach.call(fillWrap.children, function (box, i) {
+          var f = w <= 0 ? 0 : (i < n - 1 ? 1 : (w - CAP * (n - 1)) / CAP);
+          box.style.setProperty('--f', Math.min(1, Math.max(0, f)).toFixed(3));
+        });
+        fillMore.textContent = n > MAX_SHOWN ? '+' + (n - MAX_SHOWN) : '';
+        var kgTxt = T('~28,000 kg', '~28.000 kg');
+        if (w <= 0) fillTxt.textContent = T('Enter a weight to see how many 20ft containers it needs.', 'Geben Sie ein Gewicht ein, um zu sehen, wie viele 20-Fuß-Container es braucht.');
+        else if (n === 1) fillTxt.innerHTML = T('About <strong>' + Math.max(1, Math.round(w / CAP * 100)) + '%</strong> of one 20ft container\'s max. load (' + kgTxt + ').', 'Etwa <strong>' + Math.max(1, Math.round(w / CAP * 100)) + ' %</strong> der max. Zuladung eines 20-Fuß-Containers (' + kgTxt + ').');
+        else fillTxt.innerHTML = T('About <strong>' + n + ' × 20ft containers</strong> by weight (max. ' + kgTxt + ' each). Bulky cargo can need more space, so we confirm the number in your quote.', 'Etwa <strong>' + n + ' × 20-Fuß-Container</strong> nach Gewicht (max. ' + kgTxt + ' je Container). Sperrige Ladung braucht ggf. mehr Platz, die genaue Anzahl bestätigen wir im Angebot.');
       }
 
       if (!cargoEl || !destEl || w <= 0) {

@@ -1229,8 +1229,16 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 
 /* ---------- Calculator: glass container that fills with cargo by weight ---------- */
 @property --f { syntax: '<number>'; inherits: true; initial-value: 0; }
-.calc-box { height: 170px; display: grid; place-items: center; perspective: 1100px; perspective-origin: 50% 20%; margin: 6px 0 4px; }
-.calc-glass { --u: 30px; --m: 6.06; --w: 2.44; --h: 2.59; transition: none; animation: calc-sway 9s ease-in-out infinite alternate; }
+.calc-box { position: relative; min-height: 170px; display: grid; place-items: center; margin: 6px 0 4px; }
+.calc-boxes { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 18px; }
+.calc-unit { perspective: 1100px; perspective-origin: 50% 20%; display: grid; place-items: center; width: calc(var(--u) * 7.2); height: calc(var(--u) * 5); }
+.calc-boxes { --u: 30px; }
+.calc-boxes[data-count="2"] { --u: 21px; }
+.calc-boxes[data-count="3"], .calc-boxes[data-count="4"] { --u: 16px; }
+.calc-boxes[data-count="5"], .calc-boxes[data-count="6"] { --u: 13px; }
+.calc-more { position: absolute; right: 0; bottom: 6px; font-family: var(--f-serif); font-size: 1.3rem; color: var(--gold-soft); }
+.calc-more:empty { display: none; }
+.calc-glass { --m: 6.06; --w: 2.44; --h: 2.59; transition: none; animation: calc-sway 9s ease-in-out infinite alternate; }
 @keyframes calc-sway { from { transform: rotateX(-20deg) rotateY(-44deg); } to { transform: rotateX(-14deg) rotateY(-24deg); } }
 .calc-glass .bf-a, .calc-glass .bf-top { background: linear-gradient(180deg, rgba(143, 176, 209, .16), rgba(143, 176, 209, .05)); box-shadow: inset 0 0 0 1.5px rgba(224, 196, 104, .7); backface-visibility: visible; }
 .calc-glass .bf-b, .calc-glass .bf-front, .calc-glass .bf-doors { filter: brightness(.55); }
@@ -1245,7 +1253,7 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 .ff-end-l { transform: rotateY(-90deg) translateZ(calc(var(--FL) / 2)); }
 .calc-fill { margin: 0 0 18px; font-size: .86rem; color: var(--on-dark-2); text-align: center; }
 .calc-fill strong { color: var(--gold-soft); font-weight: 600; }
-@media (max-width: 560px) { .calc-glass { --u: 24px; } .calc-box { height: 140px; } }
+@media (max-width: 560px) { .calc-boxes { --u: 24px; } .calc-boxes[data-count="2"] { --u: 17px; } .calc-boxes[data-count="3"], .calc-boxes[data-count="4"] { --u: 13px; } .calc-boxes[data-count="5"], .calc-boxes[data-count="6"] { --u: 11px; } .calc-box { min-height: 140px; } }
 
 /* ---------- Routes: the route map tilts in 3D like a chart on a table ---------- */
 .map-3d { perspective: 1400px; }

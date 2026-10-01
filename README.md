@@ -54,8 +54,9 @@ The header and footer are shared by every page through the build script.
   volume and max. weight beside it (same figures as the 20ft vs 40ft guide). It spins slowly when idle.
 - **3D container stack** (Services and About headers, desktop): five containers in navy, steel and gold, built with the same
   `box3d()` helper as the home container, turning slowly. Hidden below 1100px wide; still with reduced motion.
-- **Calculator 3D container**: a glass 20ft container in the result panel fills with gold cargo as the weight goes up,
-  with a line saying what share of a 20ft container's max. load (~28,000 kg) that is.
+- **Calculator 3D containers**: glass 20ft containers in the result panel fill with gold cargo as the weight goes up.
+  It works out how many 20ft containers the weight needs (max. ~28,000 kg each), shows up to six (with "+N" beyond),
+  fills all but the last one fully, and says so in a line under them. The weight slider reaches ~170 t; the box takes up to 300 t.
 - **Routes 3D map**: the route map sits on a framed panel tilted like a chart on a table, and turns a little as it scrolls.
 - **Contact globe**: a small version of the home page globe at the top of the contact side column.
 - **404 page**: a gold container bobbing on animated waves.
@@ -134,6 +135,7 @@ The privacy policy and terms & conditions are solid starting points, but have a 
 ## Calculator
 
 Rates live in `assets/script.js` (`baseRates` per kg and `destMultiplier` per route), with a 50 kg minimum.
+The container count uses 28,000 kg per 20ft container (`CAP` in the same file).
 Results are rough estimates and the page says so.
 
 ## Claude Code skill
