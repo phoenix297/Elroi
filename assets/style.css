@@ -1226,3 +1226,47 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 
 /* ---------- 3D coverflow on the "From the yard" strip ---------- */
 .strip.coverflow a { transform-origin: 50% 50%; will-change: transform; transition: opacity .3s; }
+
+/* ---------- Calculator: glass container that fills with cargo by weight ---------- */
+@property --f { syntax: '<number>'; inherits: true; initial-value: 0; }
+.calc-box { height: 170px; display: grid; place-items: center; perspective: 1100px; perspective-origin: 50% 20%; margin: 6px 0 4px; }
+.calc-glass { --u: 30px; --m: 6.06; --w: 2.44; --h: 2.59; transition: none; animation: calc-sway 9s ease-in-out infinite alternate; }
+@keyframes calc-sway { from { transform: rotateX(-20deg) rotateY(-44deg); } to { transform: rotateX(-14deg) rotateY(-24deg); } }
+.calc-glass .bf-a, .calc-glass .bf-top { background: linear-gradient(180deg, rgba(143, 176, 209, .16), rgba(143, 176, 209, .05)); box-shadow: inset 0 0 0 1.5px rgba(224, 196, 104, .7); backface-visibility: visible; }
+.calc-glass .bf-b, .calc-glass .bf-front, .calc-glass .bf-doors { filter: brightness(.55); }
+.fill3d { --FL: calc(var(--L) * .94 * var(--f)); --FH: calc(var(--H) * .8); --FW: calc(var(--W) * .84); position: absolute; left: calc(var(--L) * .03); top: calc(var(--H) - var(--FH) - 3px); width: var(--FL); height: var(--FH); transform-style: preserve-3d; transition: --f .8s var(--ease); }
+.ff { position: absolute; left: 0; top: 0; background: repeating-linear-gradient(90deg, transparent 0 calc(var(--u) * 1.1 - 2px), rgba(11, 31, 53, .45) calc(var(--u) * 1.1 - 2px) calc(var(--u) * 1.1)), linear-gradient(180deg, transparent 48%, rgba(11, 31, 53, .35) 48% 52%, transparent 52%), linear-gradient(180deg, #e0c468, #b8921f); }
+.ff-a, .ff-b { width: var(--FL); height: var(--FH); }
+.ff-a { transform: translateZ(calc(var(--FW) / 2)); }
+.ff-b { transform: rotateY(180deg) translateZ(calc(var(--FW) / 2)); }
+.ff-top { width: var(--FL); height: var(--FW); top: calc((var(--FH) - var(--FW)) / 2); transform: rotateX(90deg) translateZ(calc(var(--FH) / 2)); background: linear-gradient(90deg, #ecd58a, #d4b44a); }
+.ff-end { width: var(--FW); height: var(--FH); left: calc((var(--FL) - var(--FW)) / 2); background: linear-gradient(180deg, #c9a227, #9a7318); }
+.ff-end-r { transform: rotateY(90deg) translateZ(calc(var(--FL) / 2)); }
+.ff-end-l { transform: rotateY(-90deg) translateZ(calc(var(--FL) / 2)); }
+.calc-fill { margin: 0 0 18px; font-size: .86rem; color: var(--on-dark-2); text-align: center; }
+.calc-fill strong { color: var(--gold-soft); font-weight: 600; }
+@media (max-width: 560px) { .calc-glass { --u: 24px; } .calc-box { height: 140px; } }
+
+/* ---------- Routes: the route map tilts in 3D like a chart on a table ---------- */
+.map-3d { perspective: 1400px; }
+.map-3d .route-map { transform-origin: 50% 55%; transform: scale(.94) rotateX(var(--map-rx, 34deg)) rotateZ(var(--map-rz, -7deg)); transition: transform .25s linear; background: linear-gradient(160deg, rgba(17, 51, 90, .82), rgba(9, 26, 45, .9)); border: 1px solid rgba(224, 196, 104, .45); box-shadow: 0 40px 60px -20px rgba(0, 0, 0, .6), inset 0 0 60px rgba(62, 109, 156, .25); }
+
+/* ---------- Contact: mini globe ---------- */
+.contact-globe-card { padding: 18px 18px 14px; text-align: center; }
+.contact-globe { position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 320px; margin: 0 auto; cursor: grab; touch-action: pan-y; opacity: 0; transition: opacity 1.2s var(--ease); }
+.contact-globe.is-ready { opacity: 1; }
+.contact-globe-cap { margin: 6px 0 0; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); }
+
+/* ---------- 404: a lost container bobbing on the waves ---------- */
+.lost { position: relative; overflow: hidden; padding-bottom: 210px; }
+.lost-sea { position: absolute; left: 0; right: 0; bottom: 0; height: 220px; pointer-events: none; perspective: 1000px; }
+.lost-bob { position: absolute; right: 16%; bottom: 62px; transform-style: preserve-3d; animation: lost-bob 4.5s ease-in-out infinite; }
+.lost-bob .box3d { --u: 26px; --m: 6.06; --w: 2.44; --h: 2.59; --rx: -14deg; --ry: -30deg; transition: none; }
+@keyframes lost-bob { 0%, 100% { transform: translateY(0) rotateZ(-4deg); } 50% { transform: translateY(-14px) rotateZ(5deg); } }
+.lost-waves { position: absolute; left: -5%; bottom: 0; width: 110%; height: 120px; }
+.lost-waves .w1 { fill: rgba(62, 109, 156, .55); animation: wave 7s ease-in-out infinite alternate; }
+.lost-waves .w2 { fill: rgba(11, 31, 53, .9); animation: wave 5s ease-in-out infinite alternate-reverse; }
+@keyframes wave { from { transform: translateX(-3%); } to { transform: translateX(3%); } }
+@media (max-width: 760px) { .lost-bob { right: 50%; margin-right: -80px; } .lost-bob .box3d { --u: 20px; } }
+@media (prefers-reduced-motion: reduce) { .calc-glass, .lost-bob, .lost-waves path { animation: none !important; } .map-3d .route-map { transition: none; } }
+.btn-block { white-space: normal; text-align: center; line-height: 1.35; }

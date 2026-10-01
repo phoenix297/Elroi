@@ -702,7 +702,7 @@ write('index.html', 'Home | EL-ROI Shipping Services',
 # =====================================================================
 about = page_hero('About', 'Our story', '20+ years of <em>honest freight forwarding</em>',
                   'A German shipping company built on relationships: honest estimates, fair pricing and clear communication at every step.',
-                  'engines', 'center 40%') + f'''
+                  'engines', 'center 40%', art=STACK3D) + f'''
 <section>
   <div class="container split">
     <div data-reveal>
@@ -887,7 +887,7 @@ routes = page_hero('Routes', 'Where we ship', 'Germany to <em>any part of the wo
   {photo_bg("redchassis", "center 50%")}
   <div class="container split" style="align-items:center">
     <div data-reveal>
-      <div class="map-wrap">
+      <div class="map-wrap map-3d" data-tilt-map>
       {route_map}
       </div>
       <div class="map-legend"><span><i></i>Major routes: Europe</span><span><i class="eu"></i>Lagos office</span><span><i class="ww"></i>Worldwide</span></div>
@@ -1274,6 +1274,10 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping</em>
       </form>
     </div>
     <div class="aside-stack">
+      <div class="card card-navy contact-globe-card" data-reveal>
+        <div class="contact-globe" data-globe role="img" aria-label="Globe showing our offices in Essen, Germany and Lagos, Nigeria"></div>
+        <p class="contact-globe-cap">Essen &middot; Lagos &middot; Worldwide</p>
+      </div>
       <div class="card office" data-reveal>
         <span class="card-kicker">Headquarters</span>
         <h3>Essen, Germany</h3>
@@ -1301,7 +1305,8 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping</em>
 
 write('contact.html', 'Contact | EL-ROI Shipping Services',
       'Contact EL-ROI Shipping Services in Essen, Germany and Lagos, Nigeria. Phone, email, WhatsApp and office map.',
-      'contact.html', contact)
+      'contact.html', contact,
+      scripts='<script src="' + LAND_URL + '" defer></script>\n<script src="' + GLOBE_URL + '" defer></script>\n')
 
 # =====================================================================
 # QUOTE / BOOK
@@ -1493,6 +1498,10 @@ calculator = page_hero('Calculator', 'Estimate', 'Shipping cost <em>calculator</
         <span class="eyebrow">Estimated cost</span>
         <div class="calc-amount" id="calc-amount">&euro; &mdash;</div>
       </div>
+      <div class="calc-box" aria-hidden="true">
+        <div class="box3d calc-glass"><div class="fill3d"><div class="ff ff-a"></div><div class="ff ff-b"></div><div class="ff ff-top"></div><div class="ff ff-end ff-end-r"></div><div class="ff ff-end ff-end-l"></div></div><div class="bf bf-side bf-a"></div><div class="bf bf-side bf-b"></div><div class="bf bf-end bf-doors"></div><div class="bf bf-end bf-front"></div><div class="bf bf-top"></div><div class="bf bf-bottom"></div></div>
+      </div>
+      <p class="calc-fill" id="calc-fill">Enter a weight to see how much of a 20ft container it uses.</p>
       <div class="calc-breakdown">
         <div><span>Base rate</span><strong id="b-rate">&mdash;</strong></div>
         <div><span>Chargeable weight</span><strong id="b-weight">&mdash;</strong></div>
@@ -1610,7 +1619,7 @@ write('terms.html', 'Terms &amp; Conditions | EL-ROI Shipping Services',
 # 404
 # =====================================================================
 lost = f'''<section class="lost dark has-photo">
-  {photo_bg("transporter", "center 55%", "soft")}
+  {photo_bg("loaded", "center 55%", "soft")}
   <div class="container">
     <span class="eyebrow">Error 404</span>
     <h1>This page has <em>gone off route.</em></h1>
@@ -1619,6 +1628,10 @@ lost = f'''<section class="lost dark has-photo">
       <a class="btn btn-primary" href="index.html">Back to home {ARROW}</a>
       <a class="btn btn-ghost" href="contact.html">Contact us</a>
     </div>
+  </div>
+  <div class="lost-sea" aria-hidden="true">
+    <div class="lost-bob">{box3d("c-gold", False)}</div>
+    <svg class="lost-waves" viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="w1" d="M0 60 Q150 20 300 60 T600 60 T900 60 T1200 60 V120 H0Z"/><path class="w2" d="M0 75 Q150 40 300 75 T600 75 T900 75 T1200 75 V120 H0Z"/></svg>
   </div>
 </section>
 '''

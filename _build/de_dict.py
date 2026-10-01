@@ -668,3 +668,9 @@ DE.update({
 "Container lift": "Container-Umschlag",
 "A 40ft box on the reach stacker": "Ein 40-Fuß-Container am Reachstacker",
 })
+
+DE.update({
+"Enter a weight to see how much of a 20ft container it uses.": "Geben Sie ein Gewicht ein, um zu sehen, wie viel eines 20-Fuß-Containers es nutzt.",
+"Globe showing our offices in Essen, Germany and Lagos, Nigeria": "Globus mit unseren Büros in Essen, Deutschland und Lagos, Nigeria",
+"Essen · Lagos · Worldwide": "Essen · Lagos · Weltweit",
+})

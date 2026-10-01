@@ -52,8 +52,13 @@ The header and footer are shared by every page through the build script.
 - **3D container** (home page, after the cargo types): a CSS 3D shipping container in her colours with the logo on
   the sides. Visitors drag it to turn it and switch 20ft / 40ft to see the length change, with the inside sizes,
   volume and max. weight beside it (same figures as the 20ft vs 40ft guide). It spins slowly when idle.
-- **3D container stack** (Services header, desktop): five containers in navy, steel and gold, built with the same
+- **3D container stack** (Services and About headers, desktop): five containers in navy, steel and gold, built with the same
   `box3d()` helper as the home container, turning slowly. Hidden below 1100px wide; still with reduced motion.
+- **Calculator 3D container**: a glass 20ft container in the result panel fills with gold cargo as the weight goes up,
+  with a line saying what share of a 20ft container's max. load (~28,000 kg) that is.
+- **Routes 3D map**: the route map sits on a framed panel tilted like a chart on a table, and turns a little as it scrolls.
+- **Contact globe**: a small version of the home page globe at the top of the contact side column.
+- **404 page**: a gold container bobbing on animated waves.
 - **3D coverflow** on the "From the yard" strip: the photo at the start faces you and the next ones turn away in depth
   as the strip slides.
 - **Scroll progress bar**: the thin gold line at the top of every page.

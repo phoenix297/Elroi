@@ -533,6 +533,21 @@
     }
   });
 
+  // ---------- Routes map: tilts in 3D and turns a little as it scrolls through the screen ----------
+  $$('[data-tilt-map]').forEach(function (wrap) {
+    if (reduceMotion) return;
+    var t = false;
+    function tilt() {
+      t = false;
+      var r = wrap.getBoundingClientRect(), vh = window.innerHeight || 1;
+      var k = Math.max(-1, Math.min(1, ((r.top + r.height / 2) - vh / 2) / vh)); // -1 above centre … 1 below
+      wrap.style.setProperty('--map-rx', (30 + k * 12).toFixed(2) + 'deg');
+      wrap.style.setProperty('--map-rz', (-7 + k * 5).toFixed(2) + 'deg');
+    }
+    window.addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(tilt); } }, { passive: true });
+    tilt();
+  });
+
   // ---------- Track a shipment: opens WhatsApp with the reference filled in ----------
   $$('[data-track]').forEach(function (f) {
     var input = f.querySelector('input');
@@ -734,6 +749,7 @@
     var bRate = $('#b-rate');
     var bWeight = $('#b-weight');
     var bRoute = $('#b-route');
+    var fillBox = $('.calc-glass'), fillTxt = $('#calc-fill');
     var eur = function (n, dp) { var t = n.toLocaleString(LOCALE, { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }); return DE ? t + ' €' : '€' + t; };
 
     // Log-scale slider so small and huge loads are both easy to pick
@@ -749,6 +765,14 @@
       bWeight.textContent = w > 0 ? chargeable.toLocaleString(LOCALE) + ' kg' + (w < MIN_KG ? ' (min.)' : '') : '—';
       bRate.textContent = cargoEl ? eur(baseRates[cargoEl.value], 2) + ' / kg' : '—';
       bRoute.textContent = destEl ? '× ' + destMultiplier[destEl.value] : '—';
+      // 3D container fill: share of a 20ft container's max. load (~28,000 kg)
+      if (fillBox) {
+        var share = w / 28000;
+        fillBox.style.setProperty('--f', Math.min(1, Math.max(0, share)).toFixed(3));
+        if (w <= 0) fillTxt.textContent = T('Enter a weight to see how much of a 20ft container it uses.', 'Geben Sie ein Gewicht ein, um zu sehen, wie viel eines 20-Fuß-Containers es nutzt.');
+        else if (share > 1) fillTxt.innerHTML = T('<strong>More than one 20ft container</strong> by weight (max. ~28,000 kg each).', '<strong>Mehr als ein 20-Fuß-Container</strong> nach Gewicht (max. ~28.000 kg je Container).');
+        else fillTxt.innerHTML = T('About <strong>' + Math.max(1, Math.round(share * 100)) + '%</strong> of a 20ft container\'s max. load (~28,000 kg).', 'Etwa <strong>' + Math.max(1, Math.round(share * 100)) + ' %</strong> der max. Zuladung eines 20-Fuß-Containers (~28.000 kg).');
+      }
 
       if (!cargoEl || !destEl || w <= 0) {
         amount.textContent = '€ —';
