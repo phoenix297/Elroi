@@ -49,6 +49,11 @@ The header and footer are shared by every page through the build script.
   effect triggered on entry/exit. Forms and the calculator only fade in. Everything is off with reduced motion.
 - **"From the yard" strip**: slides on its own, one photo every 3.2 seconds, and loops. It pauses while the visitor
   hovers, touches, scrolls or tabs into it, and while it is off screen. The arrows still work.
+- **3D container** (home page, after the cargo types): a CSS 3D shipping container in her colours with the logo on
+  the sides. Visitors drag it to turn it and switch 20ft / 40ft to see the length change, with the inside sizes,
+  volume and max. weight beside it (same figures as the 20ft vs 40ft guide). It spins slowly when idle.
+- **3D card tilt**: on computers with a mouse, cargo cards, posts, testimonials and info cards lean toward the pointer
+  with a soft light reflection. Off on touch screens and with reduced motion.
 - **Scroll progress bar**: the thin gold line at the top of every page.
 
 ## German version

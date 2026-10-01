@@ -471,6 +471,73 @@
     }
   });
 
+  // ---------- 3D container: 20ft / 40ft toggle, drag to turn, slow spin when idle ----------
+  $$('[data-box]').forEach(function (stage) {
+    var box = $('.box3d', stage), sec = stage.closest('section');
+    var specs = sec && $('[data-specs]', sec);
+    var rx = -16, ry = -32, drag = null, visible = false, idleAt = 0;
+    function apply() { box.style.setProperty('--rx', rx.toFixed(2) + 'deg'); box.style.setProperty('--ry', ry.toFixed(2) + 'deg'); }
+    apply();
+    $$('[data-size]', sec).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var ft = btn.getAttribute('data-size');
+        box.style.setProperty('--m', ft === '40' ? '12.19' : '6.06');
+        if (specs) specs.setAttribute('data-specs', ft);
+        $$('[data-size]', sec).forEach(function (b) { var on = b === btn; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      });
+    });
+    stage.addEventListener('pointerdown', function (e) {
+      drag = { x: e.clientX, y: e.clientY, rx: rx, ry: ry };
+      stage.classList.add('is-dragging');
+      if (stage.setPointerCapture) stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      ry = drag.ry + (e.clientX - drag.x) * 0.45;
+      rx = Math.max(-42, Math.min(8, drag.rx - (e.clientY - drag.y) * 0.25));
+      apply();
+    });
+    function end() { if (!drag) return; drag = null; stage.classList.remove('is-dragging'); idleAt = Date.now() + 2500; }
+    stage.addEventListener('pointerup', end);
+    stage.addEventListener('pointercancel', end);
+    if (!reduceMotion && hasIO) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) requestAnimationFrame(spin); }).observe(stage);
+      var spin = function () {
+        if (!visible) return;
+        if (!drag && Date.now() > idleAt) { ry -= 0.12; rx += (-16 - rx) * 0.02; apply(); }
+        requestAnimationFrame(spin);
+      };
+    }
+  });
+
+  // ---------- 3D tilt on cards (mouse and trackpad only) ----------
+  if (!reduceMotion && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.cargo-card, .card, .post, .testimonial, .route-card').forEach(function (el) {
+      if (el.parentElement) el.parentElement.style.perspective = '1200px';
+      el.classList.add('tilt');
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      var glare = d.createElement('span');
+      glare.className = 'tilt-glare';
+      glare.setAttribute('aria-hidden', 'true');
+      el.appendChild(glare);
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        var mag = Math.min(1, Math.hypot(px, py) * 2);
+        el.classList.add('is-tilting');
+        el.style.setProperty('--tilt-x', (-py).toFixed(3));
+        el.style.setProperty('--tilt-y', px.toFixed(3));
+        el.style.setProperty('--tilt-a', (mag * 7).toFixed(2) + 'deg');
+        el.style.setProperty('--gx', ((px + 0.5) * 100).toFixed(1) + '%');
+        el.style.setProperty('--gy', ((py + 0.5) * 100).toFixed(1) + '%');
+      });
+      el.addEventListener('pointerleave', function () {
+        el.classList.remove('is-tilting');
+        el.style.setProperty('--tilt-a', '0deg');
+      });
+    });
+  }
+
   // ---------- Track a shipment: opens WhatsApp with the reference filled in ----------
   $$('[data-track]').forEach(function (f) {
     var input = f.querySelector('input');

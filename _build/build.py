@@ -493,6 +493,38 @@ home = f'''<section class="hero dark">
   </div>
 </section>
 
+<section class="boxes section-alt">
+  <div class="container box-grid">
+    <div class="box-copy" data-reveal>
+      <span class="eyebrow">Container sizes</span>
+      <h2>20ft or 40ft? <em>See the difference.</em></h2>
+      <p>Drag the container to turn it, and switch sizes to compare. Not sure which one you need? Tell us what you are shipping and we will advise.</p>
+      <div class="box-toggle" role="group" aria-label="Container size">
+        <button type="button" class="is-on" aria-pressed="true" data-size="20">20ft</button>
+        <button type="button" aria-pressed="false" data-size="40">40ft</button>
+      </div>
+      <dl class="box-specs" data-specs="20">
+        <div><dt>Inside length</dt><dd><span data-20>5.90 m</span><span data-40>12.03 m</span></dd></div>
+        <div><dt>Volume</dt><dd><span data-20>~33 m&sup3;</span><span data-40>~67 m&sup3;</span></dd></div>
+        <div><dt>Max. cargo weight</dt><dd><span data-20>~28,000 kg</span><span data-40>~26,500 kg</span></dd></div>
+        <div><dt>Typical load</dt><dd><span data-20>One car, engines or machinery</span><span data-40>Several cars or large machinery</span></dd></div>
+      </dl>
+      <a class="link-arrow" href="guide-20ft-vs-40ft-container.html">Full 20ft vs 40ft guide {ARROW}</a>
+    </div>
+    <div class="box-stage" data-box role="img" aria-label="3D model of a shipping container that you can turn">
+      <div class="box3d" data-m="6.06">
+        <div class="bf bf-side bf-a"><span class="bf-brand">{LOGO_MARK}{LOGO_WORD}</span></div>
+        <div class="bf bf-side bf-b"><span class="bf-brand">{LOGO_MARK}{LOGO_WORD}</span></div>
+        <div class="bf bf-end bf-doors"></div>
+        <div class="bf bf-end bf-front"></div>
+        <div class="bf bf-top"></div>
+        <div class="bf bf-bottom"></div>
+      </div>
+      <span class="box-hint">Drag to turn</span>
+    </div>
+  </div>
+</section>
+
 <section class="dark has-photo">
   {photo_bg("msc", "center 40%")}
   <div class="container coverage-grid">

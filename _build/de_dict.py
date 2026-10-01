@@ -631,7 +631,7 @@ DE.update({
 })
 
 # Strings that stay the same in German (names, numbers, addresses)
-SAME = """Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
+SAME = """20ft|40ft|~33 m³|~67 m³|Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
 
 DE.update({
 "Track a shipment": "Sendung verfolgen",
@@ -639,3 +639,23 @@ DE.update({
 "§ Check status": "§ Status abfragen",
 "We reply on WhatsApp with the latest status of your shipment.": "Wir antworten per WhatsApp mit dem aktuellen Stand Ihrer Sendung.",
 })
+
+DE.update({
+"Container sizes": "Containergrößen",
+"20ft or 40ft? <em>See the difference.</em>": "20 Fuß oder 40 Fuß? <em>Sehen Sie den Unterschied.</em>",
+"Drag the container to turn it, and switch sizes to compare. Not sure which one you need? Tell us what you are shipping and we will advise.": "Ziehen Sie den Container, um ihn zu drehen, und wechseln Sie die Größe zum Vergleich. Sie wissen nicht, welchen Sie brauchen? Sagen Sie uns, was Sie verschiffen, und wir beraten Sie.",
+"Inside length": "Innenlänge",
+"Volume": "Volumen",
+"Max. cargo weight": "Max. Zuladung",
+"Typical load": "Typische Ladung",
+"~28,000 kg": "~28.000 kg",
+"~26,500 kg": "~26.500 kg",
+"5.90 m": "5,90 m",
+"12.03 m": "12,03 m",
+"One car, engines or machinery": "Ein Auto, Motoren oder Maschinen",
+"Several cars or large machinery": "Mehrere Autos oder große Maschinen",
+"Full 20ft vs 40ft guide §": "Ratgeber 20 Fuß vs. 40 Fuß (Englisch) §",
+"Drag to turn": "Zum Drehen ziehen",
+"3D model of a shipping container that you can turn": "3D-Modell eines Schiffscontainers zum Drehen",
+})
+DE["Container size"] = "Containergröße"
