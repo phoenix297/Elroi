@@ -659,3 +659,12 @@ DE.update({
 "3D model of a shipping container that you can turn": "3D-Modell eines Schiffscontainers zum Drehen",
 })
 DE["Container size"] = "Containergröße"
+
+DE.update({
+"Trucks lined up with containers at the port, ready for loading": "Lkw mit Containern im Hafen, bereit zur Verladung",
+"A reach stacker lifting a 40ft container at the port terminal": "Ein Reachstacker hebt einen 40-Fuß-Container am Hafenterminal",
+"At the port": "Im Hafen",
+"Trucks lined up with containers": "Lkw mit Containern in einer Reihe",
+"Container lift": "Container-Umschlag",
+"A 40ft box on the reach stacker": "Ein 40-Fuß-Container am Reachstacker",
+})

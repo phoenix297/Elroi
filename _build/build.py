@@ -33,6 +33,8 @@ IMG = {
     'engines': ('assets/img/container-engines-night.webp', 'Loading engines into a container at night', 719, 1280),
     'carsload': ('assets/img/container-cars-loading.webp', 'Wrapped cars strapped inside a container during loading', 719, 1280),
     'enginesclose': ('assets/img/container-engines-closeup.webp', 'Engines and parts packed tightly into a container', 719, 1280),
+    'porttrucks': ('assets/img/port-trucks-row.webp', 'Trucks lined up with containers at the port, ready for loading', 1280, 719),
+    'reachstacker': ('assets/img/msc-reach-stacker.webp', 'A reach stacker lifting a 40ft container at the port terminal', 1280, 719),
 }
 
 import hashlib
@@ -675,6 +677,8 @@ home = f'''<section class="hero dark">
     </div>
   </div>
   <div class="strip" id="yard-strip">
+    <a href="gallery.html"><div class="strip-img">{img('porttrucks')}</div><span class="cap">At the port</span></a>
+    <a href="gallery.html"><div class="strip-img">{img('reachstacker')}</div><span class="cap">Container lift</span></a>
     <a href="gallery.html"><div class="strip-img">{img('transporter')}</div><span class="cap">Vehicle transport</span></a>
     <a href="gallery.html"><div class="strip-img">{img('tractor')}</div><span class="cap">John Deere tractor</span></a>
     <a href="gallery.html"><div class="strip-img">{img('volvo')}</div><span class="cap">Volvo FH tractor unit</span></a>
@@ -937,6 +941,8 @@ GALLERY = [
     ('engines', 'machinery', 'Engines', 'Loaded at night'),
     ('redchassis', 'containers', 'Red container chassis', 'Trailers'),
     ('carsload', 'vehicles', 'Cars in a container', 'Wrapped and strapped'),
+    ('porttrucks', 'containers', 'At the port', 'Trucks lined up with containers'),
+    ('reachstacker', 'containers', 'Container lift', 'A 40ft box on the reach stacker'),
     ('enginesclose', 'machinery', 'Engines &amp; parts', 'Packed to the roof'),
 ]
 figs = '\n'.join(
