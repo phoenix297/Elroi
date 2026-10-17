@@ -90,9 +90,15 @@ NAV = [
 MOBILE_NAV = NAV[:5] + [('calculator.html', 'Calculator'), ('book.html', 'Book a Shipment')] + NAV[5:] + [('quote.html', 'Get a Quote')]
 
 
+def vimg(path):
+    """Photo URL with a content hash: photos are cached for a year, so an edited photo needs a new URL."""
+    return f'{path}?v={ver(path)}'
+
+
 def img(key, eager=False, sizes='(max-width: 760px) 92vw, 42vw'):
     src, alt, w, h = IMG[key]
-    small = src.replace('.webp', '-sm.webp')  # half-size copy for phones and small slots
+    small = vimg(src.replace('.webp', '-sm.webp'))  # half-size copy for phones and small slots
+    src = vimg(src)
     return (f'<img src="{src}" srcset="{small} {w // 2}w, {src} {w}w" sizes="{sizes}" alt="{alt}" width="{w}" height="{h}" '
             f'loading="{"eager" if eager else "lazy"}" decoding="async">')
 
@@ -229,7 +235,7 @@ def photo_bg(key, pos='center', strength='strong'):
     """Truck photo behind a navy block, tinted so text stays readable."""
     tint = {'strong': 'rgba(9,26,45,.9), rgba(11,31,53,.78) 55%, rgba(17,51,90,.9)',
             'soft': 'rgba(9,26,45,.84), rgba(11,31,53,.66) 55%, rgba(17,51,90,.84)'}[strength]
-    return f'<div class="photo-bg" aria-hidden="true" style="background-image:linear-gradient(160deg, {tint}), url(\'{IMG[key][0]}\');background-position:center, {pos}"></div>'
+    return f'<div class="photo-bg" aria-hidden="true" style="background-image:linear-gradient(160deg, {tint}), url(\'{vimg(IMG[key][0])}\');background-position:center, {pos}"></div>'
 
 
 FOOTER = f'''<footer class="site has-photo">
@@ -317,7 +323,7 @@ STACK3D = ('<div class="stack3d" aria-hidden="true"><div class="stack-scene">'
 
 def page_hero(crumb, eyebrow, h1, lede, bg, pos='center', art=''):
     return f'''<section class="page-hero">
-  <div class="bg" style="background-image:url('{IMG[bg][0]}');background-position:{pos}"></div>
+  <div class="bg" style="background-image:url('{vimg(IMG[bg][0])}');background-position:{pos}"></div>
   {ROUTE_LINE}
   {art}
   <div class="container">
@@ -418,7 +424,7 @@ home = f'''<section class="hero dark">
   <!-- Live background: the photo drifts slowly (Ken Burns). To use a real video instead,
        put an MP4 in assets/video/ and set data-video="assets/video/hero.mp4" below. -->
   <div class="hero-media" data-video="" aria-hidden="true">
-    <img class="hero-photo" src="assets/img/transporter-loaded.webp" alt="" width="1280" height="720" fetchpriority="high">
+    <img class="hero-photo" src="{vimg('assets/img/transporter-loaded.webp')}" alt="" width="1280" height="720" fetchpriority="high">
   </div>
   <div class="hero-aurora" aria-hidden="true"></div>
   <div class="hero-sweep" aria-hidden="true"></div>
@@ -615,7 +621,7 @@ home = f'''<section class="hero dark">
 </section>
 
 <section class="statement">
-  <div class="bg" style="background-image:url('{IMG['loading'][0]}')"></div>
+  <div class="bg" style="background-image:url('{vimg(IMG['loading'][0])}')"></div>
   <div class="container" data-reveal>
     <blockquote>Your satisfaction is <em>our priority.</em></blockquote>
     <cite>The EL-ROI promise &middot; since 1999</cite>
@@ -947,7 +953,7 @@ GALLERY = [
 ]
 figs = '\n'.join(
     f'''      <figure data-cat="{cat}" data-reveal>
-        <a href="{IMG[k][0]}" data-lightbox data-caption="{title}">{img(k)}</a>
+        <a href="{vimg(IMG[k][0])}" data-lightbox data-caption="{title}">{img(k)}</a>
         <figcaption><strong>{title}</strong><span>{sub}</span></figcaption>
       </figure>''' for k, cat, title, sub in GALLERY)
 
