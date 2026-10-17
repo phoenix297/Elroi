@@ -11,9 +11,9 @@ WA = 'https://wa.me/4915219521826'
 EMAIL = 'info@elroishipping.de'
 FORMSPREE = 'https://formspree.io/f/YOUR_FORM_ID'
 MAPS_ESSEN = 'https://www.google.com/maps/search/?api=1&amp;query=Ripshorster+Str.+379,+45357+Essen,+Germany'
-MAPS_LAGOS = 'https://www.google.com/maps/search/?api=1&amp;query=Olodi+Apapa,+Lagos,+Nigeria'
+MAPS_LAGOS = 'https://www.google.com/maps/search/?api=1&amp;query=21+Alhaji+Kareem+Akande+Street,+Olodi+Apapa,+Lagos,+Nigeria'
 EMBED_ESSEN = 'https://maps.google.com/maps?q=Ripshorster%20Str.%20379%2C%2045357%20Essen%2C%20Germany&amp;z=15&amp;output=embed'
-EMBED_LAGOS = 'https://maps.google.com/maps?q=Olodi%20Apapa%2C%20Lagos%2C%20Nigeria&amp;z=14&amp;output=embed'
+EMBED_LAGOS = 'https://maps.google.com/maps?q=21%20Alhaji%20Kareem%20Akande%20Street%2C%20Olodi%20Apapa%2C%20Lagos%2C%20Nigeria&amp;z=15&amp;output=embed'
 
 IMG = {
     'transporter': ('assets/img/car-transporter.webp', 'Car transporter loaded with two trucks for export', 1280, 720),
@@ -144,7 +144,7 @@ def header(active, name=''):
     mlinks = '\n    '.join(f'<a href="{h}"{act if h == active else ""}><span>{i + 1:02d}</span>{t}</a>' for i, (h, t) in enumerate(MOBILE_NAV))
     return f'''<div class="topbar">
   <div class="container">
-    <div class="tb-left"><span>Ripshorster Str. 379, Essen</span><span>Olodi Apapa, Lagos</span></div>
+    <div class="tb-left"><span>Ripshorster Str. 379, Essen</span><span>No. 21 Alhaji Kareem Akande Str., Lagos</span></div>
     <div class="tb-right"><a href="tel:{TEL}">{PHONE}</a><a class="hide-sm" href="mailto:{EMAIL}">Email us</a><a class="tb-wa" href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
 </div>
@@ -196,7 +196,7 @@ BUSINESS_LD = {
     'areaServed': ['Germany', 'Belgium', 'Austria', 'Netherlands', 'Nigeria', 'Worldwide'],
     'knowsAbout': ['Sea freight', 'Container shipping', 'Vehicle shipping', 'Car export from Germany', 'Shipping to Nigeria', 'Form M', 'Heavy machinery shipping'],
     'department': [{'@type': 'LocalBusiness', 'name': 'EL-ROI Shipping Services Lagos', 'telephone': '+49 1521 9521826',
-                    'address': {'@type': 'PostalAddress', 'streetAddress': 'Olodi Apapa', 'addressLocality': 'Lagos', 'addressCountry': 'NG'}}],
+                    'address': {'@type': 'PostalAddress', 'streetAddress': 'No. 21 Alhaji Kareem Akande Street, Olodi Apapa', 'addressLocality': 'Lagos', 'addressRegion': 'Lagos', 'addressCountry': 'NG'}}],
     'contactPoint': [{'@type': 'ContactPoint', 'telephone': '+49 1521 9521826', 'contactType': 'customer service', 'availableLanguage': ['English', 'German']}],
 }
 SEO = {
@@ -215,7 +215,7 @@ SEO = {
     'faq.html': ('Shipping FAQ: Transit Times, Form M, Customs & Documents | EL-ROI',
                  'Answers about shipping from Germany: transit times, cargo types, documents, Form M, customs duties, insurance, container sizes and our offices.'),
     'contact.html': ('Contact EL-ROI Shipping | Essen, Germany & Lagos, Nigeria',
-                     'Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.'),
+                     'Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.'),
     'quote.html': ('Get a Free Shipping Quote from Germany | EL-ROI Shipping',
                    'Request a transparent, no-pressure sea freight quote from Germany for vehicles, containers, machinery or general cargo. No hidden fees.'),
     'book.html': ('Book a Shipment from Germany | EL-ROI Shipping',
@@ -264,7 +264,7 @@ FOOTER = f'''<footer class="site has-photo">
         <h5>Offices</h5>
         <ul>
           <li><strong>Essen</strong><br>Ripshorster Str. 379<br>45357 Essen, Germany</li>
-          <li><strong>Lagos</strong><br>Olodi Apapa, Lagos, Nigeria</li>
+          <li><strong>Lagos</strong><br>No. 21 Alhaji Kareem Akande Str.<br>Olodi Apapa, Lagos, Nigeria</li>
           <li><a href="tel:{TEL}">{PHONE}</a></li>
           <li><a class="break" href="mailto:{EMAIL}">{EMAIL}</a></li>
         </ul>
@@ -335,7 +335,7 @@ def map_block(extra=''):
     <div class="head-actions" style="margin-bottom:16px">
       <div class="map-tabs" role="group" aria-label="Choose office map" style="margin:0">
         <button class="active" aria-pressed="true" data-map="{EMBED_ESSEN}" data-link="{MAPS_ESSEN}" data-title="Map of the EL-ROI office in Essen, Germany" data-place="Ripshorster Str. 379, 45357 Essen">Essen office</button>
-        <button aria-pressed="false" data-map="{EMBED_LAGOS}" data-link="{MAPS_LAGOS}" data-title="Map of the EL-ROI office in Olodi Apapa, Lagos" data-place="Olodi Apapa, Lagos, Nigeria">Lagos office</button>
+        <button aria-pressed="false" data-map="{EMBED_LAGOS}" data-link="{MAPS_LAGOS}" data-title="Map of the EL-ROI office in Olodi Apapa, Lagos" data-place="No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria">Lagos office</button>
       </div>
       <a class="link-arrow map-link" href="{MAPS_ESSEN}" target="_blank" rel="noopener">Open in Google Maps {ARROW}</a>
     </div>
@@ -716,7 +716,7 @@ about = page_hero('About', 'Our story', '20+ years of <em>honest freight forward
       <h3>At a glance</h3>
       <div class="glance-row"><span>Founded</span><div>1999</div></div>
       <div class="glance-row"><span>Headquarters</span><div>Ripshorster Str. 379, 45357 Essen, Germany</div></div>
-      <div class="glance-row"><span>Second office</span><div>Olodi Apapa, Lagos, Nigeria</div></div>
+      <div class="glance-row"><span>Second office</span><div>No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria</div></div>
       <div class="glance-row"><span>Management</span><div>Iyamah</div></div>
       <div class="glance-row"><span>Major routes</span><div>Germany to Belgium, Austria and Holland</div></div>
       <div class="glance-row"><span>Shipping</span><div>Sea freight, Germany to worldwide</div></div>
@@ -1214,7 +1214,7 @@ FAQS = [
     ('What documents are needed for special declarations?', "Certain cargo, like vehicles, requires vehicle documentation and may need a Form M special declaration. We'll guide you through what's required for your shipment. See <a href=\"guide-form-m-nigeria.html\">What is Form M?</a>"),
     ('Who pays customs duties and import taxes?', 'Customs duties, import taxes and port charges at the destination are paid by the receiver or importer. They are not included in our freight price unless we agree otherwise in writing.'),
     ('Is my cargo insured?', 'Our liability is limited by law, which can be less than the value of your cargo, so we recommend cargo insurance. We can arrange it on request.'),
-    ('Where are your offices?', 'Our headquarters is at Ripshorster Str. 379, 45357 Essen, Germany, and our second office is in Olodi Apapa, Lagos, Nigeria.'),
+    ('Where are your offices?', 'Our headquarters is at Ripshorster Str. 379, 45357 Essen, Germany, and our second office is at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.'),
     ('Can I pay through the website?', 'Online payment is coming soon. For now, payment details are arranged directly with our team, never submitted through the website form.'),
 ]
 faq_items = '\n'.join(
@@ -1290,7 +1290,7 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping</em>
       <div class="card office" data-reveal style="--d:1">
         <span class="card-kicker">Nigeria office</span>
         <h3>Lagos, Nigeria</h3>
-        <address>Olodi Apapa<br>Lagos, Nigeria</address>
+        <address>No. 21 Alhaji Kareem Akande Str.<br>Olodi Apapa, Lagos, Nigeria</address>
       </div>
       <div class="card card-navy has-photo" data-reveal style="--d:2">{photo_bg("loaded", "center 50%", "soft")}
         <h3>Prefer WhatsApp?</h3>
@@ -1523,7 +1523,7 @@ write('calculator.html', 'Shipping Calculator | EL-ROI Shipping Services',
 # PRIVACY POLICY
 # =====================================================================
 PRIV = [
- ('who', 'Who we are', f"""<p>This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the &ldquo;controller&rdquo; under the EU General Data Protection Regulation, GDPR). We also have an office in Olodi Apapa, Lagos, Nigeria.</p>
+ ('who', 'Who we are', f"""<p>This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the &ldquo;controller&rdquo; under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.</p>
 <p>Questions about your data: <a href="mailto:{EMAIL}">{EMAIL}</a> or <a href="tel:{TEL}">{PHONE}</a>.</p>"""),
  ('collect', 'What we collect', """<p>We only collect what you choose to send us:</p>
 <ul class="checklist"><li><strong>Quote, booking and contact forms:</strong> name, company or private name, phone number, email, address, pickup location, destination, cargo type, weight, number of packages, shipping method, vehicle document or Form M reference, and any message you write.</li>

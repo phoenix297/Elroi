@@ -36,7 +36,7 @@ DE = {
 "Calculator": "Kostenrechner",
 "Offices": "Standorte",
 "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Germany": "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Deutschland",
-"<strong>Lagos</strong><br/>Olodi Apapa, Lagos, Nigeria": "<strong>Lagos</strong><br/>Olodi Apapa, Lagos, Nigeria",
+"<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria": "<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria",
 "© <span data-year=\"\">2026</span> EL-ROI Shipping Services. All rights reserved.": "© <span data-year=\"\">2026</span> EL-ROI Shipping Services. Alle Rechte vorbehalten.",
 "<a href=\"privacy.html\">Privacy Policy</a> · <a href=\"terms.html\">Terms & Conditions</a> · <em>Your satisfaction, our priority.</em>": "<a href=\"privacy.html\">Datenschutz</a> · <a href=\"terms.html\">AGB</a> · <em>Ihre Zufriedenheit ist unsere Priorität.</em>",
 "EL-ROI Shipping Services home": "EL-ROI Shipping Services Startseite",
@@ -232,7 +232,7 @@ DE = {
 "Shipping Cost Calculator": "Versandkostenrechner",
 # ---- contact ----
 "Contact EL-ROI Shipping | Essen, Germany & Lagos, Nigeria": "Kontakt EL-ROI Shipping | Essen, Deutschland & Lagos, Nigeria",
-"Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.": "Kontakt zu EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, und Olodi Apapa, Lagos. Rufen Sie +49 1521 9521826 an oder schreiben Sie per WhatsApp.",
+"Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.": "Kontakt zu EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, und No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Rufen Sie +49 1521 9521826 an oder schreiben Sie per WhatsApp.",
 "Get in touch": "Kontakt",
 "Contact <em>EL-ROI Shipping</em>": "Kontakt zu <em>EL-ROI Shipping</em>",
 "Send a message, call, or chat with us on WhatsApp.": "Schreiben Sie uns, rufen Sie an oder chatten Sie mit uns per WhatsApp.",
@@ -284,7 +284,7 @@ DE = {
 "Is my cargo insured?": "Ist meine Fracht versichert?",
 "Our liability is limited by law, which can be less than the value of your cargo, so we recommend cargo insurance. We can arrange it on request.": "Unsere Haftung ist gesetzlich begrenzt und kann unter dem Wert Ihrer Fracht liegen. Wir empfehlen daher eine Transportversicherung, die wir auf Wunsch vermitteln.",
 "Where are your offices?": "Wo sind Ihre Standorte?",
-"Our headquarters is at Ripshorster Str. 379, 45357 Essen, Germany, and our second office is in Olodi Apapa, Lagos, Nigeria.": "Unser Hauptsitz ist in der Ripshorster Str. 379, 45357 Essen, und unser zweites Büro befindet sich in Olodi Apapa, Lagos, Nigeria.",
+"Our headquarters is at Ripshorster Str. 379, 45357 Essen, Germany, and our second office is at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.": "Unser Hauptsitz ist in der Ripshorster Str. 379, 45357 Essen, und unser zweites Büro befindet sich unter der Adresse No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.",
 "Can I pay through the website?": "Kann ich über die Website bezahlen?",
 "Online payment is coming soon. For now, payment details are arranged directly with our team, never submitted through the website form.": "Online-Zahlung kommt bald. Bis dahin werden Zahlungsdetails direkt mit unserem Team abgestimmt und niemals über das Website-Formular übermittelt.",
 "Shipping FAQ": "Versand-FAQ",
@@ -448,7 +448,7 @@ DE = {
 "Your rights": "Ihre Rechte",
 "Cookies": "Cookies",
 "Changes": "Änderungen",
-"This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the “controller” under the EU General Data Protection Regulation, GDPR). We also have an office in Olodi Apapa, Lagos, Nigeria.": "Diese Website wird betrieben von <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Deutschland (der „Verantwortliche“ im Sinne der Datenschutz-Grundverordnung, DSGVO). Wir haben außerdem ein Büro in Olodi Apapa, Lagos, Nigeria.",
+"This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the “controller” under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.": "Diese Website wird betrieben von <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Deutschland (der „Verantwortliche“ im Sinne der Datenschutz-Grundverordnung, DSGVO). Wir haben außerdem ein Büro unter der Adresse No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.",
 "Questions about your data: <a href=\"mailto:info@elroishipping.de\">info@elroishipping.de</a> or <a href=\"tel:+4915219521826\">+49 1521 9521826</a>.": "Fragen zu Ihren Daten: <a href=\"mailto:info@elroishipping.de\">info@elroishipping.de</a> oder <a href=\"tel:+4915219521826\">+49 1521 9521826</a>.",
 "We only collect what you choose to send us:": "Wir erheben nur, was Sie uns selbst senden:",
 "<strong>Quote, booking and contact forms:</strong> name, company or private name, phone number, email, address, pickup location, destination, cargo type, weight, number of packages, shipping method, vehicle document or Form M reference, and any message you write.": "<strong>Angebots-, Buchungs- und Kontaktformulare:</strong> Name, Firmen- oder Privatname, Telefonnummer, E-Mail, Adresse, Abholort, Ziel, Frachtart, Gewicht, Anzahl der Packstücke, Versandart, Fahrzeugpapiere oder Form-M-Referenz sowie Ihre Nachricht.",
@@ -631,7 +631,7 @@ DE.update({
 })
 
 # Strings that stay the same in German (names, numbers, addresses)
-SAME = """20ft|40ft|~33 m³|~67 m³|Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
+SAME = """20ft|40ft|~33 m³|~67 m³|Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str., Lagos|No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
 
 DE.update({
 "Track a shipment": "Sendung verfolgen",
