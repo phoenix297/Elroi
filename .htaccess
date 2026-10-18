@@ -5,7 +5,7 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
 RewriteEngine On
 # Build scripts, editor files and docs are not part of the site
-RewriteRule ^(_build|\.claude|\.git)(/|$) - [R=404,L]
+RewriteRule ^(_build|\.git)(/|$) - [R=404,L]
 RewriteRule ^(README\.md|\.gitignore)$ - [R=404,L]
 # One address: https, no www
 RewriteCond %{HTTPS} off [OR]

@@ -83,7 +83,7 @@ The header and footer are shared by every page through the build script.
 ## Hosting (Hostinger)
 
 - The build also writes `.htaccess`: it sends every visitor to `https://elroishipping.de` (https, no www), serves `404.html`
-  for missing pages, hides `_build/`, `.claude/` and this README, adds security headers, and caches the hashed assets for a year.
+  for missing pages, hides `_build/` and this README, adds security headers, and caches the hashed assets for a year.
 - The site deploys from GitHub with Hostinger's Git tool (Websites → Advanced → Git). Every push to the deploy branch updates the live site.
 
 ## Fonts and link previews
@@ -137,9 +137,3 @@ The privacy policy and terms & conditions are solid starting points, but have a 
 Rates live in `assets/script.js` (`baseRates` per kg and `destMultiplier` per route), with a 50 kg minimum.
 The container count uses 28,000 kg per 20ft container (`CAP` in the same file).
 Results are rough estimates and the page says so.
-
-## Claude Code skill
-
-`.claude/skills/scroll-world/` is the [scroll-world](https://github.com/oso95/scroll-world) skill (MIT),
-kept here so it loads in Claude Code sessions for this repo. It is not part of the website; leave it
-out when uploading the site to a host.
