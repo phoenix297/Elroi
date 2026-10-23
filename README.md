@@ -1,4 +1,4 @@
-# EL-ROI Shipping Services — website
+# EL-ROI Shipping by Iyamah — website
 
 Static website for EL-ROI Shipping Services (Essen, Germany → Lagos, Nigeria & worldwide).
 Design: marine navy, brass gold, steel blue and ivory, set in Fraunces and Inter.

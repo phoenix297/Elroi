@@ -67,7 +67,7 @@ import json as _json
 _LP = _json.load(open(os.path.join(HERE, 'logo_paths.json')))
 LOGO_MARK = f'<svg class="logo-mark" viewBox="140 127 316 354" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="{_LP["E"]}"/></svg>'
 LOGO_WORD = f'<svg class="logo-word" viewBox="304 260 209 55" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="{_LP["elroi"]}"/></svg>'
-LOGO = f'{LOGO_MARK}<span class="logo-text">{LOGO_WORD}<span class="logo-sub">Shipping Service</span></span>'
+LOGO = f'{LOGO_MARK}<span class="logo-text">{LOGO_WORD}<span class="logo-sub">Shipping by Iyamah</span></span>'
 
 ICONS = {
     'box': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>',
@@ -117,7 +117,7 @@ def head(title, desc, page='', ld='', noindex=False):
 {robots}
 <link rel="canonical" href="{SITE_URL}{page}">{alternates}
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="EL-ROI Shipping Services">
+<meta property="og:site_name" content="EL-ROI Shipping by Iyamah">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <link rel="icon" href="assets/favicon.svg?v={ver('assets/favicon.svg')}" type="image/svg+xml">
@@ -127,7 +127,7 @@ def head(title, desc, page='', ld='', noindex=False):
 <meta property="og:image" content="{SITE_URL}assets/og-image.jpg?v={ver('assets/og-image.jpg')}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EL-ROI Shipping: Germany to any part of the world">
+<meta property="og:image:alt" content="EL-ROI Shipping by Iyamah: Germany to any part of the world">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/{FONT_FR}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/{FONT_IN}" as="font" type="font/woff2" crossorigin>
@@ -156,7 +156,7 @@ def header(active, name=''):
 </div>
 <header class="site">
   <div class="container nav-wrap">
-    <a href="index.html" class="logo" aria-label="EL-ROI Shipping Services home">{LOGO}</a>
+    <a href="index.html" class="logo" aria-label="EL-ROI Shipping by Iyamah home">{LOGO}</a>
     <nav class="primary" aria-label="Primary">
       {links}
     </nav>
@@ -187,8 +187,9 @@ BUSINESS_LD = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': SITE_URL + '#business',
-    'name': 'EL-ROI Shipping Services',
-    'alternateName': 'EL-ROI Shipping',
+    'name': 'EL-ROI Shipping by Iyamah',
+    'alternateName': ['EL-ROI Shipping Services', 'EL-ROI Shipping', 'Iyamah Shipping'],
+    'founder': {'@type': 'Person', 'name': 'Iyamah'},
     'description': 'Freight forwarder in Essen, Germany since 1999. Sea freight for vehicles, trucks, tractors, 20ft and 40ft containers, machinery and general cargo from Germany to any part of the world, with major routes to Belgium, Austria and Holland and an office in Lagos, Nigeria.',
     'url': SITE_URL,
     'image': SITE_URL + 'assets/og-image.jpg',
@@ -201,30 +202,30 @@ BUSINESS_LD = {
     'hasMap': 'https://www.google.com/maps/search/?api=1&query=Ripshorster+Str.+379,+45357+Essen,+Germany',
     'areaServed': ['Germany', 'Belgium', 'Austria', 'Netherlands', 'Nigeria', 'Worldwide'],
     'knowsAbout': ['Sea freight', 'Container shipping', 'Vehicle shipping', 'Car export from Germany', 'Shipping to Nigeria', 'Form M', 'Heavy machinery shipping'],
-    'department': [{'@type': 'LocalBusiness', 'name': 'EL-ROI Shipping Services Lagos', 'telephone': '+49 1521 9521826',
+    'department': [{'@type': 'LocalBusiness', 'name': 'EL-ROI Shipping by Iyamah, Lagos', 'telephone': '+49 1521 9521826',
                     'address': {'@type': 'PostalAddress', 'streetAddress': 'No. 21 Alhaji Kareem Akande Street, Olodi Apapa', 'addressLocality': 'Lagos', 'addressRegion': 'Lagos', 'addressCountry': 'NG'}}],
     'contactPoint': [{'@type': 'ContactPoint', 'telephone': '+49 1521 9521826', 'contactType': 'customer service', 'availableLanguage': ['English', 'German']}],
 }
 SEO = {
-    'index.html': ('Shipping from Germany to Worldwide | EL-ROI Shipping, Essen',
+    'index.html': ('Shipping from Germany to Worldwide | EL-ROI Shipping by Iyamah, Essen',
                    'Freight forwarder in Essen since 1999. Sea freight for cars, trucks, tractors, containers and machinery from Germany to Europe, Lagos and any part of the world. Honest quotes.'),
-    'about.html': ('About Us: Freight Forwarder in Essen since 1999 | EL-ROI Shipping',
-                   'EL-ROI Shipping Services: a German freight forwarder in Essen with an office in Lagos. Over 20 years of honest estimates, fair pricing and clear communication.'),
-    'services.html': ('Car, Truck, Tractor & Container Shipping from Germany | EL-ROI Shipping',
+    'about.html': ('About Us: Freight Forwarder in Essen since 1999 | EL-ROI Shipping by Iyamah',
+                   'EL-ROI Shipping by Iyamah: a German freight forwarder in Essen with an office in Lagos. Over 20 years of honest estimates, fair pricing and clear communication.'),
+    'services.html': ('Car, Truck, Tractor & Container Shipping from Germany | EL-ROI Shipping by Iyamah',
                       'Ship vehicles, trucks, tractors, 20ft and 40ft containers, machinery, fragile goods and documents by sea from Germany, with documents and Form M handled.'),
     'routes.html': ('Shipping Routes from Germany: Europe, Lagos & Worldwide | EL-ROI',
                     'Sea freight from Essen, Germany: major routes to Belgium, Austria and Holland, plus Lagos, Nigeria and any port worldwide. Around two weeks after loading.'),
-    'gallery.html': ('Gallery: Vehicles, Trucks & Containers We Ship | EL-ROI Shipping',
-                     'Real photos of cars, trucks, tractors, containers and engines loaded and shipped by EL-ROI Shipping Services from Germany.'),
-    'blog.html': ('Shipping Guides & News | EL-ROI Shipping',
+    'gallery.html': ('Gallery: Vehicles, Trucks & Containers We Ship | EL-ROI Shipping by Iyamah',
+                     'Real photos of cars, trucks, tractors, containers and engines loaded and shipped by EL-ROI Shipping by Iyamah from Germany.'),
+    'blog.html': ('Shipping Guides & News | EL-ROI Shipping by Iyamah',
                   'Practical guides to shipping from Germany: shipping a car to Nigeria, Form M, 20ft vs 40ft containers and what to prepare before booking.'),
     'faq.html': ('Shipping FAQ: Transit Times, Form M, Customs & Documents | EL-ROI',
                  'Answers about shipping from Germany: transit times, cargo types, documents, Form M, customs duties, insurance, container sizes and our offices.'),
-    'contact.html': ('Contact EL-ROI Shipping | Essen, Germany & Lagos, Nigeria',
-                     'Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.'),
-    'quote.html': ('Get a Free Shipping Quote from Germany | EL-ROI Shipping',
+    'contact.html': ('Contact EL-ROI Shipping by Iyamah | Essen, Germany & Lagos, Nigeria',
+                     'Contact EL-ROI Shipping by Iyamah: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.'),
+    'quote.html': ('Get a Free Shipping Quote from Germany | EL-ROI Shipping by Iyamah',
                    'Request a transparent, no-pressure sea freight quote from Germany for vehicles, containers, machinery or general cargo. No hidden fees.'),
-    'book.html': ('Book a Shipment from Germany | EL-ROI Shipping',
+    'book.html': ('Book a Shipment from Germany | EL-ROI Shipping by Iyamah',
                   'Book sea freight from Germany to Europe, Lagos or anywhere in the world. Send your cargo details and we confirm availability and next steps.'),
     'calculator.html': ('Shipping Cost Calculator: Germany to Europe, Lagos & Worldwide | EL-ROI',
                         'Estimate the cost of shipping from Germany by cargo type, weight and destination. Then request a formal quote for the exact price.'),
@@ -243,7 +244,7 @@ FOOTER = f'''<footer class="site has-photo">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="index.html" class="logo" aria-label="EL-ROI Shipping Services home">{LOGO}</a>
+        <a href="index.html" class="logo" aria-label="EL-ROI Shipping by Iyamah home">{LOGO}</a>
         <p>Direct freight forwarding from Germany to destinations worldwide. Honest estimates, fair pricing, clear communication.</p>
       </div>
       <div>
@@ -277,7 +278,7 @@ FOOTER = f'''<footer class="site has-photo">
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year>2026</span> EL-ROI Shipping Services. All rights reserved.</span>
+      <span>&copy; <span data-year>2026</span> EL-ROI Shipping by Iyamah. All rights reserved.</span>
       <span><a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp; <button type="button" class="linklike" data-consent-open>Cookie settings</button> &nbsp;&middot;&nbsp; <em>Your satisfaction, our priority.</em></span>
     </div>
   </div>
@@ -448,7 +449,7 @@ home = f'''<section class="hero dark">
       <div class="hero-copy">
         <span class="eyebrow">Germany &rarr; Worldwide freight forwarding</span>
         <h1><span class="line">Your cargo,</span> <span class="line">moved with</span> <span class="accent">total transparency.</span></h1>
-        <p class="hero-lede">EL-ROI Shipping Services has connected Germany to the world for over 20 years. Sea freight, vehicles, containers and heavy cargo, handled with honest estimates and clear communication at every step.</p>
+        <p class="hero-lede">EL-ROI Shipping by Iyamah has connected Germany to the world for over 20 years. Sea freight, vehicles, containers and heavy cargo, handled with honest estimates and clear communication at every step.</p>
         <div class="hero-actions">
           <a href="quote.html" class="btn btn-primary">Request a Quote {ARROW}</a>
           <a href="book.html" class="btn btn-ghost">Book a Shipment</a>
@@ -699,8 +700,8 @@ home = f'''<section class="hero dark">
 
 {CTA}'''
 
-write('index.html', 'Home | EL-ROI Shipping Services',
-      'EL-ROI Shipping Services: direct freight forwarding from Germany to destinations worldwide since 1999.',
+write('index.html', 'Home | EL-ROI Shipping by Iyamah',
+      'EL-ROI Shipping by Iyamah: direct freight forwarding from Germany to destinations worldwide since 1999.',
       'index.html', home, preloader=True,
       scripts='<script src="' + LAND_URL + '" defer></script>\n<script src="' + GLOBE_URL + '" defer></script>\n')
 
@@ -766,7 +767,7 @@ about = page_hero('About', 'Our story', '20+ years of <em>honest freight forward
 
 {CTA}'''
 
-write('about.html', 'About Us | EL-ROI Shipping Services',
+write('about.html', 'About Us | EL-ROI Shipping by Iyamah',
       '20+ years of honest, transparent freight forwarding from Germany to the world.',
       'about.html', about)
 
@@ -843,7 +844,7 @@ services = page_hero('Services', 'What we offer', 'Freight services <em>built ar
 
 {CTA}'''
 
-write('services.html', 'Services | EL-ROI Shipping Services',
+write('services.html', 'Services | EL-ROI Shipping by Iyamah',
       'Freight services built around your cargo: vehicles, tractors, trucks, containers, machinery, oversized cargo, fragile goods and documents.',
       'services.html', services)
 
@@ -924,7 +925,7 @@ routes = page_hero('Routes', 'Where we ship', 'Germany to <em>any part of the wo
 </section>
 '''
 
-write('routes.html', 'Routes | EL-ROI Shipping Services',
+write('routes.html', 'Routes | EL-ROI Shipping by Iyamah',
       'Sea freight from Essen, Germany: major routes to Belgium, Austria and Holland, and any destination worldwide, including Lagos, Nigeria.',
       'routes.html', routes)
 
@@ -987,8 +988,8 @@ gallery = page_hero('Gallery', 'Gallery', 'From <em>the yard</em>',
 </section>
 '''
 
-write('gallery.html', 'Gallery | EL-ROI Shipping Services',
-      'Photos of tractors, trucks, trailers and containers shipped by EL-ROI Shipping Services from Germany.',
+write('gallery.html', 'Gallery | EL-ROI Shipping by Iyamah',
+      'Photos of tractors, trucks, trailers and containers shipped by EL-ROI Shipping by Iyamah from Germany.',
       'gallery.html', gallery)
 
 # =====================================================================
@@ -1128,7 +1129,7 @@ def guide_page(g):
   <div class="container">
     <article class="prose">
 {g['body']}
-      <p class="policy-date">Published by EL-ROI Shipping Services, Essen &middot; Updated 26 September 2026</p>
+      <p class="policy-date">Published by EL-ROI Shipping by Iyamah, Essen &middot; Updated 26 September 2026</p>
     </article>
   </div>
 </section>
@@ -1143,8 +1144,8 @@ def guide_page(g):
 {CTA}'''
     ld = [{'@context': 'https://schema.org', '@type': 'Article', 'headline': g['title'], 'description': g['desc'],
            'image': SITE_URL + IMG[g['img']][0], 'datePublished': '2026-09-26', 'dateModified': '2026-09-26',
-           'author': {'@type': 'Organization', 'name': 'EL-ROI Shipping Services', 'url': SITE_URL},
-           'publisher': {'@type': 'Organization', 'name': 'EL-ROI Shipping Services', 'logo': {'@type': 'ImageObject', 'url': SITE_URL + 'assets/logo.png'}},
+           'author': {'@type': 'Organization', 'name': 'EL-ROI Shipping by Iyamah', 'url': SITE_URL},
+           'publisher': {'@type': 'Organization', 'name': 'EL-ROI Shipping by Iyamah', 'logo': {'@type': 'ImageObject', 'url': SITE_URL + 'assets/logo.png'}},
            'mainEntityOfPage': SITE_URL + g['slug']}]
     if g['faq']:
         ld.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
@@ -1164,7 +1165,7 @@ cards = ''.join(f'''<a class="post" href="{x['slug']}" data-reveal>
         <p>{x['desc']}</p>
       </a>''' for x in GUIDES[1:])
 blog = page_hero('Guides', 'Guides &amp; news', 'Shipping guides <em>&amp; news</em>',
-                 'Practical, plain-English guides to shipping from Germany, and updates from EL-ROI Shipping Services.', 'redchassis', 'center 55%') + f'''
+                 'Practical, plain-English guides to shipping from Germany, and updates from EL-ROI Shipping by Iyamah.', 'redchassis', 'center 55%') + f'''
 <section>
   <div class="container">
     <div class="section-head" data-reveal><div><span class="eyebrow">Shipping guides</span><h2>Know before <em>you ship</em></h2></div></div>
@@ -1260,7 +1261,7 @@ write('faq.html', 'FAQ', 'FAQ', 'faq.html', faq, extra_ld=[FAQ_LD])
 # =====================================================================
 # CONTACT
 # =====================================================================
-contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping</em>',
+contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping by Iyamah</em>',
                     'Send a message, call, or chat with us on WhatsApp.', 'tractor', 'center 55%') + f'''
 <section>
   <div class="container form-layout">
@@ -1310,8 +1311,8 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping</em>
 </section>
 '''
 
-write('contact.html', 'Contact | EL-ROI Shipping Services',
-      'Contact EL-ROI Shipping Services in Essen, Germany and Lagos, Nigeria. Phone, email, WhatsApp and office map.',
+write('contact.html', 'Contact | EL-ROI Shipping by Iyamah',
+      'Contact EL-ROI Shipping by Iyamah in Essen, Germany and Lagos, Nigeria. Phone, email, WhatsApp and office map.',
       'contact.html', contact,
       scripts='<script src="' + LAND_URL + '" defer></script>\n<script src="' + GLOBE_URL + '" defer></script>\n')
 
@@ -1393,8 +1394,8 @@ quote = page_hero('Get a Quote', 'Get a quote', 'Request a <em>shipping quotatio
 </section>
 '''
 
-write('quote.html', 'Get a Quote | EL-ROI Shipping Services',
-      'Request a transparent, no-pressure shipping quotation from EL-ROI Shipping Services.',
+write('quote.html', 'Get a Quote | EL-ROI Shipping by Iyamah',
+      'Request a transparent, no-pressure shipping quotation from EL-ROI Shipping by Iyamah.',
       'quote.html', quote)
 
 book = page_hero('Book a Shipment', 'Book a shipment', 'Start your <em>shipment booking</em>',
@@ -1456,8 +1457,8 @@ book = page_hero('Book a Shipment', 'Book a shipment', 'Start your <em>shipment 
 </section>
 '''
 
-write('book.html', 'Book a Shipment | EL-ROI Shipping Services',
-      'Start your shipment booking with EL-ROI Shipping Services. Sea freight from Germany to any part of the world.',
+write('book.html', 'Book a Shipment | EL-ROI Shipping by Iyamah',
+      'Start your shipment booking with EL-ROI Shipping by Iyamah. Sea freight from Germany to any part of the world.',
       'book.html', book)
 
 # =====================================================================
@@ -1522,7 +1523,7 @@ calculator = page_hero('Calculator', 'Estimate', 'Shipping cost <em>calculator</
 </section>
 '''
 
-write('calculator.html', 'Shipping Calculator | EL-ROI Shipping Services',
+write('calculator.html', 'Shipping Calculator | EL-ROI Shipping by Iyamah',
       'Get a rough shipping cost estimate by cargo type, weight and destination. Final pricing confirmed by formal quote.',
       'calculator.html', calculator)
 
@@ -1530,7 +1531,7 @@ write('calculator.html', 'Shipping Calculator | EL-ROI Shipping Services',
 # PRIVACY POLICY
 # =====================================================================
 PRIV = [
- ('who', 'Who we are', f"""<p>This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the &ldquo;controller&rdquo; under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.</p>
+ ('who', 'Who we are', f"""<p>This website is operated by <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen, Germany (the &ldquo;controller&rdquo; under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.</p>
 <p>Questions about your data: <a href="mailto:{EMAIL}">{EMAIL}</a> or <a href="tel:{TEL}">{PHONE}</a>.</p>"""),
  ('collect', 'What we collect', """<p>We only collect what you choose to send us:</p>
 <ul class="checklist"><li><strong>Quote, booking and contact forms:</strong> name, company or private name, phone number, email, address, pickup location, destination, cargo type, weight, number of packages, shipping method, vehicle document or Form M reference, and any message you write.</li>
@@ -1557,7 +1558,7 @@ PRIV = [
 toc = ''.join(f'<li><a href="#{k}">{t}</a></li>' for k, t, _ in PRIV)
 secs = '\n'.join(f'<section class="policy-sec" id="{k}"><h2>{t}</h2>{body}</section>' for k, t, body in PRIV)
 privacy = page_hero('Privacy Policy', 'Legal', 'Privacy <em>policy</em>',
-                    'How EL-ROI Shipping Services collects, uses and protects your personal data.', 'loaded', 'center 55%') + f'''
+                    'How EL-ROI Shipping by Iyamah collects, uses and protects your personal data.', 'loaded', 'center 55%') + f'''
 <section>
   <div class="container policy">
     <aside class="policy-toc"><span class="card-kicker">On this page</span><ol>{toc}</ol></aside>
@@ -1568,14 +1569,14 @@ privacy = page_hero('Privacy Policy', 'Legal', 'Privacy <em>policy</em>',
   </div>
 </section>
 '''
-write('privacy.html', 'Privacy Policy | EL-ROI Shipping Services',
-      'How EL-ROI Shipping Services collects, uses and protects your personal data.', '', privacy)
+write('privacy.html', 'Privacy Policy | EL-ROI Shipping by Iyamah',
+      'How EL-ROI Shipping by Iyamah collects, uses and protects your personal data.', '', privacy)
 
 # =====================================================================
 # TERMS & CONDITIONS
 # =====================================================================
 TERMS = [
- ('scope', 'Scope', """<p>These terms apply to all quotes, bookings and freight forwarding services provided by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (&ldquo;we&rdquo;, &ldquo;us&rdquo;), and to the use of this website. Anything we agree with you individually in writing takes priority over these terms.</p>
+ ('scope', 'Scope', """<p>These terms apply to all quotes, bookings and freight forwarding services provided by <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen, Germany (&ldquo;we&rdquo;, &ldquo;us&rdquo;), and to the use of this website. Anything we agree with you individually in writing takes priority over these terms.</p>
 <p>Where we agree it with business customers, our services are also carried out under the German Freight Forwarders&rsquo; Standard Terms and Conditions (ADSp 2017). Mandatory law always applies, including the German Commercial Code (HGB) and international transport conventions.</p>"""),
  ('quotes', 'Quotes and estimates', """<ul class="checklist"><li>A quote is based on the information you give us (cargo type, dimensions, weight, pickup point and destination). If that information turns out to be different, the price may change, and we will tell you before going ahead.</li>
 <li>The online shipping calculator gives a rough, non-binding estimate only.</li>
@@ -1620,8 +1621,8 @@ def legal_page(items):
 
 terms = page_hero('Terms &amp; Conditions', 'Legal', 'Terms &amp; <em>conditions</em>',
                   'The terms that apply to our quotes, bookings and shipping services.', 'msc', 'center 45%') + legal_page(TERMS)
-write('terms.html', 'Terms &amp; Conditions | EL-ROI Shipping Services',
-      'Terms and conditions for quotes, bookings and freight forwarding services by EL-ROI Shipping Services.', '', terms)
+write('terms.html', 'Terms &amp; Conditions | EL-ROI Shipping by Iyamah',
+      'Terms and conditions for quotes, bookings and freight forwarding services by EL-ROI Shipping by Iyamah.', '', terms)
 
 # =====================================================================
 # 404
@@ -1643,7 +1644,7 @@ lost = f'''<section class="lost dark has-photo">
   </div>
 </section>
 '''
-write('404.html', 'Page not found | EL-ROI Shipping Services', 'This page could not be found.', '', lost)
+write('404.html', 'Page not found | EL-ROI Shipping by Iyamah', 'This page could not be found.', '', lost)
 
 
 # =====================================================================

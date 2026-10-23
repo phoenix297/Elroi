@@ -37,16 +37,16 @@ DE = {
 "Offices": "Standorte",
 "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Germany": "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Deutschland",
 "<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria": "<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria",
-"© <span data-year=\"\">2026</span> EL-ROI Shipping Services. All rights reserved.": "© <span data-year=\"\">2026</span> EL-ROI Shipping Services. Alle Rechte vorbehalten.",
+"© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. All rights reserved.": "© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. Alle Rechte vorbehalten.",
 "<a href=\"privacy.html\">Privacy Policy</a> · <a href=\"terms.html\">Terms & Conditions</a> · <em>Your satisfaction, our priority.</em>": "<a href=\"privacy.html\">Datenschutz</a> · <a href=\"terms.html\">AGB</a> · <em>Ihre Zufriedenheit ist unsere Priorität.</em>",
-"EL-ROI Shipping Services home": "EL-ROI Shipping Services Startseite",
+"EL-ROI Shipping by Iyamah home": "EL-ROI Shipping by Iyamah Startseite",
 "Primary": "Hauptmenü",
 "Language": "Sprache",
 "Open menu": "Menü öffnen",
 "Mobile": "Mobiles Menü",
 "Chat on WhatsApp": "Per WhatsApp schreiben",
 "Breadcrumb": "Brotkrumen-Navigation",
-"EL-ROI Shipping: Germany to any part of the world": "EL-ROI Shipping: von Deutschland in jeden Teil der Welt",
+"EL-ROI Shipping by Iyamah: Germany to any part of the world": "EL-ROI Shipping by Iyamah: von Deutschland in jeden Teil der Welt",
 "/": "/",
 # ---- shared CTA + map ----
 "Get started": "Jetzt starten",
@@ -84,12 +84,12 @@ DE = {
 "Filter photos": "Fotos filtern",
 "Weight slider": "Gewichtsregler",
 # ---- structured data ----
-"EL-ROI Shipping Services": "EL-ROI Shipping Services",
+"EL-ROI Shipping by Iyamah": "EL-ROI Shipping by Iyamah",
 "Freight forwarder in Essen, Germany since 1999. Sea freight for vehicles, trucks, tractors, 20ft and 40ft containers, machinery and general cargo from Germany to any part of the world, with major routes to Belgium, Austria and Holland and an office in Lagos, Nigeria.": "Spedition in Essen seit 1999. Seefracht für Fahrzeuge, Lkw, Traktoren, 20- und 40-Fuß-Container, Maschinen und Stückgut von Deutschland in jeden Teil der Welt, mit Hauptrouten nach Belgien, Österreich und in die Niederlande und einem Büro in Lagos, Nigeria.",
 "Your satisfaction, our priority": "Ihre Zufriedenheit ist unsere Priorität",
 "customer service": "Kundenservice",
 # ---- 404 ----
-"Page not found | EL-ROI Shipping Services": "Seite nicht gefunden | EL-ROI Shipping Services",
+"Page not found | EL-ROI Shipping by Iyamah": "Seite nicht gefunden | EL-ROI Shipping by Iyamah",
 "This page could not be found.": "Diese Seite wurde nicht gefunden.",
 "Error 404": "Fehler 404",
 "This page has <em>gone off route.</em>": "Diese Seite ist <em>vom Kurs abgekommen.</em>",
@@ -97,8 +97,8 @@ DE = {
 "Back to home §": "Zur Startseite §",
 "Contact us": "Kontakt aufnehmen",
 # ---- about ----
-"About Us: Freight Forwarder in Essen since 1999 | EL-ROI Shipping": "Über uns: Spedition in Essen seit 1999 | EL-ROI Shipping",
-"EL-ROI Shipping Services: a German freight forwarder in Essen with an office in Lagos. Over 20 years of honest estimates, fair pricing and clear communication.": "EL-ROI Shipping Services: eine deutsche Spedition in Essen mit Büro in Lagos. Über 20 Jahre ehrliche Kostenschätzungen, faire Preise und klare Kommunikation.",
+"About Us: Freight Forwarder in Essen since 1999 | EL-ROI Shipping by Iyamah": "Über uns: Spedition in Essen seit 1999 | EL-ROI Shipping by Iyamah",
+"EL-ROI Shipping by Iyamah: a German freight forwarder in Essen with an office in Lagos. Over 20 years of honest estimates, fair pricing and clear communication.": "EL-ROI Shipping by Iyamah: eine deutsche Spedition in Essen mit Büro in Lagos. Über 20 Jahre ehrliche Kostenschätzungen, faire Preise und klare Kommunikation.",
 "Our story": "Unsere Geschichte",
 "20+ years of <em>honest freight forwarding</em>": "Über 20 Jahre <em>ehrliche Spedition</em>",
 "A German shipping company built on relationships: honest estimates, fair pricing and clear communication at every step.": "Ein deutsches Versandunternehmen, das auf Beziehungen baut: ehrliche Kostenschätzungen, faire Preise und klare Kommunikation bei jedem Schritt.",
@@ -135,11 +135,11 @@ DE = {
 "The work <em>speaks</em>": "Unsere Arbeit <em>spricht für sich</em>",
 "View gallery §": "Zur Galerie §",
 # ---- guides listing ----
-"Shipping Guides & News | EL-ROI Shipping": "Versand-Ratgeber & News | EL-ROI Shipping",
+"Shipping Guides & News | EL-ROI Shipping by Iyamah": "Versand-Ratgeber & News | EL-ROI Shipping by Iyamah",
 "Practical guides to shipping from Germany: shipping a car to Nigeria, Form M, 20ft vs 40ft containers and what to prepare before booking.": "Praktische Ratgeber zum Versand aus Deutschland: Auto nach Nigeria verschiffen, Form M, 20- oder 40-Fuß-Container und was Sie vor der Buchung vorbereiten sollten.",
 "Guides & news": "Ratgeber & News",
 "Shipping guides <em>& news</em>": "Versand-Ratgeber <em>& News</em>",
-"Practical, plain-English guides to shipping from Germany, and updates from EL-ROI Shipping Services.": "Praktische Ratgeber zum Versand aus Deutschland (auf Englisch) und Neuigkeiten von EL-ROI Shipping Services.",
+"Practical, plain-English guides to shipping from Germany, and updates from EL-ROI Shipping by Iyamah.": "Praktische Ratgeber zum Versand aus Deutschland (auf Englisch) und Neuigkeiten von EL-ROI Shipping by Iyamah.",
 "Know before <em>you ship</em>": "Gut informiert <em>verschiffen</em>",
 "Vehicles · 5 min read": "Fahrzeuge · 5 Min. Lesezeit · Englisch",
 "How to ship a car from Germany to Nigeria": "Auto von Deutschland nach Nigeria verschiffen",
@@ -161,7 +161,7 @@ DE = {
 "Over 20 years of shipping, and counting": "Über 20 Jahre Versand, und es geht weiter",
 "Since 1999 we have been moving vehicles, containers and heavy cargo from Germany to the world.": "Seit 1999 bringen wir Fahrzeuge, Container und Schwerfracht von Deutschland in die Welt.",
 # ---- booking ----
-"Book a Shipment from Germany | EL-ROI Shipping": "Sendung aus Deutschland buchen | EL-ROI Shipping",
+"Book a Shipment from Germany | EL-ROI Shipping by Iyamah": "Sendung aus Deutschland buchen | EL-ROI Shipping by Iyamah",
 "Book sea freight from Germany to Europe, Lagos or anywhere in the world. Send your cargo details and we confirm availability and next steps.": "Buchen Sie Seefracht von Deutschland nach Europa, Lagos oder weltweit. Senden Sie uns Ihre Frachtdaten, und wir bestätigen Verfügbarkeit und nächste Schritte.",
 "Book a Shipment": "Sendung buchen",
 "Book a shipment": "Sendung buchen",
@@ -231,10 +231,10 @@ DE = {
 "Request a formal quote §": "Verbindliches Angebot anfordern §",
 "Shipping Cost Calculator": "Versandkostenrechner",
 # ---- contact ----
-"Contact EL-ROI Shipping | Essen, Germany & Lagos, Nigeria": "Kontakt EL-ROI Shipping | Essen, Deutschland & Lagos, Nigeria",
-"Contact EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.": "Kontakt zu EL-ROI Shipping Services: Ripshorster Str. 379, 45357 Essen, und No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Rufen Sie +49 1521 9521826 an oder schreiben Sie per WhatsApp.",
+"Contact EL-ROI Shipping by Iyamah | Essen, Germany & Lagos, Nigeria": "Kontakt EL-ROI Shipping by Iyamah | Essen, Deutschland & Lagos, Nigeria",
+"Contact EL-ROI Shipping by Iyamah: Ripshorster Str. 379, 45357 Essen, and No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Call +49 1521 9521826 or chat on WhatsApp.": "Kontakt zu EL-ROI Shipping by Iyamah: Ripshorster Str. 379, 45357 Essen, und No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos. Rufen Sie +49 1521 9521826 an oder schreiben Sie per WhatsApp.",
 "Get in touch": "Kontakt",
-"Contact <em>EL-ROI Shipping</em>": "Kontakt zu <em>EL-ROI Shipping</em>",
+"Contact <em>EL-ROI Shipping by Iyamah</em>": "Kontakt zu <em>EL-ROI Shipping by Iyamah</em>",
 "Send a message, call, or chat with us on WhatsApp.": "Schreiben Sie uns, rufen Sie an oder chatten Sie mit uns per WhatsApp.",
 "Send us a message": "Nachricht senden",
 "We'll get back to you by email or phone.": "Wir melden uns per E-Mail oder Telefon bei Ihnen.",
@@ -249,7 +249,7 @@ DE = {
 "Message us with your cargo and destination.": "Schreiben Sie uns Ihre Fracht und Ihr Ziel.",
 "Hello EL-ROI, message from your website:": "Hallo EL-ROI, Nachricht über Ihre Website:",
 "What are you shipping, and where to?": "Was möchten Sie versenden, und wohin?",
-"Contact EL-ROI Shipping": "Kontakt EL-ROI Shipping",
+"Contact EL-ROI Shipping by Iyamah": "Kontakt EL-ROI Shipping by Iyamah",
 # ---- FAQ ----
 "Shipping FAQ: Transit Times, Form M, Customs & Documents | EL-ROI": "Versand-FAQ: Laufzeiten, Form M, Zoll & Dokumente | EL-ROI",
 "Answers about shipping from Germany: transit times, cargo types, documents, Form M, customs duties, insurance, container sizes and our offices.": "Antworten zum Versand aus Deutschland: Laufzeiten, Frachtarten, Dokumente, Form M, Zölle, Versicherung, Containergrößen und unsere Standorte.",
@@ -289,8 +289,8 @@ DE = {
 "Online payment is coming soon. For now, payment details are arranged directly with our team, never submitted through the website form.": "Online-Zahlung kommt bald. Bis dahin werden Zahlungsdetails direkt mit unserem Team abgestimmt und niemals über das Website-Formular übermittelt.",
 "Shipping FAQ": "Versand-FAQ",
 # ---- gallery ----
-"Gallery: Vehicles, Trucks & Containers We Ship | EL-ROI Shipping": "Galerie: Fahrzeuge, Lkw & Container, die wir verschiffen | EL-ROI Shipping",
-"Real photos of cars, trucks, tractors, containers and engines loaded and shipped by EL-ROI Shipping Services from Germany.": "Echte Fotos von Autos, Lkw, Traktoren, Containern und Motoren, die EL-ROI Shipping Services aus Deutschland verladen und verschifft hat.",
+"Gallery: Vehicles, Trucks & Containers We Ship | EL-ROI Shipping by Iyamah": "Galerie: Fahrzeuge, Lkw & Container, die wir verschiffen | EL-ROI Shipping by Iyamah",
+"Real photos of cars, trucks, tractors, containers and engines loaded and shipped by EL-ROI Shipping by Iyamah from Germany.": "Echte Fotos von Autos, Lkw, Traktoren, Containern und Motoren, die EL-ROI Shipping by Iyamah aus Deutschland verladen und verschifft hat.",
 "From <em>the yard</em>": "Von unserem <em>Hof</em>",
 "Real cargo, real photos: tractors, trucks, trailers and containers on their way from Germany.": "Echte Fracht, echte Fotos: Traktoren, Lkw, Auflieger und Container auf dem Weg aus Deutschland.",
 "All": "Alle",
@@ -332,13 +332,13 @@ DE = {
 "Send a photo of your cargo and its destination on WhatsApp, and we'll tell you what it takes to ship it.": "Schicken Sie uns per WhatsApp ein Foto Ihrer Fracht und das Ziel, und wir sagen Ihnen, was für den Versand nötig ist.",
 "§ Send on WhatsApp": "§ Per WhatsApp senden",
 # ---- home ----
-"Shipping from Germany to Worldwide | EL-ROI Shipping, Essen": "Spedition Essen: Seefracht weltweit | EL-ROI Shipping",
+"Shipping from Germany to Worldwide | EL-ROI Shipping by Iyamah, Essen": "Spedition Essen: Seefracht weltweit | EL-ROI Shipping by Iyamah",
 "Freight forwarder in Essen since 1999. Sea freight for cars, trucks, tractors, containers and machinery from Germany to Europe, Lagos and any part of the world. Honest quotes.": "Spedition in Essen seit 1999. Seefracht für Autos, Lkw, Traktoren, Container und Maschinen von Deutschland nach Europa, Lagos und in jeden Teil der Welt. Ehrliche Angebote.",
 "Germany → Worldwide freight forwarding": "Spedition · Deutschland → Weltweit",
 "Your cargo,": "Ihre Fracht,",
 "moved with": "verschifft mit",
 "total transparency.": "voller Transparenz.",
-"EL-ROI Shipping Services has connected Germany to the world for over 20 years. Sea freight, vehicles, containers and heavy cargo, handled with honest estimates and clear communication at every step.": "EL-ROI Shipping Services verbindet Deutschland seit über 20 Jahren mit der Welt. Seefracht, Fahrzeuge, Container und Schwerfracht, mit ehrlichen Kostenschätzungen und klarer Kommunikation bei jedem Schritt.",
+"EL-ROI Shipping by Iyamah has connected Germany to the world for over 20 years. Sea freight, vehicles, containers and heavy cargo, handled with honest estimates and clear communication at every step.": "EL-ROI Shipping by Iyamah verbindet Deutschland seit über 20 Jahren mit der Welt. Seefracht, Fahrzeuge, Container und Schwerfracht, mit ehrlichen Kostenschätzungen und klarer Kommunikation bei jedem Schritt.",
 "§ Or chat with us on WhatsApp": "§ Oder schreiben Sie uns per WhatsApp",
 "<i></i>Major routes: Europe": "<i></i>Hauptrouten: Europa",
 "<i class=\"eu\"></i>Worldwide destinations": "<i class=\"eu\"></i>Ziele weltweit",
@@ -434,8 +434,8 @@ DE = {
 "Real cargo, <em>real photos</em>": "Echte Fracht, <em>echte Fotos</em>",
 "Full gallery §": "Zur Galerie §",
 # ---- privacy ----
-"Privacy Policy | EL-ROI Shipping Services": "Datenschutzerklärung | EL-ROI Shipping Services",
-"How EL-ROI Shipping Services collects, uses and protects your personal data.": "Wie EL-ROI Shipping Services Ihre personenbezogenen Daten erhebt, nutzt und schützt.",
+"Privacy Policy | EL-ROI Shipping by Iyamah": "Datenschutzerklärung | EL-ROI Shipping by Iyamah",
+"How EL-ROI Shipping by Iyamah collects, uses and protects your personal data.": "Wie EL-ROI Shipping by Iyamah Ihre personenbezogenen Daten erhebt, nutzt und schützt.",
 "Privacy Policy": "Datenschutzerklärung",
 "Legal": "Rechtliches",
 "Privacy <em>policy</em>": "Datenschutz<em>erklärung</em>",
@@ -448,7 +448,7 @@ DE = {
 "Your rights": "Ihre Rechte",
 "Cookies": "Cookies",
 "Changes": "Änderungen",
-"This website is operated by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (the “controller” under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.": "Diese Website wird betrieben von <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Deutschland (der „Verantwortliche“ im Sinne der Datenschutz-Grundverordnung, DSGVO). Wir haben außerdem ein Büro unter der Adresse No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.",
+"This website is operated by <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen, Germany (the “controller” under the EU General Data Protection Regulation, GDPR). We also have an office at No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.": "Diese Website wird betrieben von <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen, Deutschland (der „Verantwortliche“ im Sinne der Datenschutz-Grundverordnung, DSGVO). Wir haben außerdem ein Büro unter der Adresse No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria.",
 "Questions about your data: <a href=\"mailto:info@elroishipping.de\">info@elroishipping.de</a> or <a href=\"tel:+4915219521826\">+49 1521 9521826</a>.": "Fragen zu Ihren Daten: <a href=\"mailto:info@elroishipping.de\">info@elroishipping.de</a> oder <a href=\"tel:+4915219521826\">+49 1521 9521826</a>.",
 "We only collect what you choose to send us:": "Wir erheben nur, was Sie uns selbst senden:",
 "<strong>Quote, booking and contact forms:</strong> name, company or private name, phone number, email, address, pickup location, destination, cargo type, weight, number of packages, shipping method, vehicle document or Form M reference, and any message you write.": "<strong>Angebots-, Buchungs- und Kontaktformulare:</strong> Name, Firmen- oder Privatname, Telefonnummer, E-Mail, Adresse, Abholort, Ziel, Frachtart, Gewicht, Anzahl der Packstücke, Versandart, Fahrzeugpapiere oder Form-M-Referenz sowie Ihre Nachricht.",
@@ -473,7 +473,7 @@ DE = {
 "We may update this policy when our services or the law change. The date below shows the latest version.": "Wir passen diese Erklärung an, wenn sich unsere Leistungen oder die Rechtslage ändern. Das Datum unten zeigt den aktuellen Stand.",
 "Last updated: 26 September 2026": "Stand: 26. September 2026",
 # ---- quote ----
-"Get a Free Shipping Quote from Germany | EL-ROI Shipping": "Kostenloses Versandangebot ab Deutschland | EL-ROI Shipping",
+"Get a Free Shipping Quote from Germany | EL-ROI Shipping by Iyamah": "Kostenloses Versandangebot ab Deutschland | EL-ROI Shipping by Iyamah",
 "Request a transparent, no-pressure sea freight quote from Germany for vehicles, containers, machinery or general cargo. No hidden fees.": "Fordern Sie ein transparentes, unverbindliches Seefracht-Angebot ab Deutschland für Fahrzeuge, Container, Maschinen oder Stückgut an. Keine versteckten Gebühren.",
 "Get a quote": "Angebot anfordern",
 "Request a <em>shipping quotation</em>": "Fordern Sie ein <em>Versandangebot</em> an",
@@ -513,7 +513,7 @@ DE = {
 "Contact Us §": "Kontakt aufnehmen §",
 "Shipping Routes from Germany": "Versandrouten ab Deutschland",
 # ---- services ----
-"Car, Truck, Tractor & Container Shipping from Germany | EL-ROI Shipping": "Auto-, Lkw-, Traktor- & Containerversand ab Deutschland | EL-ROI",
+"Car, Truck, Tractor & Container Shipping from Germany | EL-ROI Shipping by Iyamah": "Auto-, Lkw-, Traktor- & Containerversand ab Deutschland | EL-ROI",
 "Ship vehicles, trucks, tractors, 20ft and 40ft containers, machinery, fragile goods and documents by sea from Germany, with documents and Form M handled.": "Verschiffen Sie Fahrzeuge, Lkw, Traktoren, 20- und 40-Fuß-Container, Maschinen, zerbrechliche Güter und Dokumente per Seefracht ab Deutschland, inklusive Papieren und Form M.",
 "What we offer": "Unsere Leistungen",
 "Freight services <em>built around your cargo</em>": "Frachtservice, <em>ganz auf Ihre Fracht zugeschnitten</em>",
@@ -570,11 +570,11 @@ DE = {
 "Certain cargo types are restricted for safety and regulatory reasons. Get in touch to confirm your cargo qualifies before booking.": "Bestimmte Frachtarten sind aus Sicherheits- oder rechtlichen Gründen eingeschränkt. Klären Sie vor der Buchung mit uns, ob Ihre Fracht in Frage kommt.",
 "Car, Truck, Tractor & Container Shipping from Germany": "Auto-, Lkw-, Traktor- & Containerversand ab Deutschland",
 # ---- terms ----
-"Terms & Conditions | EL-ROI Shipping Services": "Allgemeine Geschäftsbedingungen | EL-ROI Shipping Services",
+"Terms & Conditions | EL-ROI Shipping by Iyamah": "Allgemeine Geschäftsbedingungen | EL-ROI Shipping by Iyamah",
 "Terms & Conditions": "AGB",
 "Terms & <em>conditions</em>": "Allgemeine <em>Geschäftsbedingungen</em>",
 "The terms that apply to our quotes, bookings and shipping services.": "Die Bedingungen, die für unsere Angebote, Buchungen und Versandleistungen gelten.",
-"Terms and conditions for quotes, bookings and freight forwarding services by EL-ROI Shipping Services.": "Allgemeine Geschäftsbedingungen für Angebote, Buchungen und Speditionsleistungen von EL-ROI Shipping Services.",
+"Terms and conditions for quotes, bookings and freight forwarding services by EL-ROI Shipping by Iyamah.": "Allgemeine Geschäftsbedingungen für Angebote, Buchungen und Speditionsleistungen von EL-ROI Shipping by Iyamah.",
 "Scope": "Geltungsbereich",
 "Quotes and estimates": "Angebote und Kostenschätzungen",
 "Bookings": "Buchungen",
@@ -586,7 +586,7 @@ DE = {
 "Cancellations": "Stornierungen",
 "Using this website": "Nutzung dieser Website",
 "Law and jurisdiction": "Recht und Gerichtsstand",
-"These terms apply to all quotes, bookings and freight forwarding services provided by <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen, Germany (“we”, “us”), and to the use of this website. Anything we agree with you individually in writing takes priority over these terms.": "Diese Bedingungen gelten für alle Angebote, Buchungen und Speditionsleistungen von <strong>EL-ROI Shipping Services</strong>, Ripshorster Str. 379, 45357 Essen („wir“, „uns“), sowie für die Nutzung dieser Website. Individuelle schriftliche Vereinbarungen haben Vorrang vor diesen Bedingungen.",
+"These terms apply to all quotes, bookings and freight forwarding services provided by <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen, Germany (“we”, “us”), and to the use of this website. Anything we agree with you individually in writing takes priority over these terms.": "Diese Bedingungen gelten für alle Angebote, Buchungen und Speditionsleistungen von <strong>EL-ROI Shipping Services</strong> (EL-ROI Shipping by Iyamah), Ripshorster Str. 379, 45357 Essen („wir“, „uns“), sowie für die Nutzung dieser Website. Individuelle schriftliche Vereinbarungen haben Vorrang vor diesen Bedingungen.",
 "Where we agree it with business customers, our services are also carried out under the German Freight Forwarders’ Standard Terms and Conditions (ADSp 2017). Mandatory law always applies, including the German Commercial Code (HGB) and international transport conventions.": "Soweit mit Geschäftskunden vereinbart, erbringen wir unsere Leistungen zusätzlich auf Grundlage der Allgemeinen Deutschen Spediteurbedingungen (ADSp 2017). Zwingendes Recht gilt immer, einschließlich des Handelsgesetzbuchs (HGB) und internationaler Transportübereinkommen.",
 "A quote is based on the information you give us (cargo type, dimensions, weight, pickup point and destination). If that information turns out to be different, the price may change, and we will tell you before going ahead.": "Ein Angebot beruht auf Ihren Angaben (Frachtart, Maße, Gewicht, Abholort und Ziel). Weichen diese ab, kann sich der Preis ändern. Darüber informieren wir Sie, bevor wir fortfahren.",
 "The online shipping calculator gives a rough, non-binding estimate only.": "Der Online-Kostenrechner liefert nur eine grobe, unverbindliche Schätzung.",
@@ -631,7 +631,7 @@ DE.update({
 })
 
 # Strings that stay the same in German (names, numbers, addresses)
-SAME = """20ft|40ft|~33 m³|~67 m³|Shipping Service|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping|EL-ROI Shipping Services Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str., Lagos|No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
+SAME = """20ft|40ft|~33 m³|~67 m³|Shipping by Iyamah|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping by Iyamah|EL-ROI Shipping by Iyamah, Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str., Lagos|No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
 
 DE.update({
 "Track a shipment": "Sendung verfolgen",
