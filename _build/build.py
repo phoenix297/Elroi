@@ -1016,7 +1016,7 @@ GUIDES = [
 <p class="lead-p">Shipping a car from Germany to Nigeria is straightforward when the documents are right before the car is loaded. We have been doing it from our Essen yard since 1999, with our own office in Olodi Apapa, Lagos.</p>
 <h2>1. Check the car and its papers</h2>
 <p>Before anything is booked, make sure you have:</p>
-{tick(['The vehicle registration documents (in Germany: Zulassungsbescheinigung Teil I and Teil II)', 'The purchase invoice or proof of ownership', 'A copy of the owner&rsquo;s ID or passport', 'The receiver&rsquo;s full name, address and phone number in Nigeria'])}
+{tick(['The vehicle registration documents (in Germany: Zulassungsbescheinigung Teil I and Teil II)', 'The purchase invoice or proof of ownership', 'A copy of the owner&rsquo;s ID or passport', 'The receiver&rsquo;s full name, address and phone number at the destination'])}
 <p>If the car is still registered in Germany, it usually needs to be deregistered or put on export plates before it leaves. Ask us if you are not sure.</p>
 <h2>2. Get the Form M started in Nigeria</h2>
 <p>Almost every import into Nigeria needs a <strong>Form M</strong>, and it must be opened by the importer in Nigeria through their bank <em>before</em> the car is shipped. Starting it late is one of the most common causes of delays at the port. Read our <a href="guide-form-m-nigeria.html">Form M guide</a> for what it is and what the bank needs.</p>
