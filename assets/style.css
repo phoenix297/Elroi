@@ -1278,3 +1278,7 @@ body:has(.consent:not([hidden])) .wa-float { bottom: 150px; }
 @media (max-width: 760px) { .lost-bob { right: 50%; margin-right: -80px; } .lost-bob .box3d { --u: 20px; } }
 @media (prefers-reduced-motion: reduce) { .calc-glass, .lost-bob, .lost-waves path { animation: none !important; } .map-3d .route-map { transition: none; } }
 .btn-block { white-space: normal; text-align: center; line-height: 1.35; }
+
+/* Phone number label: "Shipping by Iyamah · +49 …" */
+.num-name { font-family: var(--f-sans); font-size: .78em; letter-spacing: .04em; opacity: .75; }
+.num-name::after { content: "·"; margin: 0 .45em; }

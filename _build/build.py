@@ -59,6 +59,7 @@ LAND_URL = 'assets/globe-land.js?v=' + ver('assets/globe-land.js')
 
 WA_PATH = 'M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h0a7.94 7.94 0 0 0 7.94-7.94 7.9 7.9 0 0 0-2.4-5.64Zm-5.55 12.2h0a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.65 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.83-.3-1.58-.97-.58-.52-.98-1.16-1.09-1.36-.11-.19 0-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.19.2-.32.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24-.01-.37-.01-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.62 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.23.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24Z'
 ARROW = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>'
+PHONE_NAMED = f'<span class="num-name">Shipping by Iyamah</span>{PHONE}'  # the number always shows whose it is
 WA_ICON = f'<svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="{WA_PATH}"/></svg>'
 PHONE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'
 MAIL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>'
@@ -151,7 +152,7 @@ def header(active, name=''):
     return f'''<div class="topbar">
   <div class="container">
     <div class="tb-left"><span>Ripshorster Str. 379, Essen</span><span>No. 21 Alhaji Kareem Akande Str., Lagos</span></div>
-    <div class="tb-right"><a href="tel:{TEL}">{PHONE}</a><a class="hide-sm" href="mailto:{EMAIL}">Email us</a><a class="tb-wa" href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
+    <div class="tb-right"><a href="tel:{TEL}">{PHONE_NAMED}</a><a class="hide-sm" href="mailto:{EMAIL}">Email us</a><a class="tb-wa" href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
 </div>
 <header class="site">
@@ -272,13 +273,13 @@ FOOTER = f'''<footer class="site has-photo">
         <ul>
           <li><strong>Essen</strong><br>Ripshorster Str. 379<br>45357 Essen, Germany</li>
           <li><strong>Lagos</strong><br>No. 21 Alhaji Kareem Akande Str.<br>Olodi Apapa, Lagos, Nigeria</li>
-          <li><a href="tel:{TEL}">{PHONE}</a></li>
+          <li><a href="tel:{TEL}">{PHONE_NAMED}</a></li>
           <li><a class="break" href="mailto:{EMAIL}">{EMAIL}</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year>2026</span> EL-ROI Shipping by Iyamah. All rights reserved.</span>
+      <span>&copy; <span data-year>2026</span> EL-ROI Shipping by Iyamah. All rights reserved. Built by Obanor Daniel.</span>
       <span><a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp; <button type="button" class="linklike" data-consent-open>Cookie settings</button> &nbsp;&middot;&nbsp; <em>Your satisfaction, our priority.</em></span>
     </div>
   </div>
@@ -369,7 +370,7 @@ CTA = f'''<section class="section-alt cta">
       <a href="quote.html" class="btn btn-dark">Request a Quote {ARROW}</a>
       <a href="{WA}" class="btn btn-outline" target="_blank" rel="noopener">{WA_ICON} Chat on WhatsApp</a>
     </div>
-    <a class="cta-phone" href="tel:{TEL}">{PHONE}</a>
+    <a class="cta-phone" href="tel:{TEL}">{PHONE_NAMED}</a>
     <form class="track" data-track novalidate>
       <label class="track-label" for="track-ref">Track a shipment</label>
       <div class="track-row">
@@ -1239,7 +1240,7 @@ faq = page_hero('FAQ', 'Support', 'Frequently asked <em>questions</em>',
         <h3>Talk to a real person</h3>
         <p>You deal with people who know your shipment, not a call centre queue.</p>
         <div class="contact-lines">
-          <a href="tel:{TEL}">{PHONE_ICON}{PHONE}</a>
+          <a href="tel:{TEL}">{PHONE_ICON}{PHONE_NAMED}</a>
           <a href="{WA}" target="_blank" rel="noopener">{WA_ICON}Chat on WhatsApp</a>
           <a href="mailto:{EMAIL}">{MAIL_ICON}Email us</a>
         </div>
@@ -1268,7 +1269,7 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping by I
     <div class="form-panel" data-reveal>
       <h2 class="form-title">Send us a message</h2>
       <p class="form-intro">We'll get back to you by email or phone.</p>
-      <form action="{FORMSPREE}" method="POST" data-wa="Hello EL-ROI, message from your website:">
+      <form action="{FORMSPREE}" method="POST" data-wa="Hello EL-ROI Shipping by Iyamah, message from your website:">
         <div class="form-row">
           <div class="field"><label for="c-name">Full name <b>*</b></label><input id="c-name" name="Full Name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="c-email">Email address <b>*</b></label><input id="c-email" name="Email" type="email" autocomplete="email" required></div>
@@ -1291,7 +1292,7 @@ contact = page_hero('Contact', 'Get in touch', 'Contact <em>EL-ROI Shipping by I
         <h3>Essen, Germany</h3>
         <address>Ripshorster Str. 379<br>45357 Essen, Germany</address>
         <div class="contact-lines">
-          <a href="tel:{TEL}">{PHONE_ICON}{PHONE}</a>
+          <a href="tel:{TEL}">{PHONE_ICON}{PHONE_NAMED}</a>
           <a class="break" href="mailto:{EMAIL}">{MAIL_ICON}{EMAIL}</a>
         </div>
       </div>
@@ -1334,7 +1335,7 @@ ASIDE_NEXT = f'''<div class="card card-navy has-photo" data-reveal>{photo_bg("ya
         <span class="card-kicker">Prefer to talk?</span>
         <h3>Call or WhatsApp</h3>
         <div class="contact-lines">
-          <a href="tel:{TEL}">{PHONE_ICON}{PHONE}</a>
+          <a href="tel:{TEL}">{PHONE_ICON}{PHONE_NAMED}</a>
           <a href="{WA}" target="_blank" rel="noopener">{WA_ICON}Chat on WhatsApp</a>
         </div>
       </div>'''
@@ -1347,7 +1348,7 @@ quote = page_hero('Get a Quote', 'Get a quote', 'Request a <em>shipping quotatio
     <div class="form-panel" data-reveal>
       <h2 class="form-title">Your shipment</h2>
       <p class="form-intro">Fields marked <b style="color:var(--gold-deep)">*</b> are required.</p>
-      <form id="quote-form" action="{FORMSPREE}" method="POST" data-wa="Hello EL-ROI, I'd like a shipping quote:">
+      <form id="quote-form" action="{FORMSPREE}" method="POST" data-wa="Hello EL-ROI Shipping by Iyamah, I'd like a shipping quote:">
         <div class="form-row">
           <div class="field"><label for="q-name">Full name <b>*</b></label><input id="q-name" name="Full Name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="q-company">Company name</label><input id="q-company" name="Company Name" type="text" autocomplete="organization"></div>
@@ -1406,7 +1407,7 @@ book = page_hero('Book a Shipment', 'Book a shipment', 'Start your <em>shipment 
     <div class="form-panel" data-reveal>
       <h2 class="form-title">Booking request</h2>
       <p class="form-intro">Fields marked <b style="color:var(--gold-deep)">*</b> are required.</p>
-      <form action="{FORMSPREE}" method="POST" enctype="multipart/form-data" data-wa="Hello EL-ROI, I'd like to book a shipment:">
+      <form action="{FORMSPREE}" method="POST" enctype="multipart/form-data" data-wa="Hello EL-ROI Shipping by Iyamah, I'd like to book a shipment:">
         <div class="form-row">
           <div class="field"><label for="b-name">Full name <b>*</b></label><input id="b-name" name="Full Name" type="text" autocomplete="name" required></div>
           <div class="field"><label for="b-phone">Phone number <b>*</b></label><input id="b-phone" name="Phone" type="tel" autocomplete="tel" required></div>

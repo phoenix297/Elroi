@@ -37,7 +37,7 @@ DE = {
 "Offices": "Standorte",
 "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Germany": "<strong>Essen</strong><br/>Ripshorster Str. 379<br/>45357 Essen, Deutschland",
 "<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria": "<strong>Lagos</strong><br/>No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria",
-"© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. All rights reserved.": "© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. Alle Rechte vorbehalten.",
+"© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. All rights reserved. Built by Obanor Daniel.": "© <span data-year=\"\">2026</span> EL-ROI Shipping by Iyamah. Alle Rechte vorbehalten. Erstellt von Obanor Daniel.",
 "<a href=\"privacy.html\">Privacy Policy</a> · <a href=\"terms.html\">Terms & Conditions</a> · <em>Your satisfaction, our priority.</em>": "<a href=\"privacy.html\">Datenschutz</a> · <a href=\"terms.html\">AGB</a> · <em>Ihre Zufriedenheit ist unsere Priorität.</em>",
 "EL-ROI Shipping by Iyamah home": "EL-ROI Shipping by Iyamah Startseite",
 "Primary": "Hauptmenü",
@@ -205,7 +205,7 @@ DE = {
 "Prefer to talk?": "Lieber persönlich?",
 "Call or WhatsApp": "Anruf oder WhatsApp",
 "§Chat on WhatsApp": "§Per WhatsApp schreiben",
-"Hello EL-ROI, I'd like to book a shipment:": "Hallo EL-ROI, ich möchte eine Sendung buchen:",
+"Hello EL-ROI Shipping by Iyamah, I'd like to book a shipment:": "Hallo EL-ROI Shipping by Iyamah, ich möchte eine Sendung buchen:",
 "Book a Shipment from Germany": "Sendung aus Deutschland buchen",
 # ---- calculator ----
 "Shipping Cost Calculator: Germany to Europe, Lagos & Worldwide | EL-ROI": "Versandkostenrechner: Deutschland nach Europa, Lagos & weltweit | EL-ROI",
@@ -247,7 +247,7 @@ DE = {
 "Nigeria office": "Büro Nigeria",
 "Prefer WhatsApp?": "Lieber WhatsApp?",
 "Message us with your cargo and destination.": "Schreiben Sie uns Ihre Fracht und Ihr Ziel.",
-"Hello EL-ROI, message from your website:": "Hallo EL-ROI, Nachricht über Ihre Website:",
+"Hello EL-ROI Shipping by Iyamah, message from your website:": "Hallo EL-ROI Shipping by Iyamah, Nachricht über Ihre Website:",
 "What are you shipping, and where to?": "Was möchten Sie versenden, und wohin?",
 "Contact EL-ROI Shipping by Iyamah": "Kontakt EL-ROI Shipping by Iyamah",
 # ---- FAQ ----
@@ -485,7 +485,7 @@ DE = {
 "Additional details": "Weitere Angaben",
 "Want a rough figure first? Try the <a href=\"calculator.html\">shipping calculator</a>. How we use your details: <a href=\"privacy.html\">Privacy Policy</a>. Bookings are subject to our <a href=\"terms.html\">Terms & Conditions</a>.": "Erst eine grobe Zahl? Probieren Sie den <a href=\"calculator.html\">Kostenrechner</a>. Wie wir Ihre Angaben nutzen: <a href=\"privacy.html\">Datenschutzerklärung</a>. Für Buchungen gelten unsere <a href=\"terms.html\">AGB</a>.",
 "Request Quote §": "Angebot anfordern §",
-"Hello EL-ROI, I'd like a shipping quote:": "Hallo EL-ROI, ich möchte ein Versandangebot:",
+"Hello EL-ROI Shipping by Iyamah, I'd like a shipping quote:": "Hallo EL-ROI Shipping by Iyamah, ich möchte ein Versandangebot:",
 "e.g. Essen, Germany": "z. B. Essen, Deutschland",
 "e.g. Antwerp, Belgium": "z. B. Antwerpen, Belgien",
 "Make and model, dimensions, weight, number of items...": "Marke und Modell, Maße, Gewicht, Anzahl der Teile ...",
@@ -631,7 +631,7 @@ DE.update({
 })
 
 # Strings that stay the same in German (names, numbers, addresses)
-SAME = """20ft|40ft|~33 m³|~67 m³|Shipping by Iyamah|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping by Iyamah|EL-ROI Shipping by Iyamah, Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str., Lagos|No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
+SAME = """<span class="num-name">Shipping by Iyamah</span>+49 1521 9521826|§<span class="num-name">Shipping by Iyamah</span>+49 1521 9521826|20ft|40ft|~33 m³|~67 m³|Shipping by Iyamah|Ripshorster Str. 379, Essen|Olodi Apapa, Lagos|+49 1521 9521826|WhatsApp|EL-ROI <em>Shipping</em>|EN|DE|info@elroishipping.de|1999|Olodi Apapa, Lagos, Nigeria|Iyamah|EL-ROI Shipping by Iyamah|EL-ROI Shipping by Iyamah, Lagos|02|KG|Lagos, Nigeria|—|§+49 1521 9521826|§info@elroishipping.de|Olodi Apapa<br/>Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str., Lagos|No. 21 Alhaji Kareem Akande Str., Olodi Apapa, Lagos, Nigeria|No. 21 Alhaji Kareem Akande Str.<br/>Olodi Apapa, Lagos, Nigeria|Volvo FH|John Deere 3140|20|+|2|(01)|(02)|(03)|(04)|(05)|(06)|01|03|04|05|Essen|EU|WW|NG|§ WhatsApp|Cookies|Vision|Mission|Fairness.|FAQ""".split('|')
 
 DE.update({
 "Track a shipment": "Sendung verfolgen",
